@@ -1,0 +1,112 @@
+#mainCategoryBox li {
+  text-align: center;
+}
+
+video {
+  width: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  height: 100px;
+}
+
+.mapG {
+  display: none;
+}
+.mapG:hover {
+  cursor: pointer;
+  display: block;
+  animation: loactionFloat 0.7s linear infinite alternate none;
+}
+.mapAni {
+  animation: loactionFloat 0.7s linear infinite alternate none;
+  display: block;
+}
+
+@keyframes loactionFloat {
+  0% {
+  }
+
+  100% {
+    transform: translateY(-15px);
+  }
+}
+
+#mapCont {
+  border-radius: 5px;
+  width: 100%;
+  position: relative;
+}
+iframe {
+  width: 100%;
+  height: 570px;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+#mainSearch {
+  background: transparent;
+}
+
+#mainMenuBox {
+  position: absolute;
+  width: 500px;
+  right: 50px;
+  height: auto;
+  top: 80px;
+  min-height: 40px;
+  box-shadow: 2px 2px 5px 0px gray;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.st102,
+.st103:hover {
+  cursor: pointer;
+}
+
+#mainMenu {
+  width: 100%;
+  height: 400px;
+}
+strong {
+  display: block;
+  text-align: center;
+}
+#mainMenuTab {
+  background-color: yellow;
+  height: 180px;
+  width: 100%;
+}
+#mainMenuRecomand {
+  background-color: blue;
+  height: 220px;
+  width: 100%;
+}
+#mainMenuTtile {
+  font-size: 30px;
+  color: gray;
+}
+#mainMenuRecomand ul {
+  display: flex;
+  white-space: nowrap;
+  padding: 20px 0;
+}
+#mainMenuRecomand li {
+  width: 100%;
+  height: 180px;
+  border: 1px solid black;
+  position: relative;
+}
+#mainMenuRecomand img {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+#mainMenuRecomand p {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  word-break: break-all;
+}

@@ -1,0 +1,194 @@
+.warningPharses {
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+  color: orangered;
+}
+
+input[type="checkbox"]:checked + label {
+  color: black;
+}
+.agreeLabelSt {
+  color: gray;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+#agreeNextBtn {
+  width: 100%;
+  height: 35px;
+  border: none;
+  background-color: rgb(253, 74, 74);
+  color: white;
+  border-radius: 5px;
+}
+#agreeNextBtn:disabled {
+  background-color: gray;
+}
+
+h3 {
+  margin: 20px 0;
+}
+
+#essentialBox div {
+  margin: 10px 0;
+}
+#choiceBox div {
+  margin: 10px 0;
+}
+
+#phoneCertBtn {
+  border: 1px solid #e6e6e6;
+  color: gray;
+  font-family: fantasy;
+  border-radius: 5px;
+  padding: 5px;
+}
+#signCompleteBtn {
+  width: 100%;
+  height: 35px;
+  border: none;
+  background-color: rgb(253, 74, 74);
+  color: white;
+  border-radius: 5px;
+}
+
+#signCompleteBtn:disabled {
+  background-color: gray;
+}
+#signForm input {
+  border: none;
+  border-bottom: 1px solid black;
+  height: 40px;
+  width: 100%;
+  font-size: 14px;
+}
+#signForm li {
+  margin: 5px 0;
+}
+
+#signFormAgreeBox li {
+  margin: 10px 0;
+}
+
+#signUlSNS {
+  display: flex;
+  justify-content: center;
+  top: 350px;
+  padding-right: 15px;
+}
+#signUlSNS img {
+  width: 50px;
+  border-radius: 50%;
+  height: 50px;
+  margin-left: 40px;
+}
+#signSelectCont button {
+  border-radius: 5px;
+  width: 600px;
+  padding: 10px 0;
+  font-size: 20px;
+  border: 1px solid #e6e6e6;
+  font-weight: 500;
+  font-family: fantasy;
+  background-color: white;
+}
+
+#signSelectCont > * {
+  margin: 20px 0;
+}
+
+#signSelectCont p {
+  font-size: 14px;
+  color: gray;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+#signSelectCont div {
+  margin: 70px 0;
+}
+#signCompCont {
+  text-align: center;
+}
+
+#signCompCont button {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 3px;
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+}
+#signCompCont * {
+  margin: 20px 0;
+}
+
+#loginForm input:not(#rememberID){
+  width: 400px;
+ font-size: 16px;
+ height: 50px;
+  border-radius: 5px;
+  border: 1px solid #e6e6e6;
+  padding: 0 15px;
+  margin: 5px 0;
+}
+
+
+#rememberID:checked{
+  color: black;
+}
+#rememberID ~ label{
+  font-size: 12px;
+}
+#searchUl{
+  font-size: 12px;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  color: rgb(78, 78, 78);
+}
+#searchUl li{
+  width: 100%;
+}
+#searchUl li:not(#searchUl li:nth-child(3)){
+border-right: 1px solid #e6e6e6;
+}
+
+
+#loginBtnUl{
+margin-top: 40px;
+}
+
+#loginBtnUl button{
+width: 100%;
+margin: 5px 0;
+font-size: 14px;
+padding: 10px 0;
+border: none;
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+#loginBtnUl img{
+  width: 40px;
+}
+#loginBtnUl span{
+    display: inline-block;
+}
+
+
+#u_gender{
+	display: flex;
+	align-items: center;
+}
+#u_gender label{
+	margin-right: 10px;
+	font-size : 14px;
+}
+#u_gender input{
+	width: 12px;
+	margin-right: 2px;
+}

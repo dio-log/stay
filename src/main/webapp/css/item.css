@@ -1,0 +1,506 @@
+/* <label for="ice-cream-choice">Choose a flavor:</label>
+<input list="ice-cream-flavors" 
+       id="ice-cream-choice" 
+       name="ice-cream-choice" />
+
+<datalist id="ice-cream-flavors">
+    <option value="Chocolate">
+    <option value="Coconut">
+    <option value="Mint">
+    <option value="Strawberry">
+    <option value="Vanilla">
+</datalist>
+
+
+<input type="tel" id="phone" name="phone"
+       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+       required> 
+
+
+*/
+#itemTitle {
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+#itemTabUl input {
+  display: none;
+}
+#itemTabUl input:checked + label {
+  border-bottom: 2px solid rgb(255, 35, 35);
+  color: rgb(255, 35, 35);
+  font-weight: 600;
+}
+#itemTabUl label:hover {
+  cursor: pointer;
+}
+#itemTabUl {
+  display: flex;
+}
+#itemTabUl li {
+  padding: 0px 20px;
+  color: gray;
+}
+
+#itemTabUl label {
+  padding-bottom: 20px;
+  display: inline-block;
+}
+
+.itemTab_roomDetailSt {
+  display: flex;
+  border-bottom: 1px solid #e6e6e6;
+}
+.itemTab_roomDetailSt div {
+  padding: 10px 0;
+}
+
+#itemSecLeftBox {
+  width: 768px;
+}
+#itemSecLeftBox img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+.itemTab_roomDetailMore {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  color: gray;
+}
+#itemTab_infoDetailBox textarea {
+  width: 100%;
+  resize: none;
+  overflow-y: auto;
+  padding: 10px;
+  height: 100px;
+  font-size: 14px;
+}
+#itemSecRightBox {
+  width: 400px;
+}
+
+#itemSecondCont {
+  display: flex;
+  margin-top: 50px;
+}
+#totalChargeBox {
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  padding: 0 10px;
+  position: relative;
+}
+#dateAndMen ul {
+  display: flex;
+  justify-content: space-around;
+}
+#dateAndMen {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  overflow: hidden;
+  height: 130px;
+}
+
+#dateAndMen i:hover {
+  cursor: pointer;
+}
+
+#dateAndMen p {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+input[type="checkbox"] {
+  display: none;
+}
+
+#underIcon:checked + div {
+  height: 275px;
+}
+
+input[type="number"] {
+  text-align: center;
+  width: 30px;
+  border: none;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  display: none;
+}
+
+.btnStCircle {
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid #e6e6e6;
+  color: gray;
+  background-color: white;
+  text-align: center;
+  clear: both;
+  padding-left: 2px;
+}
+#totalChargeBox > * {
+  margin: 16px 0;
+}
+
+#itemMainInfoBox {
+  padding: 0 10px;
+  width: 100%;
+}
+
+#itemMainInfoBox > * {
+  margin-bottom: 10px;
+}
+#itemMainInfoBox textarea {
+  width: 100%;
+  resize: none;
+  display: block;
+  height: 288px;
+  padding: 10px;
+}
+
+#itemMainInfoBox input[type="text"] {
+  height: 30px;
+  font-size: 14px;
+}
+#itemMainInfoBox input[type="radio"] {
+  display: none;
+}
+#itemMainInfoBox input[type="radio"]:checked + label {
+  color: rgb(248, 63, 63);
+  font-size: 16px;
+}
+#sample6_detailAddress {
+  width: 50%;
+}
+#sample6_extraAddress {
+  width: 87px;
+}
+#itemSubImgBox {
+  width: 600px;
+  height: 100px;
+  border: 1px solid black;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+#itemSubImgBox img {
+  position: absolute;
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+#itemSubImgBox img:hover {
+  cursor: pointer;
+}
+#addRoomBtn {
+  width: 100%;
+  background-color: rgb(248, 63, 63);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 50px;
+  font-size: 20px;
+  margin-top: 5px;
+}
+#addRoomBtn:hover {
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+#itemMainImgBox {
+  width: 600px;
+}
+#itemMainImgLabel {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  font-size: 50px;
+  color: gray;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+#roomMoreBox {
+  position: fixed;
+  width: 768px;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-47%);
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+  display: none;
+  box-shadow: 0 3px 5px 2px gray;
+}
+
+.roomMoreImgBox {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  width: 100%;
+  height: 300px;
+  margin: 10px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.roomMoreImgBox label {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  color: gray;
+  width: 100%;
+  height: 100%;
+}
+#roomMoreInfoBox {
+  display: flex;
+}
+
+#roomMoreLeftBox {
+  width: 400px;
+}
+#roomMoreRightBox {
+  width: 100%;
+  margin-left: 20px;
+}
+#roomMoreRightBox p {
+  margin-bottom: 10px;
+}
+
+#room_size {
+  width: 50px;
+  border-bottom: 1px solid #e6e6e6;
+}
+#room_size:focus {
+  border-bottom-color: black;
+}
+#roomMoreLeftBox li:not(:first-child) {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+#roomMoreBox select {
+  border: none;
+  width: 70px;
+}
+#room_name {
+  height: 30px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 5px;
+}
+#room_name:focus {
+  border-bottom-color: black;
+}
+#roomMoreCancelBtn {
+  border: 1px solid #e6e6e6;
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  margin-right: 20px;
+  background-color: white;
+}
+#roomMoreCancelBtn:hover {
+  border: 1px solid black;
+}
+
+#roomSaveBtn {
+  background-color: rgb(248, 63, 63);
+  color: white;
+  border: none;
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+#roomSaveBtn:hover {
+  border: 1px solid black;
+}
+
+#roomMoreRightBox input[type="checkbox"] {
+  display: inline-block;
+}
+#roomMoreRightBox label {
+  margin-right: 10px;
+}
+
+#roomMoreRightBox input[type="number"] {
+  width: 100px;
+  border-bottom: 1px solid #e6e6e6;
+  text-align: right;
+  height: 24px;
+}
+#roomMoreRightBox input[type="number"]:focus {
+  border-bottom-color: black;
+}
+#roomMoreRightBox select {
+  width: 50px;
+  margin-left: 50px;
+}
+#price {
+  margin-left: 98px;
+}
+
+#roomMoreSlide {
+  height: inherit;
+  display: flex;
+  left: 0;
+  position: absolute;
+  transition: all 1s;
+
+  /*20px 뺴고 748px 로 가정   348 174*/
+}
+#roomMoreSlide img {
+  height: 100%;
+  width: 400px;
+  object-fit: fill;
+  border: 1px solid black;
+}
+
+#roomMoreBtnBox {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+}
+#roomMoreBtnBox button {
+  padding: 10px;
+  font-size: 50px;
+  border: none;
+  background: none;
+  opacity: 0.4;
+}
+#roomMoreBtnBox button:nth-child(1) {
+  padding-right: 60px;
+}
+#roomMoreBtnBox button:nth-child(2) {
+  padding-left: 60px;
+}
+
+#roomMoreBtnBox button:hover {
+  opacity: 1;
+}
+
+#viewMoreCloseBtn {
+}
+
+.itemTab_roomDetailRight {
+  width: 100%;
+  padding: 10px !important;
+  position: relative;
+}
+.itemTab_roomDetailRight button {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  font-size: 16px;
+}
+
+.itemTab_roomDetailSt img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
+#itemDiv {
+  height: 30px;
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+#addrBox input {
+  margin-bottom: 5px;
+  padding: 0 5px;
+}
+#item_name {
+  padding: 0 5px;
+  width: 75%;
+}
+#roomMoreImgCont {
+  position: absolute;
+  width: auto;
+  height: 100%;
+  opacity: 1;
+  display: flex;
+  /* background-color: yellow; */
+}
+#roomMoreImgCont img {
+  width: 400;
+  height: 100%;
+  object-fit: fill;
+}
+
+.roomMoreImgBox button {
+  width: 50px;
+  font-size: 40px;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  z-index: 5000;
+  background: none;
+  border: none;
+  opacity: 0.3;
+}
+.roomMoreImgBox button:hover {
+  opacity: 0.7;
+}
+.roomMoreImgBox button:nth-child(2) {
+  left: 0;
+}
+.roomMoreImgBox button:nth-child(3) {
+  right: 0;
+}
+#fileListBox {
+  display: flex;
+  width: auto;
+  min-height: 44px;
+  border-bottom: 1px solid gray;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+#fileListBox p {
+  display: inline-block;
+  border-radius: 5px;
+  margin-right: 10px;
+  /* border: 1px solid black; */
+  line-height: 1.9;
+  padding: 0 5px;
+  width: auto;
+  white-space: nowrap;
+}
+#fileListBox button {
+  width: 20px;
+  margin-left: 5px;
+  padding-left: 2px;
+  background-color: #e6e6e6;
+  border: 1px solid black;
+  border-radius: 3px;
+  opacity: 0.7;
+}
+#fileListBox button:hover {
+  opacity: 1;
+}
+
+#calendar {
+  position: absolute;
+  border: 1px solid black;
+  width: 350px;
+  height: 280px;
+  left: 0;
+  background-color: white;
+}

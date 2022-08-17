@@ -1,0 +1,30 @@
+#searchCont {
+  box-shadow: 0 1px 3px 0 gray;
+  border-radius: 10px;
+  height: 80px;
+  display: flex;
+  padding: 10px;
+  white-space: nowrap;
+}
+#searchCont div {
+  width: 100%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+}
+#searchCont input {
+  /* height: 40px; */
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+
+#searchCont div:hover {
+  cursor: pointer;
+}
+#searchCont input:hover {
+  cursor: pointer;
+}
+#searchCont i {
+  font-size: 20px;
+}

@@ -1,0 +1,110 @@
+#myTab {
+  position: fixed;
+  width: 200px;
+
+  font-size: 20px;
+  padding: 5px 10px;
+}
+#myTab a {
+  color: gray;
+}
+#myTab li {
+  padding: 5px 0;
+}
+.myCont {
+  display: flex;
+  padding: 10px 20px;
+}
+#myPage li span:nth-child(1) {
+  display: inline-block;
+  width: 100px;
+}
+#myPage li span:nth-child(2) {
+  color: #a7a7a7;
+}
+#myPage label {
+  color: #a7a7a7;
+}
+
+#myPage li {
+  padding: 20px 0;
+}
+#modifyCompBtn {
+  font-size: 16px;
+  padding: 5px 30px;
+}
+#myPage input {
+  height: 35px;
+  border: none;
+  border-bottom: 1px solid gray;
+  font-size: 16px;
+  margin: 5px 0;
+  padding: 0 5px;
+}
+#myPage input[type="checkbox"] {
+  height: auto;
+}
+#phoneWarning {
+  font-size: 14px;
+  color: rgb(255, 61, 61);
+}
+
+#currentPointBox {
+  background-color: #f2f8ff;
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  color: #1273e4;
+}
+#currentPointBox strong {
+  font-size: 30px;
+}
+#myPoint ul {
+  display: flex;
+}
+#myPoint label {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 50px;
+  background-color: #f5f5f5;
+  margin: 20px 10px;
+  font-size: 14px;
+}
+#myPoint ul input[type="radio"] {
+  display: none;
+}
+#myPoint ul input[type="radio"]:checked + label {
+  background-color: #1273e4;
+  color: white;
+}
+#pointListBox {
+  border-top: 1px solid gray;
+  padding: 10px;
+}
+#notice li:not(#notice li:nth-child(1)) {
+  border-bottom: 1px solid #e6e6e6;
+  padding: 20px 0;
+}
+
+.noticeDate {
+  font-size: 14px;
+}
+#notice p {
+  margin: 10px 0;
+}
+#notice li:first-child {
+  border: none;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+#notice li:first-child button {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+#viewMore {
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: center;
+}

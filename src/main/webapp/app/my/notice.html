@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap");
+    </style>
+    <script
+      src="https://kit.fontawesome.com/fd6f859d9b.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../../css/default.css" />
+    <link rel="stylesheet" href="../../css/myPage.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <!-- 중간배치박스 -->
+      <div class="navCenterCont">
+        <!-- 3등분 -->
+        <ul>
+          <li><img src="" alt="z" /></li>
+          <li>
+            <p class="navTit">마이 페이지</p>
+          </li>
+          <li>
+            <i class="fa-solid fa-user"></i>
+            <div class="navCartBox">
+              <img src="../../img/main/speachBubble.png" alt="" />
+              <div>
+                <p>My</p>
+                <p>Cart</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="centerCont">
+      <div class="emptyBoxByNav"></div>
+      <!-- 내 정보 관리 , 예약내역,나의 후기,포인트, 찜,쿠폰함,  공지 사항-->
+      <div id="myTab">
+        <ul>
+          <li>
+            <a href="#">내 정보 관리</a>
+          </li>
+          <li><a href="#">예약내역</a></li>
+          <li><a href="#">나의 후기</a></li>
+          <li><a href="#">포인트</a></li>
+          <li><a href="#">쿠폰</a></li>
+          <li><a href="#">찜</a></li>
+          <li>
+            <a href="#" style="color: rgb(243, 21, 21); font-weight: 600"
+              >공지 사항</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div id="notice" class="myCont">
+        <div style="width: 200px; height: 10px"></div>
+
+        <ul style="width: 100%">
+          <li>
+            <span style="font-size: 18px; font-weight: 600"
+              >Press & Notice</span
+            >
+            <button type="button" class="whiteBtnSt">공지등록</button>
+          </li>
+          <li>
+            <a href="">
+              <div>
+                <p>대한민국 공로상 수상</p>
+                <p class="noticeDate">2022.07.08</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div>
+                <p>대한민국 공로상 수상</p>
+                <p class="noticeDate">2022.07.08</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div>
+                <p>대한민국 공로상 수상</p>
+                <p class="noticeDate">2022.07.08</p>
+              </div>
+            </a>
+          </li>
+
+          <li style="padding: 0">
+            <button type="button" id="viewMore">
+              <p>VIEW MORE</p>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="../../js/default.js"></script>
+    <script src="../../js/myPage.js"></script>
+  </body>
+</html>
