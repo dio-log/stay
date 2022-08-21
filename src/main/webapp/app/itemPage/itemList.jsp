@@ -25,28 +25,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
   </head>
 
   <body>
-    <nav class="nav">
-      <!-- 중간배치박스 -->
-      <div class="navCenterCont">
-        <!-- 3등분 -->
-        <ul>
-          <li><img src="" alt="z" /></li>
-          <li>
-            <h2 class="navTit"></h2>
-          </li>
-          <li>
-            <i class="fa-solid fa-user"></i>
-            <div class="navCartBox">
-              <img src="../../img/main/speachBubble.png" alt="" />
-              <div>
-                <p>My</p>
-                <p>Cart</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+      <c:set var="title" value=""></c:set>
+    <%@ include file="/app/mainPage/nav.jsp" %>
     <div class="centerCont">
       <div class="emptyBoxByNav"></div>
       <div class="searchBoxWrap">

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -63,13 +65,13 @@ public class ReviewDAO {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		ResultSet rs = null;
-		query = "select count(r_no) from review";
+		query = "select max(re_no) from review";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				result = rs.getInt("count(r_no)");
+				result = rs.getInt("max(re_no)");
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -83,17 +85,17 @@ public class ReviewDAO {
 	public void insertReview(ReviewDTO dto) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		int totalR_no = getTotalR_no();
-		query = "insert into review(r_no,u_no,item_no,room_no,r_grade,r_content,r_imgpath) values(?,?,?,?,?,?,?)";
+		int maxReNo = getTotalR_no();
+		query = "insert into review(re_no,u_no,item_no,room_no,re_grade,re_content,re_imgpath) values(?,?,?,?,?,?,?)";
 		try {
 			pstmt =conn.prepareStatement(query);
-			pstmt.setInt(1, totalR_no);
+			pstmt.setInt(1, maxReNo+1);
 			pstmt.setInt(2, dto.getU_no());
 			pstmt.setInt(3, dto.getItem_no());
 			pstmt.setInt(4, dto.getRoom_no());
-			pstmt.setInt(5, dto.getR_grade());
-			pstmt.setString(6, dto.getR_content());
-			pstmt.setString(7, dto.getR_imgpath());
+			pstmt.setString(5, dto.getRe_grade());
+			pstmt.setString(6, dto.getRe_content());
+			pstmt.setString(7, dto.getRe_imgpath());
 			
 			pstmt.executeUpdate();
 		
@@ -103,17 +105,17 @@ public class ReviewDAO {
 			close(pstmt, conn);
 		}
 	}
-	
+	//리뷰수정
 	public void updateReview(ReviewDTO dto) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		query = "update review set r_content=? where r_no=? and r_indent=?";
+		query = "update review set re_content=? where re_no=? and re_indent=?";
 		try {
 			pstmt =conn.prepareStatement(query);
 			
-			pstmt.setString(1, dto.getR_content());
-			pstmt.setInt(2,dto.getR_no());
-			pstmt.setInt(3,dto.getR_indent());
+			pstmt.setString(1, dto.getRe_content());
+			pstmt.setInt(2,dto.getRe_no());
+			pstmt.setInt(3,dto.getRe_indent());
 			
 			pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -126,42 +128,56 @@ public class ReviewDAO {
 	public void insertAnswer(ReviewDTO dto) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		setAnswerColumn(dto.getR_no(), dto.getR_indent());
-		query = "insert into review(r_no,u_no,item_no,room_no,r_content,r_indent) values(?,?,?,?,?,?)";
+		query = "insert into review(re_no,u_no,item_no,room_no,re_content,re_indent) values(?,?,?,?,?,?)";
 		try {
 			pstmt =conn.prepareStatement(query);
-			pstmt.setInt(1,dto.getR_no());
+			pstmt.setInt(1,dto.getRe_no());
 			pstmt.setInt(2, dto.getU_no());
 			pstmt.setInt(3,dto.getItem_no());
 			pstmt.setInt(4,dto.getRoom_no());
-			pstmt.setString(5, dto.getR_content());
-			pstmt.setInt(6, dto.getR_indent()+1);
+			pstmt.setString(5, dto.getRe_content());
+			pstmt.setInt(6, 1);
 			pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt, conn);
 		}
+		updateReAnswerSts(dto.getRe_no());
 		
 	}
-	
-	public void setAnswerColumn(int r_no, int r_indent) {
+	public void updateReAnswerSts(int re_no) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		query = "update review set r_answer=? where r_no=? and r_indent=?";
+		query = "update from review set re_answer_sts='y' where re_no=? and re_indent=0";
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1,"y");
-			pstmt.setInt(2, r_no);
-			pstmt.setInt(3, r_indent);
+			pstmt =conn.prepareStatement(query);
+			pstmt.setInt(1,re_no);
 			pstmt.executeUpdate();
-		}
-		catch(SQLException e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt, conn);
 		}
 	}
+	
+	public List<ReviewDTO> getDtoList(int item_no){
+		 List<ReviewDTO> list= new  ArrayList();
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		query ="";
+		try {
+			ReviewDTO dto = new ReviewDTO();
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn,rs);
+		}
+	}
+
 	
 	
 }

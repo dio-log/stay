@@ -23,37 +23,17 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     <link rel="stylesheet" href="../../css/memberSign.css" />
   </head>
   <body>
-    <nav class="nav">
-      <!-- 중간배치박스 -->
-      <div class="navCenterCont">
-        <!-- 3등분 -->
-        <ul>
-          <li><img src="" alt="z" /></li>
-          <li>
-            <p class="navTit">회원가입</p>
-          </li>
-          <li>
-            <i class="fa-solid fa-user"></i>
-            <div class="navCartBox">
-              <img src="../../img/main/speachBubble.png" alt="" />
-              <div>
-                <p>My</p>
-                <p>Cart</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+        <c:set var='title' value='회원가입'></c:set>
+   <%@ include file="/app/mainPage/nav.jsp" %> 
     <div
       class="centerCont"
       style="width: 768px; text-align: center; position: relative"
     >
       <div class="emptyBoxByNav"></div>
       <div id="signSelectCont">
-        <h1 style="margin: 0">HangOut</h1>
+        <h1 style="margin: 0">Hostel</h1>
         <h4>지금 가입하시면 최대 30% 쿠폰을 쏩니다 !</h4>
-        <a href="signAgree.html"
+        <a href="signAgree.m"
           ><button type="button">개인 회원가입</button></a
         >
         <div>

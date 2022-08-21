@@ -23,32 +23,13 @@
     <link rel="stylesheet" href="../../css/memberSign.css" />
   </head>
   <body>
-    <nav class="nav">
-      <!-- 중간배치박스 -->
-      <div class="navCenterCont">
-        <!-- 3등분 -->
-        <ul>
-          <li><img src="" alt="z" /></li>
-          <li>
-            <p class="navTit">회원가입</p>
-          </li>
-          <li>
-            <i class="fa-solid fa-user"></i>
-            <div class="navCartBox">
-              <img src="../../img/main/speachBubble.png" alt="" />
-              <div>
-                <p>My</p>
-                <p>Cart</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+     <c:set var='title' value='회원가입'></c:set>
+   <%@ include file="/app/mainPage/nav.jsp" %> 
+   
     <!-- body아래서 가로정렬 박스 -->
     <div class="centerCont" style="width: 768px">
       <div class="emptyBoxByNav"></div>
-      <form id="signForm" action="">
+      <form id="signForm" action="signComp.m">
         <ul>
           <li>아이디</li>
           <li>
@@ -61,7 +42,7 @@
             />
           </li>
           <li>
-            <p id="idWarning" class="warningPharses">공란</p>
+            <p id="idWarning" class="warningPharses"></p>
           </li>
           <li>비밀번호</li>
           <li>
@@ -137,7 +118,7 @@
         </ul>
         
       </div>
-      <a href="signComp.jsp"> <button type="button" id="signCompleteBtn" disabled>가입완료</button></a>
+      <button type="submit" id="signCompleteBtn" disabled>가입완료</button>
     </div>
   </form>
     <script src="../../js/memberSign.js"></script>

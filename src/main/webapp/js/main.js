@@ -35,3 +35,14 @@ onload = function () {
     }
   );
 };
+let cnt = 0;
+setInterval(mainImgChange, 4000);
+function mainImgChange() {
+  $(".mainImg").eq(cnt).hide(400);
+  if (cnt > 2) {
+    cnt = -1;
+  }
+  $(".mainImg")
+    .eq(++cnt)
+    .fadeIn(800);
+}

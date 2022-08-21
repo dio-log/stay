@@ -3,6 +3,7 @@ package com.project.item.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileUploadException;
 
 import com.project.item.cmd.BasicCmd;
+import com.project.item.cmd.InsertItemCmd;
 import com.project.item.cmd.InsertRoomCmd;
 import com.project.mdClass.MultipartCtl;
 
@@ -50,23 +52,39 @@ public class ItemFrontCtl extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
-//	
 
 		String viewPage=null;
 		String path = req.getServletPath();
-		HttpSession session = req.getSession();
-		session.setAttribute("id", "admin");
-		session.setAttribute("no", 99);
 		BasicCmd cmd=null;
+		
+		boolean flag = true;
+	
+		System.out.println(req.getServletPath());
 		
 		if(path.equals("/app/itemPage/insertRoom.it")){
 		 cmd = new InsertRoomCmd();
 		 cmd.excute(req, resp);
+		 return;
 
+		}else if(path.equals("/app/myPage/itemUpload.it")) {
+			viewPage = "/app/itemPage/itemUpload.jsp";
+			flag =false;
+		}else if(path.equals("/app/itemPage/insertItem.it")) {
+			cmd = new InsertItemCmd();
+			cmd.excute(req, resp);
+			viewPage = "/app/myPage/myItemManage.jsp";
+			flag =false;
 		}
 		
 		
 		
+		if(flag) {
+			RequestDispatcher rd = req.getRequestDispatcher(viewPage);
+			rd.forward(req, resp);
+			
+		}else {
+			resp.sendRedirect(viewPage);
+		}
 	}
 
 	

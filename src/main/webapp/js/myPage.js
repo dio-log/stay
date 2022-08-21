@@ -18,22 +18,19 @@ $("#modifyNick").on("keyup", function () {
   if ($(this).val().length >= 2) {
     if (!specialSymbolCheck(this)) {
       $("#nickWarning").html("영문,숫자 이외의 문자는 사용할 수 없습니다");
-      u_nick = false;
     } else {
+      let nickValue = $("#modifyNick").val();
       $.ajax({
-        url: "nickOverlap.my",
+        url: "checkOverlapNick.m",
         type: "post",
         dataType: "text",
-        data: $("#modifyNick").val(),
+        data: { nickValue },
         success: function (data) {
           if (data == "false") {
             $("#nickWarning").html("사용가능한 닉네임입니다");
-            u_nick = true;
           } else {
             $("#nickWarning").html("사용이 불가능한 닉네임입니다");
-            u_nick = false;
           }
-          isFormOk();
         },
         error: function (e) {
           console.log("닉네임 수정 에러 : " + e);
@@ -43,15 +40,50 @@ $("#modifyNick").on("keyup", function () {
   }
 });
 
-$("#modifyPhone").on("keyup", function () {
-  console.log($(this).val().length);
-  if ($(this).val().length == 3) {
-    $(this).val($(this).val() + "-");
-  } else if ($(this).val().length == 8) {
-    $(this).val($(this).val() + "-");
-  } else if ($(this).val().length > 13) {
+// $("#modifyPhone").on("keyup", function () {
+//   console.log($(this).val().length);
+//   if($(this).val())
+//   if ($(this).val().length == 3) {
+//     $(this).val($(this).val() + "-");
+//   } else if ($(this).val().length == 8) {
+//     $(this).val($(this).val() + "-");
+//   } else if ($(this).val().length > 13) {
+//     $("#phoneWarning").html("올바른 형식이 아닙니다");
+//   } else {
+//     $("#phoneWarning").html("");
+//   }
+// });
+$("#modifyPhoneInput").on("keyup", function () {
+  if ($(this).val().length > 11) {
     $("#phoneWarning").html("올바른 형식이 아닙니다");
-  } else {
-    $("#phoneWarning").html("");
+  } else if ($(this).val().length == 11) {
+    $("#getAccessNum").attr("disabled", false);
   }
+});
+
+$("#myPagePwCheckBtn").on("click", function () {
+  let pwValue = $("#myPagePwCheckInput").val();
+  $.ajax({
+    url: "selectMember.m",
+    type: "post",
+    dataType: "json",
+    data: { pwValue },
+    success: function (data) {
+      console.log(data);
+
+      console.log(data.u_phone);
+      if (data.result == true) {
+        $("#myPagePwCheckWrap").hide();
+        $("#myPageModifyWrap").show();
+        $("#u_id").html(data.u_id);
+        $("#u_email").html(data.u_email);
+        $("#u_phone").html(data.u_phone);
+      } else {
+        alert("비밀번호가 맞지 않습니다");
+      }
+    },
+    error: function (req, status, e) {
+      alert("에러 : " + req + "/" + status + "/" + e);
+    },
+  });
 });

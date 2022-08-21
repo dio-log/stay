@@ -8,6 +8,9 @@
 .filterWrap li {
   padding: 0;
 }
+.filterWrap input[type="checkbox"] {
+  display: none;
+}
 
 .filterWrap ul li:nth-child(1) {
   margin-top: 10px;

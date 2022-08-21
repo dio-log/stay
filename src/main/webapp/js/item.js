@@ -103,7 +103,6 @@ function closeBtn(e) {
   $(e).parent().css("display", "none");
 }
 
-let firstImg = "";
 $("#roomSaveBtn").on("click", function () {
   // for (let inputValue of $("#roomUploadForm input")) {
   //   if (inputValue.value == "") {
@@ -112,6 +111,8 @@ $("#roomSaveBtn").on("click", function () {
   //     return;
   //   }
   // }
+  console.log($("#roomMoreImgInput")[0].files[0]);
+  let firstImg = $("#roomMoreImgInput")[0].files[0];
   let arr = [];
   $("input:checkbox[name=room_extraopt]:checked").each(function () {
     arr.push(this.value);
@@ -130,37 +131,38 @@ $("#roomSaveBtn").on("click", function () {
     data: formData,
     dataType: "json",
     success: function (re) {
-      let firtstImgPath = $("#roomMoreImgInput")[0].files;
-
       let reader = new FileReader();
-      reader.readAsDataURL(firtstImgPath);
-
-      $("#itemTab_roomDetailBox").append(`
-      <div class="itemTab_roomDetailSt">
-      <div style="position: relative">
-        <img src="${firstImg}" alt="깨짐" />
-       <p class="itemTab_roomDetailMore" data-no="${re.item_no}&${
-        re.room_no
-      }">더 보기</p>
+      reader.readAsDataURL(firstImg);
+      let result;
+      reader.onload = function () {
+        result = reader.result;
+        $("#itemTab_roomDetailBox").append(`
+        <div class="itemTab_roomDetailSt">
+        <div style="position: relative">
+          <img src="${result}" alt="깨짐" />
+         <p class="itemTab_roomDetailMore" data-no="${re.item_no}&${
+          re.room_no
+        }">더 보기</p>
+        </div>
+        <div class="itemTab_roomDetailRight">
+          <p>${re.room_name}</p>
+       
+          <p>1박 가격 <span>${re.room_price}</span></p>
+          <p>대실 가격 <span>${re.room_part_price}</span></p>
+          <p>
+            쿠폰적용가
+            <span>${re.room_price * 0.9}</span>
+          </p>
+         <a href=""> <button  type="button" class="whiteBtnSt">수정하기</button>
+       </a> 
+        </div>
       </div>
-      <div class="itemTab_roomDetailRight">
-        <p>${re.room_name}</p>
-     
-        <p>1박 가격 <span>${re.room_price}</span></p>
-        <p>대실 가격 <span>${re.room_part_price}</span></p>
-        <p>
-          쿠폰적용가
-          <span>${re.room_price * 0.9}</span>
-        </p>
-       <a href=""> <button  type="button" class="whiteBtnSt">견적보기 ></button>
-     </a> 
-      </div>
-    </div>
-      `);
-      $("#fileListBox").empty();
-      $("#roomMoreImgCont").empty();
-      $("#roomMoreBox").css("display", "none");
-      $("#roomUploadForm")[0].reset();
+        `);
+        $("#fileListBox").empty();
+        $("#roomMoreImgCont").empty();
+        $("#roomMoreBox").css("display", "none");
+        $("#roomUploadForm")[0].reset();
+      };
     },
     error: function (e) {
       alert(e);
@@ -205,16 +207,16 @@ function sample6_execDaumPostcode() {
           extraAddr = " (" + extraAddr + ")";
         }
         // 조합된 참고항목을 해당 필드에 넣는다.
-        document.getElementById("sample6_extraAddress").value = extraAddr;
+        document.getElementById("item_addr_extra").value = extraAddr;
       } else {
-        document.getElementById("sample6_extraAddress").value = "";
+        document.getElementById("item_addr_extra").value = "";
       }
 
       // 우편번호와 주소 정보를 해당 필드에 넣는다.
       // document.getElementById("sample6_postcode").value = data.zonecode;
-      document.getElementById("sample6_address").value = addr;
+      document.getElementById("item_addr").value = addr;
       // 커서를 상세주소 필드로 이동한다.
-      document.getElementById("sample6_detailAddress").focus();
+      document.getElementById("item_addr_detail").focus();
     },
   }).open();
 }
@@ -306,10 +308,8 @@ function moveImg(e, clickImgLeft) {
 let fileList = new Set();
 $("#roomMoreImgInput").on("change", function (e) {
   // let arr = Array.from(e.target.files);
-
   //기존에 업로드된 파일이면 삭제
   let arr = [...e.target.files];
-  firstImg = arr[0].src;
   let len = e.target.files.length;
   for (let i = 0; i < len; i++) {
     for (let file of [...fileList]) {
@@ -330,7 +330,6 @@ $("#roomMoreImgInput").on("change", function (e) {
       let p = $("<p></p>");
       let span = $("<span></span>");
       let btn = $("<button></button>");
-
       img.attr("src", reader.result);
       img.data("name", data.name);
 
@@ -352,8 +351,6 @@ $("#roomMoreImgInput").on("change", function (e) {
       document.querySelector("#roomMoreImgInput").files = dataTransfer.files;
     };
   });
-
-  console.log(document.querySelector("#roomMoreImgInput").files);
 });
 
 function imgDelete(e) {
@@ -380,3 +377,14 @@ function imgDelete(e) {
   // fileList = Set.from(dataTransfer.files);
   fileList = new Set(dataTransfer.files);
 }
+
+$(".fa-circle-exclamation").on("click", function (e) {
+  $(e.target).nextAll("div").eq(0).css("display", "block");
+  $(e.target).nextAll("div").eq(0).css("z-index", "50000");
+});
+
+$("body").on("click", function (e) {
+  if ($(e.target).data("ex") != "ex") {
+    $(".writeEx").css("display", "none");
+  }
+});

@@ -1,7 +1,5 @@
 #myTab {
-  position: fixed;
   width: 200px;
-
   font-size: 20px;
   padding: 5px 10px;
 }
@@ -11,29 +9,26 @@
 #myTab li {
   padding: 5px 0;
 }
-.myCont {
-  display: flex;
-  padding: 10px 20px;
+#myPageContentWrap {
+  border: 1px soldi black;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
 }
-#myPage li span:nth-child(1) {
+#myPagePwCheckWrap {
+  width: inherit;
+}
+#myPageModifyWrap {
   display: inline-block;
-  width: 100px;
+  text-align: left;
 }
-#myPage li span:nth-child(2) {
-  color: #a7a7a7;
+#myPageModifyWrap li span:nth-child(1) {
+  color: gray;
 }
-#myPage label {
-  color: #a7a7a7;
+#myPageModifyWrap li {
+  padding: 15px 0;
 }
-
-#myPage li {
-  padding: 20px 0;
-}
-#modifyCompBtn {
-  font-size: 16px;
-  padding: 5px 30px;
-}
-#myPage input {
+#myPageModifyWrap input {
   height: 35px;
   border: none;
   border-bottom: 1px solid gray;
@@ -41,28 +36,46 @@
   margin: 5px 0;
   padding: 0 5px;
 }
-#myPage input[type="checkbox"] {
+#myPageModifyWrap input[type="number"]::-webkit-inner-spin-button,
+#myPageModifyWrap input[type="number"]::-webkit-outer-spin-button {
+  display: none;
+}
+
+#myPageModifyWrap input[type="checkbox"] {
   height: auto;
 }
+
+#modifyCompBtn {
+  font-size: 16px;
+  padding: 5px 30px;
+}
+
 #phoneWarning {
   font-size: 14px;
   color: rgb(255, 61, 61);
 }
+#nickWarning {
+  font-size: 14px;
+  color: rgb(255, 61, 61);
+}
 
+/* 포인트 */
 #currentPointBox {
   background-color: #f2f8ff;
   padding: 20px;
   width: 100%;
   border-radius: 10px;
   color: #1273e4;
+  text-align: left;
 }
 #currentPointBox strong {
   font-size: 30px;
 }
-#myPoint ul {
+#myPointWrap ul {
   display: flex;
+  border-bottom: 1px solid #e6e6e6;
 }
-#myPoint label {
+#myPointWrap label {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 50px;
@@ -70,10 +83,10 @@
   margin: 20px 10px;
   font-size: 14px;
 }
-#myPoint ul input[type="radio"] {
+#myPointWrap ul input[type="radio"] {
   display: none;
 }
-#myPoint ul input[type="radio"]:checked + label {
+#myPointWrap ul input[type="radio"]:checked + label {
   background-color: #1273e4;
   color: white;
 }

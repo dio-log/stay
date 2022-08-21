@@ -24,28 +24,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     <link rel="stylesheet" href="../../css/memberSign.css" />
   </head>
   <body>
-    <nav class="nav">
-      <!-- 중간배치박스 -->
-      <div class="navCenterCont">
-        <!-- 3등분 -->
-        <ul>
-          <li><img src="" alt="z" /></li>
-          <li>
-            <p class="navTit">회원가입</p>
-          </li>
-          <li>
-            <i class="fa-solid fa-user"></i>
-            <div class="navCartBox">
-              <img src="../../img/main/speachBubble.png" alt="" />
-              <div>
-                <p>My</p>
-                <p>Cart</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+            <c:set var='title' value='회원가입'></c:set>
+   <%@ include file="/app/mainPage/nav.jsp" %> 
 
     <div class="inner-cont">
       <div class="emptyBoxByNav" style="margin-bottom: 60px"></div>
@@ -114,7 +94,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         </div>
       </form>
 
-      <a href="signForm.html">
+      <a href="signForm.m">
         <button type="button" id="agreeNextBtn" disabled>다음 단계</button></a
       >
     </div>

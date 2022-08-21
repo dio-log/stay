@@ -1,29 +1,28 @@
 package com.project.item.db;
 
 public class RoomDTO {
-	private int no_fk=0;
-	private int item_no=99; //임시
+	private int u_no=0;
+	private int item_no=0; 
 	private int room_no=0;
 	private String room_name=null;
 	private String room_price=null;
 	private String room_part_price=null;
 	private int room_part_time=0;
 	
-	private int min_men=0;
+	private int basic_men=0;
 	private int max_men=0;
 	private String room_bed=null;
-	private int bedcnt=0;
+	private int room_bed_cnt=0;
 	private String room_view=null;
-	private int room_size=0;
+	private String room_size=null;
 	private String room_theme=null;
 	private String room_extraopt=null;
 	private String room_img_path=null;
-	
-	public int getNo_fk() {
-		return no_fk;
+	public int getU_no() {
+		return u_no;
 	}
-	public void setNo_fk(int no_fk) {
-		this.no_fk = no_fk;
+	public void setU_no(int u_no) {
+		this.u_no = u_no;
 	}
 	public int getItem_no() {
 		return item_no;
@@ -61,11 +60,12 @@ public class RoomDTO {
 	public void setRoom_part_time(int room_part_time) {
 		this.room_part_time = room_part_time;
 	}
-	public int getMin_men() {
-		return min_men;
+
+	public int getBasic_men() {
+		return basic_men;
 	}
-	public void setMin_men(int min_men) {
-		this.min_men = min_men;
+	public void setBasic_men(int basic_men) {
+		this.basic_men = basic_men;
 	}
 	public int getMax_men() {
 		return max_men;
@@ -79,11 +79,11 @@ public class RoomDTO {
 	public void setRoom_bed(String room_bed) {
 		this.room_bed = room_bed;
 	}
-	public int getBedcnt() {
-		return bedcnt;
+	public int getRoom_bed_cnt() {
+		return room_bed_cnt;
 	}
-	public void setBedcnt(int bedcnt) {
-		this.bedcnt = bedcnt;
+	public void setRoom_bed_cnt(int room_bed_cnt) {
+		this.room_bed_cnt = room_bed_cnt;
 	}
 	public String getRoom_view() {
 		return room_view;
@@ -91,10 +91,12 @@ public class RoomDTO {
 	public void setRoom_view(String room_view) {
 		this.room_view = room_view;
 	}
-	public int getRoom_size() {
+
+	
+	public String getRoom_size() {
 		return room_size;
 	}
-	public void setRoom_size(int room_size) {
+	public void setRoom_size(String room_size) {
 		this.room_size = room_size;
 	}
 	public String getRoom_theme() {
@@ -115,7 +117,6 @@ public class RoomDTO {
 	public void setRoom_img_path(String room_img_path) {
 		this.room_img_path = room_img_path;
 	}
-	
 	
 	
 	

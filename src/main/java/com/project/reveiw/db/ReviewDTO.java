@@ -1,80 +1,105 @@
 package com.project.reveiw.db;
 
 public class ReviewDTO {
-	private int r_no=0;
-	private int u_no = 0;
-	private int item_no = 0;
-	private int room_no = 0;
-	private int r_grade = 0;
-	private String r_content  = null;
-	private String r_answer = null;
-	private int r_indent = 0;
-	private String r_wtime = null;
-	private String r_imgpath = null;
+private int u_no=0;
+private int item_no=0;
+private int room_no=0;
+private int re_no=0;
+private String re_grade = null;
+private String re_content = null;
+private String re_imgpath = null;
+private int re_indent=0;
+private int re_answer_sts = 0;
+private String re_wtime = null;
+private int re_maxReview = 0;
+private int re_maxAnswer = 0;
+private String re_room_name=null;
+
+
+
+public String getRe_room_name() {
+	return re_room_name;
+}
+public void setRe_room_name(String re_room_name) {
+	this.re_room_name = re_room_name;
+}
+public int getRe_maxReview() {
+	return re_maxReview;
+}
+public void setRe_maxReview(int re_maxReview) {
+	this.re_maxReview = re_maxReview;
+}
+public int getRe_maxAnswer() {
+	return re_maxAnswer;
+}
+public void setRe_maxAnswer(int re_maxAnswer) {
+	this.re_maxAnswer = re_maxAnswer;
+}
+public String getRe_imgpath() {
+	return re_imgpath;
+}
+public void setRe_imgpath(String re_imgpath) {
+	this.re_imgpath = re_imgpath;
+}
+public int getU_no() {
+	return u_no;
+}
+public void setU_no(int u_no) {
+	this.u_no = u_no;
+}
+public int getItem_no() {
+	return item_no;
+}
+public void setItem_no(int item_no) {
+	this.item_no = item_no;
+}
+public int getRoom_no() {
+	return room_no;
+}
+public void setRoom_no(int room_no) {
+	this.room_no = room_no;
+}
+public int getRe_no() {
+	return re_no;
+}
+public void setRe_no(int re_no) {
+	this.re_no = re_no;
+}
+public String getRe_grade() {
+	return re_grade;
+}
+public void setRe_grade(String re_grade) {
+	this.re_grade = re_grade;
+}
+public String getRe_content() {
+	return re_content;
+}
+public void setRe_content(String re_content) {
+	this.re_content = re_content;
+}
+public int getRe_indent() {
+	return re_indent;
+}
+public void setRe_indent(int re_indent) {
+	this.re_indent = re_indent;
+}
+public int getRe_answer_sts() {
+	return re_answer_sts;
+}
+public void setRe_answer_sts(int re_answer_sts) {
+	this.re_answer_sts = re_answer_sts;
+}
+public String getRe_wtime() {
+	return re_wtime;
+}
+public void setRe_wtime(String re_wtime) {
+	this.re_wtime = re_wtime;
+}
+
+
+
 	
 	
-	
-	
-	public String getR_imgpath() {
-		return r_imgpath;
-	}
-	public void setR_imgpath(String r_imgpath) {
-		this.r_imgpath = r_imgpath;
-	}
-	public int getR_no() {
-		return r_no;
-	}
-	public void setR_no(int r_no) {
-		this.r_no = r_no;
-	}
-	public int getU_no() {
-		return u_no;
-	}
-	public void setU_no(int u_no) {
-		this.u_no = u_no;
-	}
-	public int getItem_no() {
-		return item_no;
-	}
-	public void setItem_no(int item_no) {
-		this.item_no = item_no;
-	}
-	public int getRoom_no() {
-		return room_no;
-	}
-	public void setRoom_no(int room_no) {
-		this.room_no = room_no;
-	}
-	public int getR_grade() {
-		return r_grade;
-	}
-	public void setR_grade(int r_grade) {
-		this.r_grade = r_grade;
-	}
-	public String getR_content() {
-		return r_content;
-	}
-	public void setR_content(String r_content) {
-		this.r_content = r_content;
-	}
-	public String getR_answer() {
-		return r_answer;
-	}
-	public void setR_answer(String r_answer) {
-		this.r_answer = r_answer;
-	}
-	public int getR_indent() {
-		return r_indent;
-	}
-	public void setR_indent(int r_indent) {
-		this.r_indent = r_indent;
-	}
-	public String getR_wtime() {
-		return r_wtime;
-	}
-	public void setR_wtime(String r_wtime) {
-		this.r_wtime = r_wtime;
-	}
 	
 	
 }

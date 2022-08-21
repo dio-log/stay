@@ -26,14 +26,14 @@ public class InsertReviewCmd implements BasicCmd{
 		MultipartCtl mtc;
 		try {
 			mtc = new MultipartCtl(req, resp);
-			Map map = mtc.saveFiles();
+			Map map = mtc.saveReviewImg();
 		
 			dto.setU_no((Integer)session.getAttribute("u_no"));
-			dto.setItem_no(Integer.parseInt(req.getParameter("item_no")));
-			dto.setRoom_no(Integer.parseInt(req.getParameter("room_no")));
-			dto.setR_grade(Integer.parseInt(req.getParameter("r_grade")));
-			dto.setR_content(req.getParameter("r_content"));
-			dto.setR_imgpath((String) (map.get("fullFileName")));
+			dto.setItem_no((Integer)map.get("item_no"));
+			dto.setRoom_no((Integer)map.get("room_no"));
+			dto.setRe_grade((String)map.get("re_grade"));
+			dto.setRe_content((String)map.get("re_content"));
+			dto.setRe_imgpath((String)(map.get("fullFileName")));
 			dao.insertReview(dto);
 		} catch (FileUploadException | IOException e) {
 			// TODO Auto-generated catch block

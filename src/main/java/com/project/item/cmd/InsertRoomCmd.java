@@ -33,18 +33,18 @@ public class InsertRoomCmd implements BasicCmd{
 			
 			mpt = new MultipartCtl(req, resp);
 			
-			Map<String, String> map =  mpt.saveFiles();
-			int no_fk=(Integer)session.getAttribute("no");
-			dto.setNo_fk(no_fk);
+			Map<String, String> map =  mpt.saveRoomImg();
+			int u_no=(Integer)session.getAttribute("u_no");
+			dto.setU_no(u_no);
 			dto.setRoom_name(map.get("room_name"));
 			dto.setRoom_price(map.get("room_price"));
 			dto.setRoom_part_price(map.get("room_part_price"));
 			dto.setRoom_part_time(Integer.parseInt(map.get("room_part_time")));
-			dto.setMin_men(Integer.parseInt(map.get("min_men")));
+			dto.setBasic_men(Integer.parseInt(map.get("basic_men")));
 			dto.setMax_men(Integer.parseInt(map.get("max_men")));
 			dto.setRoom_bed(map.get("room_bed"));
-			dto.setBedcnt(Integer.parseInt(map.get("bedcnt")));
-			dto.setRoom_size(Integer.parseInt(map.get("room_size")));
+			dto.setRoom_bed_cnt(Integer.parseInt(map.get("room_bed_cnt")));
+			dto.setRoom_size(map.get("room_size"));
 			dto.setRoom_view(map.get("room_view"));
 			dto.setRoom_theme(map.get("room_theme"));
 			dto.setRoom_extraopt(map.get("room_extraopt"));
@@ -59,11 +59,10 @@ public class InsertRoomCmd implements BasicCmd{
 //			obj.put("room_no", room_no);
 			obj.put("item_no", 1);
 			obj.put("room_no", 2);
-			obj.put("roomFirstImg", map.get("roomFirstImg"));
+//			obj.put("roomFirstImg", map.get("roomFirstImg"));
 			obj.put("room_price", map.get("room_price"));
 			obj.put("room_part_price", map.get("room_part_price"));
 			obj.put("room_name", map.get("room_name"));
-			System.out.println("룸네임"+map.get("roomFirstImg"));
 				
 			pw.write(obj.toString());
 			 

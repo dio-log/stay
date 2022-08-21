@@ -7,6 +7,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
   <head>
     <meta charset="UTF-8" />
     <title>Document</title>
+
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap");
     </style>
@@ -24,34 +25,14 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     <link rel="stylesheet" href="../../css/item.css" />
   </head>
   <body>
-    <nav class="nav">
-      <!-- 중간배치박스 -->
-      <div class="navCenterCont">
-        <!-- 3등분 -->
-        <ul>
-          <li><img src="" alt="z" /></li>
-          <li>
-            <p class="navTit">객실 등록</p>
-          </li>
-          <li>
-            <i class="fa-solid fa-user"></i>
-            <div class="navCartBox">
-              <img src="../../img/main/speachBubble.png" alt="" />
-              <div>
-                <p>My</p>
-                <p>Cart</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <c:set var="title" value="상품 등록"></c:set>
+    <%@ include file="/app/mainPage/nav.jsp" %>
     <!--  -->
 
-    <div class="centerCont">
+    <div class="centerCont" style="position: relative">
       <form
         id="itemUploadForm"
-        action=""
+        action="insertItem.it"
         method="post"
         enctype="multipart/form-data"
       >
@@ -81,7 +62,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
 
                 <input
                   id="itemMainImgInput"
-                  name="itemMainImgInput"
+                  name="item_imgpath"
                   type="file"
                   multiple
                   accept="image/*"
@@ -101,7 +82,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               <p style="display: flex; justify-content: space-between">
                 <span>분류</span>
 
-                <select name="itemDiv" id="itemDiv">
+                <select name="item_div " id="item_div ">
                   <option value="모텔">모텔</option>
                   <option value="호텔">호텔</option>
                   <option value="리조트">리조트</option>
@@ -116,20 +97,23 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               <div id="addrBox">
                 <input
                   type="text"
-                  id="sample6_address"
+                  id="item_addr"
+                  name="item_addr"
                   placeholder="주소"
                   style="width: 100%"
                 />
                 <br />
                 <input
                   type="text"
-                  id="sample6_detailAddress"
+                  id="item_addr_detail"
+                    name="item_addr_detail"
                   placeholder="상세주소"
                 />
 
                 <input
                   type="text"
-                  id="sample6_extraAddress"
+                  id="item_addr_extra"
+                    name="item_addr_extra"
                   placeholder="참고항목"
                 />
                 <input
@@ -143,7 +127,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               <p>이벤트</p>
               <textarea
                 id="itemMainEvent"
-                name="itemMainEvent"
+                name="item_event"
                 cols=""
                 rows=""
               ></textarea>
@@ -171,49 +155,97 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
             <!-- 디테일 -->
 
             <div id="itemTab_roomDetailBox">
-              <button id="addRoomBtn" type="button">객실 추가</button>
+              <button id="addRoomBtn" type="button" class="whiteBtnSt">
+                객실 추가
+              </button>
               <!-- 정보추출해서 반복해서 넣어줄 박스 -->
-        <div class="itemTab_roomDetailSt">
-                <div style="position: relative">
-                  <img src="../../img/room/admin/ho7.jpg" alt="" />
-                  <p class="itemTab_roomDetailMore">더 보기</p>
-                </div>
-                <div class="itemTab_roomDetailRight">
-                  <p>객실이름</p>
-                  <p>객실상세</p>
-                  <p>가격 <span>110,000</span></p>
-                  <p>
-                    쿠폰적용가
-                    <span>99,000</span>
-                  </p>
-                  <button type="button" class="whiteBtnSt">수정</button>
-                </div> 
-              </div> 
             </div>
 
             <!-- 인포 -->
 
             <div id="itemTab_infoDetailBox" class="displayNone">
-              <p>주변정보</p>
+              <p style="font-size: 14px; margin: 10px 0; color: gray">
+                <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i
+                >아이콘을 누르면 각 항목별 예시를 보실 수 있습니다
+              </p>
+
+              <span>주변정보</span>
+              <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
               <textarea name="item_arround" id="" cols="" rows=""></textarea>
-              <p>공지사항</p>
-              <textarea name="item_notice" id="" cols="" rows=""></textarea>
-              <p>기본정보</p>
+              <div class="writeEx" data-ex="ex">
+                · 홍대입구역 도보 3분<br />
+                · 연트럴파크 도보 1분<br />
+                · 홍대거리 도보 5분
+              </div>
+
+              <span>기본 정보</span>
+              <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
+
               <textarea name="item_basic" id="" cols="" rows=""></textarea>
-              <p>주차정보</p>
+              <div class="writeEx" data-ex="ex">
+                · 체크인 : 15시~ | 체크아웃 : ~11시<br />
+                · 22시 이후 체크인 시 호텔 프론트 문의<br />
+                · 보안을 위하여 투숙객 본인 외에 외부인 동반 출입을 금지합니다
+                <br />
+                · 전 객실 금연 (흡연 적발 시 300,000원 위약금이 발생됩니다)<br />
+                · 애완동물 출입 금지입니다 <br />
+                · 시설물을 파손하거나 침구류 훼손 및 오염 (세탁 불가능) 시 전액
+                배상해야 합니다 <br />
+                · 보호자 동반 없는 미성년자 입실 불가 (업체 문의 필수)
+              </div>
+
+              <span>공지사항</span>
+              <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
+              <textarea name="item_notice" id="" cols="" rows=""></textarea>
+              <div class="writeEx" data-ex="ex">
+                · 보안을 위하여 투숙객 본인 외에 외부인 동반 출입을 금지합니다
+                <br />
+                · 전 객실 금연 (흡연 적발 시 300,000원 위약금이 발생됩니다)<br />
+                · 애완동물 출입 금지입니다 <br />
+                · 시설물을 파손하거나 침구류 훼손 및 오염 (세탁 불가능) 시 전액
+                배상해야 합니다 <br />
+                · 보호자 동반 없는 미성년자 입실 불가 (업체 문의 필수)
+              </div>
+
+              <span>주차정보</span>
+              <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
               <textarea name="item_parking" id="" cols="" rows=""></textarea>
-              <p>인원추가시</p>
-              <textarea name="item_addpeople" id="" cols="" rows=""></textarea>
-              <p>취소 및 환불 규정</p>
+              <div class="writeEx" data-ex="ex">
+                · 숙소 앞 무료주차 가능 (업체 문의 필수) 또는<br />
+                · 주차 가능 (발렛파킹만 가능 / 박 당 10,000원)
+              </div>
+              <span>인원추가시</span>
+              <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
+              <textarea name="item_addpeople" id="" cols="" rows=""> </textarea>
+              <div class="writeEx" data-ex="ex">
+                · 기준인원 외 추가 시, 1인 33,000원 (만 12세 이상~성인), 만 12세
+                미만 무료 <br />
+                · 영유아 인원수 포함, 최대인원 초과 불가<br />
+                · 현장 결제
+              </div>
+              <span>취소 및 환불 규정</span>
+              <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
+              <div class="writeEx" data-ex="ex">
+                · 체크인일 기준 7일 전 : 100% 환불<br />
+                · 체크인일 기준 6 ~ 4일 전 : 50% 환불<br />
+                · 체크인일 기준 3일 전 ~ 당일 및 No-Show : 환불 불가<br />
+                · 취소, 환불 시 수수료가 발생할 수 있습니다
+              </div>
               <textarea
                 name="item_cancel_refund"
                 id=""
                 cols=""
                 rows=""
               ></textarea>
-              <p>확인사항 및 기타</p>
-              <textarea name="item_extra" id="" cols="" rows=""></textarea>
             </div>
+          </div>
+          <div>
+            <button
+              class="redBtnSt"
+              style="position: absolute; bottom: 20px; right: 0px"
+            >
+              상품 등록
+            </button>
           </div>
         </div>
       </form>
@@ -280,7 +312,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                   <span>
                     <i class="fa-solid fa-minus btnStCircle"></i>
                     <input
-                      name="min_men"
+                      name="basic_men"
                       type="number"
                       min="0"
                       max="8"
@@ -306,12 +338,12 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                   <span>침대</span>
                   <span
                     ><select name="room_bed" id="bed">
-                      <option value="b001">싱글</option>
-                      <option value="b002">더블</option>
-                      <option value="b003">퀸</option>
-                      <option value="b004">킹</option>
+                      <option value="싱글">싱글</option>
+                      <option value="더블">더블</option>
+                      <option value="퀸">퀸</option>
+                      <option value="킹">킹</option>
                     </select>
-                    <select name="bedcnt" id="bedcnt">
+                    <select name="room_bed_cnt" id="bedcnt">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -322,9 +354,10 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                   <span>전망</span>
                   <span>
                     <select name="room_view" id="view">
-                      <option value="v001">산</option>
-                      <option value="v002">바다</option>
-                      <option value="v003">프라이빗</option>
+                      <option value="시티">시티</option>
+                      <option value="산">산</option>
+                      <option value="바다">바다</option>
+                      <option value="프라이빗">프라이빗</option>
                     </select></span
                   >
                 </li>

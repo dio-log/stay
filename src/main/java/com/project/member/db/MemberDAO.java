@@ -20,9 +20,9 @@ public class MemberDAO {
 	private final String INSERT_MEMBER = "INSERT INTO "+TABLE_NAME+"(u_name,u_id,u_nick,u_pw,u_email,u_phone,"
 			+ "u_gender) VALUES(?,?,?,?,?,?,?)";
 	private final String UPDATE_MEMBER = "UPDATE "+TABLE_NAME+" SET u_nick=?, u_pw=?, u_email=?,u_phone=? WHERE no=?";
-	private final String SELECT_NO_NICK_BY_ID = "SELECT u_no, u_nick FROM "+TABLE_NAME+" WHERE u_id=?";
+	private final String SELECT_NO_NICK_BY_ID = "SELECT u_no, u_nick,u_div FROM "+TABLE_NAME+" WHERE u_id=?";
 	private final String SELECT_PW = "SELECT u_pw FROM "+TABLE_NAME+" WHERE u_id=?";
-	private final String SELECT_MEMBER = "SELECT * FORM "+TABLE_NAME+" WHERE u_no=?";
+	private final String SELECT_MEMBER = "SELECT * FROM "+TABLE_NAME+" WHERE u_no=?";
 	private MemberDAO() {
 		try {
 			Context context = new InitialContext();
@@ -101,6 +101,7 @@ public class MemberDAO {
 					dto = new MemberDTO();
 					dto.setU_no(rs.getInt("u_no"));
 					dto.setU_nick(rs.getString("u_nick"));
+					dto.setU_div(rs.getInt("u_div"));
 			}
 			
 		}catch(SQLException e) {
@@ -122,7 +123,26 @@ public class MemberDAO {
 			pstmt.setString(1, u_id);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				if(rs.getString("u_id")!=null) return true;
+				return true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn, rs);
+		}
+		return false;
+	}
+	public boolean hasNick(String u_nick) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		query = "SELECT u_nick FROM MEMBER WHERE u_nick=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, u_nick);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				return true;
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -198,6 +218,26 @@ public class MemberDAO {
 		}finally {
 			close(pstmt, conn);
 		}
+	}
+	public boolean checkPw(int u_no, String u_pw) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		query = "select u_pw from member where u_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, u_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				if(rs.getString("u_pw").equals(u_pw)) return true;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn);
+		}
+		return false;
 	}
 	
 }

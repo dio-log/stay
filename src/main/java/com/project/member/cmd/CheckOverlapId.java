@@ -17,7 +17,8 @@ public class CheckOverlapId implements BasicCmd {
 		MemberDAO dao = MemberDAO.getIns();
 		PrintWriter pw = resp.getWriter();
 	
-		if(dao.hasId(req.getParameter("u_id"))){
+		if(dao.hasId(req.getParameter("u_id_value"))){
+	
 			pw.write("true");
 		}else {
 			pw.write("false");
