@@ -33,7 +33,7 @@
     >
       <div class="emptyBoxByNav" style="margin-bottom: 60px;"></div>
       <div style="display:inline-block ; width: 400px;text-align: center;">
-      <form id="loginForm" action="#">
+      <form id="loginForm" action="main.m">
         <input id="u_id" name="u_id" type="text" placeholder="아이디">
         <br>
         <input id="u_pw" name="u_pw" type="password" placeholder="비밀번호">

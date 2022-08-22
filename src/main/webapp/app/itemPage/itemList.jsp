@@ -21,6 +21,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     ></script>
     <link rel="stylesheet" href="../../css/main.css" />
     <link rel="stylesheet" href="../../css/default.css" />
+      <link rel="stylesheet" href="../../css/calendar.css" />
     <link rel="stylesheet" href="../../css/itemList.css" />
   </head>
 
@@ -29,62 +30,111 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ include file="/app/mainPage/nav.jsp" %>
     <div class="centerCont">
       <div class="emptyBoxByNav"></div>
-      <div class="searchBoxWrap">
-        <div class="searchBoxDestination">
-          <h4>여행지, 숙소</h4>
+   <div id="searchCont">
+        <div id="setLocationBox">
+          <label for="setLocationInput">
+            <i
+              class="fa-solid fa-map-location-dot"
+              style="margin-right: 5px"
+            ></i>
+          </label>
+
           <input
+            name="setLocationInput"
+            id="setLocationInput"
             type="text"
-            placeholder="검색해보세요"
-            style="
-              width: 200px;
-              height: 40px;
-              font-size: 20px;
-              font-weight: 600;
-              border: none;
-            "
+            placeholder="여행지, 숙소"
           />
-
-          <div id="recentSearchDesination">
-            <span>최근검색</span><br />
-            <a href=""
-              ><span style="font-size: 12px"
-                >강원도 <br />07.09-07.10 박 / 성인2-객실1</span
-              ></a
-            >
-            <br />
-            <span>인기 여행지</span>
-            <br />
-            <a href="">부산</a>
-            <a href="">강원도</a>
+          <div id="searchDetination">
+            <!-- 포커스했을땐 최근검색, 인기키워드 -->
+            <!-- 검색할땐 검색키워드 자동검색 -->
+            <div style="padding: 0 5px;overflow-y: auto; width: 100%;max-height: 300px; ">
+            <div id="searchRecent">
+              <div><strong>최근 검색</strong></div>
+              <div>
+                <div class="searchRecnetContent">
+                  <p> <a href="">최근검색어 쿠키에서불러오기</a> <i class="fa-solid fa-xmark"></i></p>
+                  <p>08.19(금) ~ 08.20(토) / 성인2 </p>
+                </div>
+                <div class="searchRecnetContent">
+                  <p>최근검색어 쿠키에서불러오기 <i class="fa-solid fa-xmark"></i></p>
+                  <p>08.19(금) ~ 08.20(토) / 성인2 </p>
+                </div> <div class="searchRecnetContent">
+                  <p>최근검색어 쿠키에서불러오기 <i class="fa-solid fa-xmark"></i></p>
+                  <p>08.19(금) ~ 08.20(토) / 성인2 </p>
+                </div> <div class="searchRecnetContent">
+                  <p>최근검색어 쿠키에서불러오기 <i class="fa-solid fa-xmark"></i></p>
+                  <p>08.19(금) ~ 08.20(토) / 성인2 </p>
+                </div> <div class="searchRecnetContent">
+                  <p>최근검색어 쿠키에서불러오기 <i class="fa-solid fa-xmark"></i></p>
+                  <p>08.19(금) ~ 08.20(토) / 성인2 </p>
+                </div>
+               
+              </div>
+            </div>
+            
+            <div id="searchBestKeyword">
+              <div><strong>인기키워드</strong></div>
+              <div>
+                
+              </div>
+            </div>
+          </div>
           </div>
         </div>
-        <div class="searchBoxDate" onclick="searchBoxBlock(this)">
-          <h4>날짜</h4>
-          <p>07.09(토) - 07.10(일) 1박</p>
+        <div id="setCalendarBox">
+          <label for="setCalendarInput"
+            ><i class="fa-solid fa-calendar-week"></i
+          ></label>
+          <input
+            id="setCalendarInput"
+            name="setCalendarInput"
+            type="text"
+            placeholder="날짜"
+          />
+            <div id="calendar">
+      <div id="firstCalendar" class="calendarSt">
+        <div class="titleBox">
+          <p class="title">
+            <button type="button" onclick="prevMonth()">
+              <i class="fa-solid fa-angle-left"></i>
+            </button>
+            <span id="firstTitle" style="margin-right: 50px"></span>
+          </p>
+        </div>
+        <table id="firstCalendarTable"></table>
+      </div>
+      <div id="secondCalendar" class="calendarSt">
+        <div class="titleBox">
+          <p class="title">
+            <span id="secondTitle" style="margin-left: 50px"></span
+            ><button type="button" onclick="nextMonth()">
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
+          </p>
+        </div>
 
-          <div id="searchCalendar">
-            <div id="thisMonth">sdfasf</div>
-            <div id="nextMonth">sdfsadfdsf</div>
+        <table id="secondCalendarTable"></table>
+      </div>
+    </div>
+        </div>
+
+        <div id="setPeopleBox">
+          <label for="setPeopleInput"><i class="fa-solid fa-users"></i></label>
+          <input id="setPeopleInput" type="text" placeholder="인원" />
+          <div id="setPeople">
+            <div class="setPeopleContent">
+              <p><span>성인</span><span><i class="fa-solid fa-minus minusBtn"></i><input class="setPeopleAdult" type="number" min="0" max="8" value="2" disabled><i class="fa-solid fa-plus plusBtn"></i></span></p>
+              <p><span>아동 <span style="font-size: 12px; color: gray;">만 18세미만</span></span><span><i class="fa-solid fa-minus minusBtn"></i><input class="setPeopleKids" type="number" min="0" max="8" value="0" disabled><i class="fa-solid fa-plus plusBtn"></i></span></p>
+              <p><span>반려동물</span><span><i class="fa-solid fa-minus minusBtn"></i><input  class="setPeoplePet"  type="number" min="0" max="8" value="0" disabled><i class="fa-solid fa-plus plusBtn"></i></span></p>
+             
+            </div>
+            <p style="text-align: center;"><button id="setPeopleBtn" c type="button" class="whiteBtnSt">선택 완료</button></p>
           </div>
         </div>
-        <div class="searchBoxRoom" onclick="searchBoxBlock(this)">
-          <h4>인원, 객실</h4>
-          <p>성인 2, 소아 0, 객실 1</p>
-
-          <div id="searchRoomOption">dddd</div>
-        </div>
-        <button id="searchBoxBtn" style="position: relative">
-          <p
-            class="fa-solid fa-magnifying-glass"
-            style="
-              font-size: 35px;
-              position: absolute;
-              left: 50%;
-              top: 50%;
-              transform: translateX(-50%) translateY(-50%);
-            "
-          ></p>
-        </button>
+      <div style="display: flex; align-items: center; padding-left: 0;">
+      <button id="searchBtn" class="redBtnSt" type="button">검색</button>
+      </div>
       </div>
       <div class="midCont">
         <div>
@@ -262,7 +312,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               border-bottom: 1px solid #e6e6e6;
             "
           >
-            <h2>서울</h2>
+            <h2 id="beSearchedWord">${searchWord}</h2>
             <ul id="sortUl">
               <li>인기순</li>
               <li>높은 평점순</li>
@@ -270,10 +320,10 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               <li>리뷰 많은순</li>
             </ul>
           </div>
-          <ul style="margin-top: 5px">
+          <ul id="itemListWrap" style="margin-top: 5px">
             <li>
               <a href="#">
-                <img src="../../img/main/테스트_호텔이미지.jpg" alt="" />
+                <img src="../../img/item/item1/main1.jpg" alt="" />
                 <input
                   type="checkbox"
                   class="cbSt-heart"
@@ -295,61 +345,15 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                 </div>
               </a>
             </li>
-            <li>
-              <a href="#">
-                <img src="../../img/main/테스트_호텔이미지.jpg" alt="" />
-                <input
-                  type="checkbox"
-                  class="cbSt-heart"
-                  style="display: none"
-                  id="item_no2"
-                /><label for="item_no2"
-                  ><i class="fa-solid fa-heart heartStyle"></i
-                ></label>
-                <div class="itemTitle">
-                  <h1 style="margin-bottom: 5px">힐슨 호텔</h1>
-                  <div>
-                    <p><span>호텔</span> <span>등급미정</span></p>
-                    <p><span>9.2</span><span>(210)</span></p>
-                  </div>
-                  <div style="text-align: right">
-                    <p>남은객실 1개</p>
-                    <p>440,000원</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="../../img/main/테스트_호텔이미지.jpg" alt="" />
-                <input
-                  type="checkbox"
-                  class="cbSt-heart"
-                  style="display: none"
-                  id="item_no3"
-                /><label for="item_no3"
-                  ><i class="fa-solid fa-heart heartStyle"></i
-                ></label>
-                <div class="itemTitle">
-                  <h1 style="margin-bottom: 5px">힐슨 호텔</h1>
-                  <div>
-                    <p><span>호텔</span> <span>등급미정</span></p>
-                    <p><span>9.2</span><span>(210)</span></p>
-                  </div>
-                  <div style="text-align: right">
-                    <p>남은객실 1개</p>
-                    <p>440,000원</p>
-                  </div>
-                </div>
-              </a>
-            </li>
+    
+            
           </ul>
         </div>
       </div>
     </div>
 
-    <script src="../../js/hangOver.js"></script>
     <script src="../../js/default.js"></script>
+    <script src="../../js/calendar.js"></script>
     <script src="../../js/itemList.js"></script>
   </body>
 </html>

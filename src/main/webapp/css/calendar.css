@@ -1,6 +1,56 @@
 #calendar {
-  border: 1px solid black;
   border-radius: 10px;
-  width: 1024px;
-  height: 600px;
+  text-align: center;
+  display: flex;
+  padding: 20px;
+  position: absolute;
+  z-index: 50000;
+  background-color:white;
+  top:70px;
+  box-shadow: 0 1px 5px 0 grey;
+  left:-20px;
+}
+
+tr:hover {
+  cursor: pointer;
+}
+
+.calendarSt tr:nth-child(1) {
+  background-color: rgb(235, 235, 235);
+}
+.calendarSt tr:nth-child(1) td {
+  border-radius: 5px;
+}
+
+.calendarSt td:nth-child(1) {
+  color: rgb(255, 98, 98);
+}
+
+.calendarSt tr:not(.calendarSt tr:nth-child(1)) td {
+}
+.calendarSt td {
+  padding: 10px;
+  border-radius: 50%;
+}
+.calendarSt {
+  padding: 0 10px;
+}
+.title {
+  font-size: 25px;
+}
+.title * {
+  margin: 0 5px;
+}
+.title i {
+  font-size: 25px;
+}
+.title button {
+  border: none;
+  background: none;
+}
+.title button:hover {
+  cursor: pointer;
+}
+table {
+  border-collapse: collapse;
 }

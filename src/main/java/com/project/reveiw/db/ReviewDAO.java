@@ -86,7 +86,7 @@ public class ReviewDAO {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		int maxReNo = getTotalR_no();
-		query = "insert into review(re_no,u_no,item_no,room_no,re_grade,re_content,re_imgpath) values(?,?,?,?,?,?,?)";
+		query = "insert into review(re_no,u_no,item_no,room_no,re_grade,re_title,re_content,re_imgpath) values(?,?,?,?,?,?,?,?)";
 		try {
 			pstmt =conn.prepareStatement(query);
 			pstmt.setInt(1, maxReNo+1);
@@ -94,8 +94,9 @@ public class ReviewDAO {
 			pstmt.setInt(3, dto.getItem_no());
 			pstmt.setInt(4, dto.getRoom_no());
 			pstmt.setString(5, dto.getRe_grade());
-			pstmt.setString(6, dto.getRe_content());
-			pstmt.setString(7, dto.getRe_imgpath());
+			pstmt.setString(6, dto.getRe_title());
+			pstmt.setString(7, dto.getRe_content());
+			pstmt.setString(8, dto.getRe_imgpath());
 			
 			pstmt.executeUpdate();
 		
@@ -109,13 +110,14 @@ public class ReviewDAO {
 	public void updateReview(ReviewDTO dto) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		query = "update review set re_content=? where re_no=? and re_indent=?";
+		query = "update review set re_title=?, re_content=? where re_no=? and re_indent=?";
 		try {
 			pstmt =conn.prepareStatement(query);
 			
-			pstmt.setString(1, dto.getRe_content());
-			pstmt.setInt(2,dto.getRe_no());
-			pstmt.setInt(3,dto.getRe_indent());
+			pstmt.setString(1, dto.getRe_title());
+			pstmt.setString(2, dto.getRe_content());
+			pstmt.setInt(3,dto.getRe_no());
+			pstmt.setInt(4,dto.getRe_indent());
 			
 			pstmt.executeUpdate();
 		}catch(SQLException e) {

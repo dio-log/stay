@@ -2,14 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap");
+    </style>
+    <script
+      src="https://kit.fontawesome.com/fd6f859d9b.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="../../css/calendar.css" />
   </head>
   <body>
     <div id="calendar">
-        
+      <div id="firstCalendar" class="calendarSt">
+        <div class="titleBox">
+          <p class="title">
+            <button onclick="prevMonth()">
+              <i class="fa-solid fa-angle-left"></i>
+            </button>
+            <span id="firstTitle" style="margin-right: 50px"></span>
+          </p>
+        </div>
+        <table id="firstCalendarTable"></table>
+      </div>
+      <div id="secondCalendar" class="calendarSt">
+        <div class="titleBox">
+          <p class="title">
+            <span id="secondTitle" style="margin-left: 50px"></span
+            ><button onclick="nextMonth()">
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
+          </p>
+        </div>
+
+        <table id="secondCalendarTable"></table>
+      </div>
     </div>
   </body>
   <script src="../../js/calendar.js"></script>

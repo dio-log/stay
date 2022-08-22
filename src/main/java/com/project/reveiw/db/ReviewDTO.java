@@ -6,6 +6,7 @@ private int item_no=0;
 private int room_no=0;
 private int re_no=0;
 private String re_grade = null;
+private String re_title = null;
 private String re_content = null;
 private String re_imgpath = null;
 private int re_indent=0;
@@ -14,9 +15,23 @@ private String re_wtime = null;
 private int re_maxReview = 0;
 private int re_maxAnswer = 0;
 private String re_room_name=null;
+private String re_u_nick = null;
 
 
 
+
+public String getRe_title() {
+	return re_title;
+}
+public void setRe_title(String re_title) {
+	this.re_title = re_title;
+}
+public String getRe_u_nick() {
+	return re_u_nick;
+}
+public void setRe_u_nick(String re_u_nick) {
+	this.re_u_nick = re_u_nick;
+}
 public String getRe_room_name() {
 	return re_room_name;
 }

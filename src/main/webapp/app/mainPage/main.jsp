@@ -21,6 +21,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="../../css/default.css" />
+    <link rel="stylesheet" href="../../css/calendar.css" />
     <link rel="stylesheet" href="../../css/main.css" />
   </head>
   <body>
@@ -28,7 +29,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
    <%@ include file="nav.jsp" %>
     <div class="centerCont">
       <div class="emptyBoxByNav"></div>
-      <form action="search.it" method='post'>
+      <form action="itemList.it" method='post'>
       <div id="searchCont">
         <div id="setLocationBox">
           <label for="setLocationInput">
@@ -39,7 +40,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           </label>
 
           <input
-            name="setLocationInput"
+            name="searchWord"
             id="setLocationInput"
             type="text"
             placeholder="여행지, 숙소"
@@ -91,9 +92,31 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
             type="text"
             placeholder="날짜"
           />
-          <div id="calendar">
+            <div id="calendar">
+      <div id="firstCalendar" class="calendarSt">
+        <div class="titleBox">
+          <p class="title">
+            <button type="button" onclick="prevMonth()">
+              <i class="fa-solid fa-angle-left"></i>
+            </button>
+            <span id="firstTitle" style="margin-right: 50px"></span>
+          </p>
+        </div>
+        <table id="firstCalendarTable"></table>
+      </div>
+      <div id="secondCalendar" class="calendarSt">
+        <div class="titleBox">
+          <p class="title">
+            <span id="secondTitle" style="margin-left: 50px"></span
+            ><button type="button" onclick="nextMonth()">
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
+          </p>
+        </div>
 
-          </div>
+        <table id="secondCalendarTable"></table>
+      </div>
+    </div>
         </div>
 
         <div id="setPeopleBox">
@@ -110,7 +133,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           </div>
         </div>
       <div style="display: flex; align-items: center; padding-left: 0;">
-      <button id="searchBtn" class="redBtnSt" type="button">검색</button>
+      <button id="searchBtn" class="redBtnSt">검색</button>
       </div>
       </div>
       </form>
@@ -185,5 +208,6 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     </div>
     <script src="../../js/default.js"></script>
     <script src="../../js/main.js"></script>
+    <script src="../../js/calendar.js"></script>
   </body>
 </html>

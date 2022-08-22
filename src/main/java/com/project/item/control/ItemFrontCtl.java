@@ -16,6 +16,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import com.project.item.cmd.BasicCmd;
 import com.project.item.cmd.InsertItemCmd;
 import com.project.item.cmd.InsertRoomCmd;
+import com.project.item.cmd.SelectItemListCmd;
 import com.project.mdClass.MultipartCtl;
 
 /**
@@ -55,6 +56,8 @@ public class ItemFrontCtl extends HttpServlet {
 
 		String viewPage=null;
 		String path = req.getServletPath();
+		int idx = path.lastIndexOf("/");
+		String lastPath = path.substring(idx);
 		BasicCmd cmd=null;
 		
 		boolean flag = true;
@@ -74,6 +77,12 @@ public class ItemFrontCtl extends HttpServlet {
 			cmd.excute(req, resp);
 			viewPage = "/app/myPage/myItemManage.jsp";
 			flag =false;
+		}else if(lastPath.equals("/itemList.it")) {
+			viewPage ="../itemPage/itemList.jsp";
+		}else if(lastPath.equals("/selectItemList.it")) {
+			cmd = new SelectItemListCmd();
+			cmd.excute(req, resp);
+			return;
 		}
 		
 		

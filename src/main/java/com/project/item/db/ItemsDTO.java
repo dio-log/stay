@@ -16,7 +16,23 @@ public class ItemsDTO {
 	private String item_parking = null;
 	private String item_addpeople = null;
 	private String item_cancel_refund = null;
+	private String item_grade = null;
+	private int item_reviewCnt=0;
 	
+	
+	
+	public int getItem_reviewCnt() {
+		return item_reviewCnt;
+	}
+	public void setItem_reviewCnt(int item_reviewCnt) {
+		this.item_reviewCnt = item_reviewCnt;
+	}
+	public String getItem_grade() {
+		return item_grade;
+	}
+	public void setItem_grade(String item_grade) {
+		this.item_grade = item_grade;
+	}
 	public int getU_no() {
 		return u_no;
 	}

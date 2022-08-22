@@ -4,18 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+
 public class ItemsDAO {
 	private static ItemsDAO dao = new ItemsDAO();
 	private DataSource dataSource =null;
 	private final static String DATASOURCE_NAME = "jdbc/testdb";
 //	private final String TABLE_NAME = "board";
-	private final String SELECT_ITEM_BY_NO = "SELECT * FROM item_list WHERE u_no = ?";
+	private final String SELECT_ITEM_BY_NO = "SELECT * FROM item WHERE u_no = ?";
 	private final String SELECT_ALLROOM_BY_ITEMNO = "SELECT * FROM room_list WHERE item_no = ?";
 	private final String SELECT_ROOM = "SELECT * FROM room_list WHERE room_no = ? and item_no=?";
 	
@@ -300,7 +306,7 @@ public class ItemsDAO {
 		//+ "room_part_price=?, room_part_time=?,room_bed=?,bedcnt=?,room_size=?,room_view=?,"
 		//+ "room_theme=?,room_extraopt=?,min_men=?,max_men=?,room_img_path=? WHERE room_no=?";
 		int totalItemNO = getTotalItemNo();
-		query = "INSERT INTO item values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		query = "INSERT INTO item values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			pstmt= conn.prepareStatement(query);
@@ -319,6 +325,7 @@ public class ItemsDAO {
 			pstmt.setString(13, dto.getItem_parking());
 			pstmt.setString(14, dto.getItem_addpeople());
 			pstmt.setString(15, dto.getItem_cancel_refund());
+			pstmt.setString(16, "0");
 			pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -330,4 +337,34 @@ public class ItemsDAO {
 		
 	}
 	
+public JSONArray getDtoList(String searchWord){ 
+	JSONArray jsonArr = new JSONArray();
+
+	PreparedStatement pstmt =null; 
+	Connection conn = getConn(); 
+	ResultSet rs = null;
+	query ="select a.item_no,a.item_name,a.item_grade,a.item_imgpath,count(b.re_no),c.room_price from item a left join review b on a.item_no=b.item_no left join room_list c on a.item_no=c.item_no where item_addr like '%"+searchWord+"%' order by item_grade";
+	try {
+		pstmt = conn.prepareStatement(query);
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			JSONObject obj = new JSONObject();
+			obj.put("item_no", rs.getInt(1));
+			obj.put("item_name", rs.getString(2));
+			obj.put("item_grade", rs.getString(3));
+			obj.put("item_imgpath", rs.getString(4));
+			obj.put("item_reviewCnt", rs.getInt(5));
+			obj.put("item_price", rs.getString(6));
+			
+			jsonArr.add(obj);
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt,conn,rs);
+	}
+return jsonArr;
+}
+	
+
 }
