@@ -4,7 +4,7 @@ let checkSet = new Set();
 
 let dt1 = new Date();
 let dt2 = new Date();
-onload = function () {
+
   //   let dt = new Date();
 
   dt2.setMonth(dt1.getMonth() + 1);
@@ -17,7 +17,7 @@ onload = function () {
   setCalendar("firstCalendarTable", dt1);
   setCalendar("secondCalendarTable", dt2);
   initClick();
-};
+
 function initClick() {
   $(".calendarSt tr:not(.calendarSt tr:nth-child(1)) td").on(
     "click",

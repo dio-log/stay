@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.project.reveiw.db.ReviewDAO;
+
 
 public class ItemsDAO {
 	private static ItemsDAO dao = new ItemsDAO();
@@ -261,13 +263,13 @@ public class ItemsDAO {
 		PreparedStatement pstmt =null;
 		Connection conn = getConn();
 		ResultSet rs = null;
-		query = "select count(item_no) from item";
+		query = "select max(item_no) from item";
 		int totalItemNO=0;
 		try {
 			pstmt= conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				totalItemNO = rs.getInt("count(item_no)");
+				totalItemNO = rs.getInt("max(item_no)");
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -333,11 +335,11 @@ public class ItemsDAO {
 			close(pstmt,conn);
 		}
 		
-		modifyItemNo(totalItemNO+1, dto.getU_no());
+		modifyItemNo( dto.getU_no(),totalItemNO+1);
 		
 	}
 	
-public JSONArray getDtoList(String searchWord){ 
+public JSONArray getMoreItemDtoList(String searchWord){ 
 	JSONArray jsonArr = new JSONArray();
 
 	PreparedStatement pstmt =null; 
@@ -365,6 +367,125 @@ public JSONArray getDtoList(String searchWord){
 	}
 return jsonArr;
 }
+public List<ItemsDTO> getItemDtoList(String searchWord){ 
+	List<ItemsDTO> itemDto = new ArrayList<>();
+	PreparedStatement pstmt =null; 
+	Connection conn = getConn(); 
+	ResultSet rs = null;
+	ReviewDAO reviewDao = ReviewDAO.getIns();
 	
+	//평점순
+	query ="select item_no,item_name,item_grade,item_imgpath from item where item_addr like '%"+searchWord+"%' order by item_grade";
+	try {
+		pstmt = conn.prepareStatement(query);
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			ItemsDTO dto = new ItemsDTO();
+			dto.setItem_no(rs.getInt(1));
+			dto.setItem_name(rs.getString(2));
+			dto.setItem_grade(rs.getString(3));
+			dto.setItem_imgpath(rs.getString(4));
+			int maxReview = reviewDao.getMaxReview(rs.getInt(1));
+			dto.setItem_reviewCnt(maxReview);
+			dto.setItem_room_price(getRoomPrice(rs.getInt(1)));
+			itemDto.add(dto);
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt,conn,rs);
+	}
+return itemDto;
+}
+public String getRoomPrice(int item_no) {
+	PreparedStatement pstmt =null; 
+	Connection conn = getConn(); 
+	ResultSet rs = null;
+	query = "select room_price from room_list where item_no=? and room_no=1 ";
+	String roomPrice=null;
+	try {
+		pstmt= conn.prepareStatement(query);
+		pstmt.setInt(1, item_no);
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			roomPrice = rs.getString("room_price");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt,conn,rs);
+	}
+	return roomPrice;
+}
+
+	public ItemsDTO getItemDto(int item_no) {
+		ItemsDTO dto = new ItemsDTO();
+		PreparedStatement pstmt =null; 
+		Connection conn = getConn(); 
+		ResultSet rs = null;
+		query = "select * from item where item_no=?";
+		try {
+			pstmt= conn.prepareStatement(query);
+			pstmt.setInt(1, item_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				dto.setItem_name(rs.getString("item_name"));
+				dto.setItem_div(rs.getString("item_div"));
+				dto.setItem_addr(rs.getString("item_addr"));
+				dto.setItem_addr_detail(rs.getString("item_addr_detail"));
+				dto.setItem_addr_extra(rs.getString("item_addr_extra"));
+				dto.setItem_event(rs.getString("item_event"));
+				dto.setItem_imgpath(rs.getString("item_imgpath"));
+				dto.setItem_arround(rs.getString("item_arround"));
+				dto.setItem_basic(rs.getString("item_basic"));
+				dto.setItem_notice(rs.getString("item_notice"));
+				dto.setItem_parking(rs.getString("item_parking"));
+				dto.setItem_addpeople(rs.getString("item_addpeople"));
+				dto.setItem_cancel_refund(rs.getString("item_cancel_refund"));
+				dto.setItem_grade(rs.getString("item_grade"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt,conn,rs);
+		}
+		return dto;
+	}
+	public List<RoomDTO> getRoomDtoList(int item_no){
+		List<RoomDTO> dtoList = new ArrayList<>();
+		PreparedStatement pstmt =null; 
+		Connection conn = getConn(); 
+		ResultSet rs = null;
+		query = "select * from room_list where item_no=?";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, item_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				RoomDTO dto = new RoomDTO();
+				dto.setRoom_no(rs.getInt("room_no"));
+				dto.setRoom_name(rs.getString("room_name"));
+				dto.setRoom_price(rs.getString("room_price"));
+				dto.setRoom_part_price(rs.getString("room_part_price"));
+				dto.setRoom_part_time(rs.getInt("room_part_time"));
+				dto.setBasic_men(rs.getInt("basic_men"));
+				dto.setMax_men(rs.getInt("max_men"));
+				dto.setRoom_bed(rs.getString("room_bed"));
+				dto.setRoom_bed_cnt(rs.getInt("room_bed_cnt"));
+				dto.setRoom_view(rs.getString("room_view"));
+				dto.setRoom_size(rs.getString("room_size"));
+				dto.setRoom_theme(rs.getString("room_theme"));
+				dto.setRoom_extraopt(rs.getString("room_extraopt"));
+				dto.setRoom_img_path(rs.getString("room_img_path"));
+				dtoList.add(dto);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt,conn,rs);
+		}
+		return dtoList;
+	}
 
 }

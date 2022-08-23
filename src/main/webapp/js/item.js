@@ -24,15 +24,34 @@ function itemTabToggle(e) {
 
 $(".fa-plus").on("click", function () {
   this.previousElementSibling.stepUp();
+  let ch= $(this).prev().data('ch');
+   let chVal  = $(this).prev().val()
   //   $(this).prev().spinner("stepUp");
-});
-$(".fa-minus").on("click", function () {
-  this.nextElementSibling.stepDown();
+  if(ch==="adult"){
+	$('#p_adult').val(chVal)
+}else if(ch==="child"){
+	$('#p_child').val(chVal)
+}else if(ch==="pet"){
+	$('#p_pet').val(chVal)
+}
 });
 
-// $("#addRoomBtn").on("click", () => {
-//   $("#roomMoreBox").css("display", "block");
-// });
+
+$(".fa-minus").on("click", function () {
+  this.nextElementSibling.stepDown();
+    let ch= $(this).next().data('ch');
+   let chVal  = $(this).next().val()
+  if(ch==="adult"){
+	$('#p_adult').val(chVal)
+}else if(ch==="child"){
+	$('#p_child').val(chVal)
+}else if(ch==="pet"){
+	$('#p_pet').val(chVal)
+}
+});
+
+
+
 onload = function () {
   $("#addRoomBtn").on("click", () => {
     $("#roomMoreBox").fadeIn();
@@ -44,48 +63,10 @@ onload = function () {
     $("#roomMoreBox").css("display", "none");
     $("#roomUploadForm")[0].reset();
   });
+
 };
 
-// $("#tempSaveBtn").on("click", function () {
-//   let roomData = new FormData();
-//   roomData.append("room_name", $("#room_name").val());
-//   roomData.append("size", $("#size").val());
-//   roomData.append("min_men", $("#min_men").val());
-//   roomData.append("max_men", $("#max_men").val());
-//   roomData.append("bed", $("#bed").val());
-//   roomData.append("view", $("#view").val());
-//   roomData.append("roomExtraInfo", $("#roomExtraInfo").val());
-//   roomData.append("view", $("#view").val());
-//   roomData.append("view", $("#view").val());
 
-//   $.ajax({
-//     type: "post",
-//     url: "",
-//     data: formData,
-//     success: function (result) {
-//       $("#itemTab_roomDetailBox").append(`
-//       <div class="itemTab_roomDetailSt">
-//                 <div style="position: relative">
-//                   <img src="http://via.placeholder.com/300x200" alt="" />
-//                   <p class="itemTab_roomDetailMore">더 보기</p>
-//                 </div>
-//                 <div class="itemTab_roomDetailRight">
-//                   <p>객실이름</p>
-//                   <p>객실상세</p>
-//                   <p>가격 <span>110,000</span></p>
-//                   <p>
-//                     쿠폰적용가
-//                     <span>99,000</span>
-//                   </p>
-//                   <button  type="button" class="whiteBtnSt">견적보기 ></button>
-//                 </div>
-//               </div>`);
-//     },
-//     error: function (e) {
-//       console.log("파일 전송실패:" + e);
-//     },
-//   });
-// });
 
 let cnt = 0;
 function leftSideBtn() {
@@ -111,7 +92,6 @@ $("#roomSaveBtn").on("click", function () {
   //     return;
   //   }
   // }
-  console.log($("#roomMoreImgInput")[0].files[0]);
   let firstImg = $("#roomMoreImgInput")[0].files[0];
   let arr = [];
   $("input:checkbox[name=room_extraopt]:checked").each(function () {
@@ -160,8 +140,11 @@ $("#roomSaveBtn").on("click", function () {
         `);
         $("#fileListBox").empty();
         $("#roomMoreImgCont").empty();
-        $("#roomMoreBox").css("display", "none");
         $("#roomUploadForm")[0].reset();
+         let dataTransfer = new DataTransfer();
+       document.querySelector("#roomMoreImgInput").files = dataTransfer.files;
+      fileList = new Set(dataTransfer.files);
+        $("#roomMoreBox").css("display", "none");
       };
     },
     error: function (e) {
@@ -388,3 +371,4 @@ $("body").on("click", function (e) {
     $(".writeEx").css("display", "none");
   }
 });
+

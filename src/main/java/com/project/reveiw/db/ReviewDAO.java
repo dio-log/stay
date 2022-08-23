@@ -163,14 +163,32 @@ public class ReviewDAO {
 		}
 	}
 	
-	public List<ReviewDTO> getDtoList(int item_no){
-		 List<ReviewDTO> list= new  ArrayList();
+	public List<ReviewDTO> getReviewDtoList(int item_no){
+		 List<ReviewDTO> dtoList= new  ArrayList();
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		ResultSet rs = null;
-		query ="";
+		query ="select a.re_no, a.re_grade, a.re_title, a.re_content,a.re_imgpath,a.re_indent,"
+				+ "a.re_wtime, a.room_no, c.u_nick"
+				+ " from review a left join"
+				+ " room_list b on a.item_no=b.item_no"
+				+ " left join member c on a.u_no=c.u_no";
 		try {
-			ReviewDTO dto = new ReviewDTO();
+			pstmt=conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ReviewDTO dto = new ReviewDTO();
+				dto.setRe_no(rs.getInt(1));
+				dto.setRe_grade(rs.getString(2));
+				dto.setRe_title(rs.getString(3));
+				dto.setRe_content(rs.getString(4));
+				dto.setRe_imgpath(rs.getString(5));
+				dto.setRe_indent(rs.getInt(6));
+				dto.setRe_wtime(rs.getString(7));
+				dto.setRe_room_name(rs.getString(8));
+				dto.setRe_u_nick(rs.getString(9));
+				dtoList.add(dto);
+			}
 			
 			
 		}catch(SQLException e) {
@@ -178,6 +196,48 @@ public class ReviewDAO {
 		}finally {
 			close(pstmt, conn,rs);
 		}
+		return dtoList;
+	}
+	
+	public int getMaxAnswer(int item_no) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		int maxAnswer = 0;
+		query = "select count(re_no) from review where item_no=? and re_indent=1";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, item_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				maxAnswer = rs.getInt("count(re_no)");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn,rs);
+		}
+		return maxAnswer;
+	}
+	public int getMaxReview(int item_no) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		int maxReview = 0;
+		query = "select count(re_no) from review where item_no=? and re_indent=0";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, item_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				maxReview = rs.getInt("count(re_no)");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn,rs);
+		}
+		return maxReview;
 	}
 
 	

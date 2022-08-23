@@ -19,6 +19,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"
     ></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b8cfe888abf4ea908007fe3bb9d7094&libraries=services,clusterer,drawing"></script>
     <link rel="stylesheet" href="../../css/main.css" />
     <link rel="stylesheet" href="../../css/default.css" />
       <link rel="stylesheet" href="../../css/calendar.css" />
@@ -92,7 +93,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
             type="text"
             placeholder="날짜"
           />
-            <div id="calendar">
+            <div id="calendar" style="display:none">
       <div id="firstCalendar" class="calendarSt">
         <div class="titleBox">
           <p class="title">
@@ -140,12 +141,14 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         <div>
           <div class="filterWrap">
             <div style="text-align: center; margin-bottom: 10px">
+           
               <button type="button" id="searchMapBtn">
                 <i
                   class="fa-solid fa-map-location-dot"
                   style="margin-right: 5px"
                 ></i
                 >지도 보기
+                 <div id="map"></div>
               </button>
             </div>
             <ul>
@@ -312,7 +315,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               border-bottom: 1px solid #e6e6e6;
             "
           >
-            <h2 id="beSearchedWord">${searchWord}</h2>
+            <h2 id="beSearchedWord">'${searchWord }' <span style="font-size:20px">검색결과</span> </h2>
             <ul id="sortUl">
               <li>인기순</li>
               <li>높은 평점순</li>
@@ -321,31 +324,37 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
             </ul>
           </div>
           <ul id="itemListWrap" style="margin-top: 5px">
-            <li>
-              <a href="#">
-                <img src="../../img/item/item1/main1.jpg" alt="" />
+          <c:if test="${itemDtoList==null}">
+          <li style="text-align: center;margin-top: 50px">
+        <h3> 검색하신 상품은 존재하지 않습니다</h3> 
+          </li>
+           </c:if>
+          <c:forEach var="itemDto" items="${itemDtoList}">
+             <li>
+              <a href="itemView.it?item_no=${itemDto.item_no}">
+                <img src="${itemDto.item_imgpath.split(',')[1]}" alt="" />
                 <input
                   type="checkbox"
                   class="cbSt-heart"
                   style="display: none"
-                  id="item_no1"
                 /><label for="item_no1"
                   ><i class="fa-solid fa-heart heartStyle"></i
                 ></label>
                 <div class="itemTitle">
-                  <h1 style="margin-bottom: 5px">힐슨 호텔</h1>
+                  <h1 style="margin-bottom: 5px">${itemDto.item_name}</h1>
                   <div>
-                    <p><span>호텔</span> <span>등급미정</span></p>
-                    <p><span>9.2</span><span>(210)</span></p>
+                    <p><span>${itemDto.item_div}</span> <span></span></p>
+                    <p style="color:rgb(250, 187, 93)"><span>${itemDto.item_grade}</span><span>(${itemDto.item_reviewCnt})</span></p>
                   </div>
                   <div style="text-align: right">
-                    <p>남은객실 1개</p>
-                    <p>440,000원</p>
+                    <p></p>
+                    <p>${itemDto.item_room_price}원</p>
                   </div>
                 </div>
               </a>
             </li>
-    
+    </c:forEach>
+           
             
           </ul>
         </div>
@@ -353,7 +362,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     </div>
 
     <script src="../../js/default.js"></script>
-    <script src="../../js/calendar.js"></script>
+      <script src="../../js/calendar.js"></script>
     <script src="../../js/itemList.js"></script>
+
   </body>
 </html>

@@ -6,7 +6,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Document</title>
+    <title>Hostel</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap");
       @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
@@ -25,11 +25,11 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     <link rel="stylesheet" href="../../css/main.css" />
   </head>
   <body>
-  <c:set var='title' value='메인'></c:set>
+  <c:set var='title' value=''></c:set>
    <%@ include file="nav.jsp" %>
     <div class="centerCont">
       <div class="emptyBoxByNav"></div>
-      <form action="itemList.it" method='post'>
+      <form action="searchItemList.it" method="POST">
       <div id="searchCont">
         <div id="setLocationBox">
           <label for="setLocationInput">
@@ -38,11 +38,10 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               style="margin-right: 5px"
             ></i>
           </label>
-
           <input
-            name="searchWord"
             id="setLocationInput"
             type="text"
+            name="searchWord" 
             placeholder="여행지, 숙소"
           />
           <div id="searchDetination">
@@ -92,7 +91,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
             type="text"
             placeholder="날짜"
           />
-            <div id="calendar">
+            <div id="calendar" style="display:none">
       <div id="firstCalendar" class="calendarSt">
         <div class="titleBox">
           <p class="title">
@@ -133,7 +132,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           </div>
         </div>
       <div style="display: flex; align-items: center; padding-left: 0;">
-      <button id="searchBtn" class="redBtnSt">검색</button>
+      <button id="searchBtn" class="redBtnSt" type="submit">검색</button>
       </div>
       </div>
       </form>

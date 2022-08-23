@@ -2,6 +2,8 @@ package com.project.item.cmd;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.mysql.cj.xdevapi.JsonArray;
 import com.project.item.db.ItemsDAO;
@@ -22,9 +25,17 @@ public class SelectItemListCmd implements BasicCmd {
 		// TODO Auto-generated method stub
 		ItemsDAO dao = ItemsDAO.getIns();
 		String searchWord = req.getParameter("searchWord");
-		JSONArray jsonArr = dao.getDtoList(searchWord);
+	 System.out.println("서치워드"+searchWord);
+		JSONArray jsonArr = dao.getMoreItemDtoList(searchWord);
+		System.out.println("서치워드"+searchWord);
+		JSONObject obj = new JSONObject();
+		obj.put("searchWord", searchWord);
+		jsonArr.add(obj);
 		PrintWriter pw = resp.getWriter();
 		pw.print(jsonArr);
+		
+	
+	
 		
 	}
 	

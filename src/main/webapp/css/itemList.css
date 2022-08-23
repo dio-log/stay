@@ -76,3 +76,17 @@
 .optLabel {
   color: gray;
 }
+#map{
+	position: fixed;
+	width: 600px;
+	height: 500px;
+	left: 50%;
+	top: 50%;
+	transform:translateY(-50%) translateX(-50%);
+	background-color: white;
+	border-radius: 5px;
+	z-index: 50000;
+	box-shadow: 0 2px 2px 0 gray;
+	border:1px solid #e6e6e6;
+	display: none;
+}

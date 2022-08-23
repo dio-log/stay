@@ -1,5 +1,5 @@
 window.addEventListener("scroll", (e) => {
-  console.log(window.scrollY);
+ // console.log(window.scrollY);
   if (window.scrollY > 20) {
     $(".nav").css("height", "50px");
     $(".nav").css("background-color", "white");

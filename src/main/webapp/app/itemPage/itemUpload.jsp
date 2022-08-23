@@ -171,7 +171,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
 
               <span>주변정보</span>
               <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
-              <textarea name="item_arround" id="" cols="" rows=""></textarea>
+              <textarea name="item_arround" id=""  class="itemInfoTextarea" cols="" rows="">· 신논현역 도보 1분
+· 강남역 도보 5분</textarea>
               <div class="writeEx" data-ex="ex">
                 · 홍대입구역 도보 3분<br />
                 · 연트럴파크 도보 1분<br />
@@ -181,7 +182,13 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               <span>기본 정보</span>
               <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
 
-              <textarea name="item_basic" id="" cols="" rows=""></textarea>
+              <textarea name="item_basic" id=""  class="itemInfoTextarea" cols="" rows="">· 체크인 : 15시~ | 체크아웃 : ~11시
+· 22시 이후 체크인 시 호텔 프론트 문의
+· 보안을 위하여 투숙객 본인 외에 외부인 동반 출입을 금지합니다
+· 전 객실 금연 (흡연 적발 시 300,000원 위약금이 발생됩니다)
+· 애완동물 출입 금지입니다
+· 시설물을 파손하거나 침구류 훼손 및 오염 (세탁 불가능) 시 전액 배상해야 합니다
+· 보호자 동반 없는 미성년자 입실 불가 (업체 문의 필수)</textarea>
               <div class="writeEx" data-ex="ex">
                 · 체크인 : 15시~ | 체크아웃 : ~11시<br />
                 · 22시 이후 체크인 시 호텔 프론트 문의<br />
@@ -196,7 +203,11 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
 
               <span>공지사항</span>
               <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
-              <textarea name="item_notice" id="" cols="" rows=""></textarea>
+              <textarea name="item_notice" id=""  class="itemInfoTextarea" cols="" rows="">· 보안을 위하여 투숙객 본인 외에 외부인 동반 출입을 금지합니다
+· 전 객실 금연 (흡연 적발 시 300,000원 위약금이 발생됩니다)
+· 애완동물 출입 금지입니다
+· 시설물을 파손하거나 침구류 훼손 및 오염 (세탁 불가능) 시 전액 배상해야 합니다
+· 보호자 동반 없는 미성년자 입실 불가 (업체 문의 필수)</textarea>
               <div class="writeEx" data-ex="ex">
                 · 보안을 위하여 투숙객 본인 외에 외부인 동반 출입을 금지합니다
                 <br />
@@ -209,14 +220,16 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
 
               <span>주차정보</span>
               <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
-              <textarea name="item_parking" id="" cols="" rows=""></textarea>
+              <textarea name="item_parking" id=""  class="itemInfoTextarea" cols="" rows="">· 주차 가능 (발렛파킹만 가능 / 박 당 10,000원)</textarea>
               <div class="writeEx" data-ex="ex">
                 · 숙소 앞 무료주차 가능 (업체 문의 필수) 또는<br />
                 · 주차 가능 (발렛파킹만 가능 / 박 당 10,000원)
               </div>
               <span>인원추가시</span>
               <i class="fa-solid fa-circle-exclamation" data-ex="ex"></i>
-              <textarea name="item_addpeople" id="" cols="" rows=""> </textarea>
+              <textarea name="item_addpeople" id=""  class="itemInfoTextarea" cols="" rows="">· 기준인원 외 추가 시, 1인 33,000원 (만 12세 이상~성인), 만 12세 미만 무료
+· 영유아 인원수 포함, 최대인원 초과 불가
+· 현장 결제</textarea>
               <div class="writeEx" data-ex="ex">
                 · 기준인원 외 추가 시, 1인 33,000원 (만 12세 이상~성인), 만 12세
                 미만 무료 <br />
@@ -236,7 +249,11 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                 id=""
                 cols=""
                 rows=""
-              ></textarea>
+                 class="itemInfoTextarea"
+              >· 체크인일 기준 7일 전 : 100% 환불
+· 체크인일 기준 6 ~ 4일 전 : 50% 환불
+· 체크인일 기준 3일 전 ~ 당일 및 No-Show : 환불 불가
+· 취소, 환불 시 수수료가 발생할 수 있습니다</textarea>
             </div>
           </div>
           <div>
@@ -292,8 +309,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                     name="room_name"
                     id="room_name"
                     type="text"
-                    maxlength="16"
-                    placeholder="최대 16자리"
+                    maxlength="40"
+                    placeholder="최대 40자리"
                   />
                 </li>
                 <li>
@@ -381,13 +398,13 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               </p>
               <p>
                 대실
-                <select name="room_part_price" id="partTimePrice">
+                <select name="room_part_time" id="partTimePrice">
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
                   <option value="5">5</option>
                   <option value="6">6</option></select
-                >시간 <input name="room_part_time" type="number" required />원
+                >시간 <input name="room_part_price" type="number" required />원
               </p>
 
               <p>부대 시설</p>

@@ -49,7 +49,7 @@ public class MultipartCtl {
 	public Map<String,String> saveItemImg() throws Exception {
 		Map<String, String> map = new HashMap<>();
 		Iterator<?> itr = items.iterator();
-		File file = new File("C:\\programing\\gitrep\\webProject\\src\\main\\webapp\\img\\item\\"+dirName);
+		File file = new File("C:\\programing\\gitrep\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\webProject\\img\\item\\"+dirName);
 		file.mkdirs();
 		String fullFileName ="";
 		ItemsDTO dto = null;
@@ -69,7 +69,7 @@ public class MultipartCtl {
 	public Map saveRoomImg() throws Exception {
 		Map<String, String> map = new HashMap<>();
 		Iterator<?> itr = items.iterator();
-		File file = new File("C:\\programing\\gitrep\\webProject\\src\\main\\webapp\\img\\item\\"+dirName);
+		File file = new File("C:\\programing\\gitrep\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\webProject\\img\\item\\"+dirName);
 		file.mkdirs();
 		String fullFileName ="";
 		String checkStr="";
@@ -104,7 +104,7 @@ public class MultipartCtl {
 	public Map<String,String> saveReviewImg() throws Exception {
 		Map<String, String> map = new HashMap<>();
 		Iterator<?> itr = items.iterator();
-		File file = new File("C:\\programing\\gitrep\\webProject\\src\\main\\webapp\\img\\review\\"+reviewDirName);
+		File file = new File("C:\\programing\\gitrep\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\webProject\\img\\review\\"+reviewDirName);
 		file.mkdirs();
 		String fullFileName ="";
 		ItemsDTO dto = null;

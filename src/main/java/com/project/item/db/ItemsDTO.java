@@ -18,9 +18,17 @@ public class ItemsDTO {
 	private String item_cancel_refund = null;
 	private String item_grade = null;
 	private int item_reviewCnt=0;
+	private String item_room_price=null;
 	
 	
 	
+	
+	public String getItem_room_price() {
+		return item_room_price;
+	}
+	public void setItem_room_price(String item_room_price) {
+		this.item_room_price = item_room_price;
+	}
 	public int getItem_reviewCnt() {
 		return item_reviewCnt;
 	}
