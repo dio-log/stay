@@ -206,7 +206,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       </div>
     </div>
     <script src="../../js/default.js"></script>
-    <script src="../../js/main.js"></script>
     <script src="../../js/calendar.js"></script>
+    <script src="../../js/main.js"></script>
   </body>
 </html>

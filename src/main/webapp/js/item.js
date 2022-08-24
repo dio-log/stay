@@ -52,7 +52,7 @@ $(".fa-minus").on("click", function () {
 
 
 
-onload = function () {
+
   $("#addRoomBtn").on("click", () => {
     $("#roomMoreBox").fadeIn();
   });
@@ -64,7 +64,7 @@ onload = function () {
     $("#roomUploadForm")[0].reset();
   });
 
-};
+
 
 
 
@@ -367,8 +367,9 @@ $(".fa-circle-exclamation").on("click", function (e) {
 });
 
 $("body").on("click", function (e) {
-  if ($(e.target).data("ex") != "ex") {
-    $(".writeEx").css("display", "none");
+  if ($(e.target).data("ex") == "ex") {
+    $(".writeEx").toggle();
   }
 });
+
 

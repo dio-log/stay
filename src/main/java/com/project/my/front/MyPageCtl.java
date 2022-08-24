@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.project.item.cmd.BasicCmd;
+import com.project.payment.cmd.GetPaymentListCmd;
+import com.project.payment.cmd.GetTotalPointCmd;
+import com.project.reveiw.cmd.SelectPerTotalReviewCmd;
 
 /**
  * Servlet implementation class MyPageCtl
@@ -46,19 +49,31 @@ public class MyPageCtl extends HttpServlet {
 		BasicCmd cmd = null;
 		String viewPage = null;
 		String path = req.getServletPath();
+		int idx = path.lastIndexOf("/");
+		String lastPath = path.substring(idx);
 		boolean flag = true;
-		if(path.equals("/app/myPage/myReservation.my")) {
+		if(lastPath.equals("/myReservation.my")) {
 			//예약내역 조회
-			flag=false;
+			cmd = new GetPaymentListCmd();
+			cmd.excute(req, resp);
 			viewPage="/app/myPage/myReservation.jsp";
-		}else if(path.equals("/app/myPage/myInfo.my") ||path.equals("/app/signPage/myInfo.my") || path.equals("/app/itemPage/myInfo.my") ||path.equals("/app/mainPage/myInfo.my")) {
+			
+		}else if(lastPath.equals("/myInfo.my")) {
+	
 			viewPage = "/app/myPage/myInfo.jsp";
 			flag =false; //주소 날림
 			
-		}else if(path.equals("/app/myPage/myPoint.my")) {
+		}else if(lastPath.equals("/myPoint.my")) {
 			//포인트조회
+			cmd = new GetTotalPointCmd();
+			cmd.excute(req, resp);
+			
 			viewPage= "/app/myPage/myPoint.jsp";
-			flag=false;
+			
+		}else if(lastPath.equals("/myReview.my")) {
+			cmd = new SelectPerTotalReviewCmd();
+			cmd.excute(req, resp);
+			viewPage="/app/myPage/myReview.jsp";
 		}
 		
 		

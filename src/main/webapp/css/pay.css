@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+#payLeftWrap{
+	width: 700px;
+	padding: 0 30px;
+}
+#payRightWrap{
+	width: 324px;
+		padding: 30px 20px;
+		background-color: #eeeeee45;
+}
+#payLeftWrap>*{
+	padding: 20px 0;
+}
+#payLeftWrap div>*{
+	padding: 10px 0;
+}
+#payLeftWrap div:not(#payLeftWrap div:nth-child(1)){
+	border-top:1px solid #e6e6e6;
+	margin-top: 50px;
+}
+
+#payLeftWrap div:nth-child(1) input{
+	width: 100%;
+	font-size: 16px;
+	padding-left: 10px;
+	border-radius: 5px;
+	border:1px solid #e6e6e6;
+}
+#payLeftWrap div:nth-child(2) p{
+	display:flex;
+	justify-content: space-between;
+} 
+
+#p_point{
+	width: 100px;
+	text-align: right;
+	padding:10px 0;
+	font-size: 16px;
+	border-radius: 5px;
+	border:1px solid #e6e6e6;
+}
+
+#payLeftWrap *{
+	color: gray;
+}
+#payLeftWrap h3{
+	color:black;
+}
+#payRightWrap>p:nth-child(odd) {
+	color:gray;
+}
+#payRightWrap>p:nth-child(even){
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+#payRightWrap div h2{
+	color: #f7323f;
+	margin: 10px 0;
+}
+#payRightWrap div p{
+	font-size: 14px;
+	color:gray;
+}
+#payRightWrap button{
+	width: 100%;
+	margin-top:20px; 
+}
+
+#payBox{
+	width:400px;
+	height:400px;
+	box-shadow: 0 2px 3px 0 #e6e6e6;
+	background-color:white;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform:translateY(-50%) translateX(-50%);
+	border-radius: 5px;
+	overflow: hidden;
+}
+#outerPayBox{
+	position:fixed !important;
+	width:inherit;
+	height:inherit;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 50000;
+	top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+#payBox img{
+	width: 100px;
+}
+#payBox div button{
+	padding: 0 10px;
+	margin: 0 5px;
+}
+#payBox div{
+	padding: 10px;
+	display: flex;
+	justify-content: flex-end;
+	
+}
+#payBox :nth-child(3){
+	margin-top:170px;
+	font-size: 12px;
+	color: gray;
+	text-align: right;
+	padding-right: 10px;
+}

@@ -87,3 +87,7 @@ $("#myPagePwCheckBtn").on("click", function () {
     },
   });
 });
+
+$('#modifyCancelBtn').on('click',function(){
+	location="myInfo.my";
+})

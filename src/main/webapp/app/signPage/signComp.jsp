@@ -57,7 +57,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           회원님을 위한 웰컴쿠폰을 지급해드렸어요 !
         </p>
         <p style="margin-top: 0"></p>
-        <button type="">로그인페이지</button>
+       <a href="login.m"><button type="button">로그인페이지</button></a> 
       </div>
     </div>
   </body>

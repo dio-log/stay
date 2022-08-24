@@ -19,10 +19,10 @@ public class SearchItemListCmd implements BasicCmd{
 		ItemsDAO dao = ItemsDAO.getIns();
 		String searchWord = req.getParameter("searchWord");
 		List<ItemsDTO> itemDtoList =  dao.getItemDtoList(searchWord);
-		if(itemDtoList.get(0).getItem_no()==0) {
-			itemDtoList =null;
+		if(itemDtoList.size()==0) {
+			itemDtoList=null;
 		}
-	
+	System.out.println(itemDtoList);
 	
 		req.setAttribute("searchWord", searchWord);
 		req.setAttribute("itemDtoList", itemDtoList);

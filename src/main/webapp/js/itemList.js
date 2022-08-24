@@ -119,5 +119,33 @@ $('body').on('click',function(e){
 	if($('#searchMapBtn').is(e.target)){
 		$('#map').toggle();
 	}
-	
+	if (
+    !$("#setLocationBox").is(e.target) &&
+    !$("#setLocationBox").has(e.target).length
+  ) {
+    $("#searchDetination").hide();
+  } else {
+    $("#searchDetination").show();
+  }
+  if (
+    !$("#setCalendarBox").is(e.target) &&
+    !$("#setCalendarBox").has(e.target).length
+  ) {
+    $("#calendar").hide();
+  } else {
+    $("#calendar").show();
+  }
+
+  if (
+    !$("#setPeopleBox").is(e.target) &&
+    !$("#setPeopleBox").has(e.target).length
+  ) {
+    $("#setPeople").hide();
+  } else {
+    $("#setPeople").show();
+  }
+  if ($("#setPeopleBtn").is(e.target)) {
+    $("#setPeople").hide();
+  }
 });
+

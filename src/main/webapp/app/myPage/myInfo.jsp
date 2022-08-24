@@ -40,12 +40,12 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
            <c:choose>
  	<c:when test="${u_div==1}">
           <li>
-            <a href="myReservation.my">예약내역</a>
+            <a href="myReservation.my">결제/예약내역</a>
           </li>
-
+<li>
+            <a href="myPoint.my">나의 포인트</a>
+          </li>
           <li><a href="myReview.my">나의 후기</a></li>
-           	<li> <a href="myPoint.my">포인트</a></li>
-          <li><a href="myCoupon.my">쿠폰</a></li>
           <li><a href="myPick.my">찜</a></li>
  	</c:when>
  	<c:when test="${u_div==2}">
@@ -140,8 +140,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                 <label for="smsMarketing">SMS 및 이메일</label>
               </li>
               <li>
+                <button id="modifyCancelBtn" class="whiteBtnSt" id="modifyCompBtn">수정취소</button>
                 <button class="redBtnSt" id="modifyCompBtn">수정완료</button>
-                <button class="whiteBtnSt" id="modifyCompBtn">수정취소</button>
               </li>
               <li>
                 <hr />

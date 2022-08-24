@@ -25,6 +25,7 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b8cfe888abf4ea908007fe3bb9d7094&libraries=services,clusterer,drawing"></script>
 <link rel="stylesheet" href="../../css/default.css" />
+<link rel="stylesheet" href="../../css/calendar.css" />
 <link rel="stylesheet" href="../../css/item.css" />
 </head>
 <body>
@@ -61,16 +62,19 @@
 				</div>
 				<div id="itemMainInfoBox">
 					<p style="display: flex; justify-content: space-between"></p>
-					<p >
-						<span style="display:inline-block; width:80px">분류</span> <span style="color:gray;font-size:14px">${itemDto.item_div}</span>
+					<p>
+						<span style="display: inline-block; width: 80px">분류</span> <span
+							style="color: gray; font-size: 14px">${itemDto.item_div}</span>
 					</p>
 					<div id="map"></div>
 					<p>
-					<span style="display:inline-block; width:80px">소재지</span>	 <span><i
-							class="fa-solid fa-location-dot location" style="color:rgb(65, 211, 65)"></i><span class="location" style="color:gray;font-size:14px">지도로보기</span> </span>
+						<span style="display: inline-block; width: 80px">소재지</span> <span><i
+							class="fa-solid fa-location-dot location"
+							style="color: rgb(65, 211, 65)"></i><span class="location"
+							style="color: gray; font-size: 14px">지도로보기</span> </span>
 					</p>
-					<p id="item_addr" style="color:gray;font-size:14px">${itemDto.item_addr}</p>
-					<p style="color:gray;font-size:14px">${itemDto.item_addr_detail}${itemDto.item_addr_extra}</p>
+					<p id="item_addr" style="color: gray; font-size: 14px">${itemDto.item_addr}</p>
+					<p style="color: gray; font-size: 14px">${itemDto.item_addr_detail}${itemDto.item_addr_extra}</p>
 
 					<p>이벤트</p>
 					<textarea id="itemMainEvent" name="item_event" cols="" rows=""
@@ -96,6 +100,7 @@ ${itemDto.item_event}</textarea>
 				<div id="itemTab_roomDetailBox">
 					<!-- 정보추출해서 반복해서 넣어줄 박스 -->
 					<c:forEach var="roomDto" items="${roomDtoList}">
+
 						<div class="itemTab_roomDetailSt">
 							<div style="position: relative">
 								<img src='${roomDto.room_img_path.split(",")[1]}' alt="깨짐" />
@@ -112,15 +117,20 @@ ${itemDto.item_event}</textarea>
 									1박 가격 <span>${roomDto.room_price}</span>
 								</p>
 								<c:if test="${roomDto.room_part_price!=0}">
-								<p>
-									대실 가격 <span>${roomDto.room_part_price}</span>
-								</p>
+									<p>
+										대실 가격 <span>${roomDto.room_part_price}</span>
+									</p>
+
 								</c:if>
-								
-							<%-- 	<p>
+
+								<%-- 	<p>
 									쿠폰적용가 <span>${roomDto.room_price * 0.9}</span>
 								</p> --%>
-								<button type="button" class="whiteBtnSt tempPayBtn" data-temp="${roomDto.room_name}&${roomDto.room_price}">견적보기<i class="fa-solid fa-angle-right" style="margin-left:10px"></i></button>
+								<button type="button" class="whiteBtnSt tempPayBtn"
+									data-temp="${roomDto.room_name}&${roomDto.room_price}&${roomDto.max_men}">
+									견적보기<i class="fa-solid fa-angle-right"
+										style="margin-left: 10px"></i>
+								</button>
 							</div>
 						</div>
 					</c:forEach>
@@ -169,11 +179,12 @@ ${itemDto.item_event}</textarea>
 				<div id="itemTab_reviewDetailBox" class="displayNone">
 					<div id="">
 						<p>평점</p>
-						<span>전체 리뷰</span> <span>${maxReview}</span>
-						 <span>제휴점 답변</span> <span> ${maxAnswer}</span>
+						<span>전체 리뷰</span> <span>${maxReview}</span> <span>제휴점 답변</span> <span>
+							${maxAnswer}</span>
 					</div>
 					<!--리뷰dto array 불러서 반복붙임, 페이징-->
 					<c:forEach var="reviewDto" items="${reviewDtoList}">
+
 						<div class="reviewNick">${reviewDto.re_u_nick}</div>
 						<div class="reviewContentWrap">
 							<p class="reviewTitle">${reviewDto.re_title}</p>
@@ -195,27 +206,55 @@ ${itemDto.item_event}</textarea>
 			</div>
 			<div id="itemSecRightBox">
 				<div id="totalChargeBox">
-					<p> <input  class="temp_price" style="font-size :16px;text-align:right; border: none; background-color: white; width:80px;" value="0" readonly="readonly">원</p>
+					<div id="calendar">
+						<div id="firstCalendar" class="calendarSt">
+							<div class="titleBox">
+								<p class="title">
+									<button onclick="prevMonth()">
+										<i class="fa-solid fa-angle-left"></i>
+									</button>
+									<span id="firstTitle" style="margin-right: 50px"></span>
+								</p>
+							</div>
+							<table id="firstCalendarTable"></table>
+						</div>
+						<div id="secondCalendar" class="calendarSt">
+							<div class="titleBox">
+								<p class="title">
+									<span id="secondTitle" style="margin-left: 50px"></span>
+									<button onclick="nextMonth()">
+										<i class="fa-solid fa-angle-right"></i>
+									</button>
+								</p>
+							</div>
+
+							<table id="secondCalendarTable"></table>
+						</div>
+					</div>
+					<p>
+						<input class="temp_price"
+							style="font-size: 16px; text-align: right; border: none; background-color: white; width: 80px;"
+							value="0" readonly="readonly">원
+					</p>
 					<input type="checkbox" id="underIcon" checked />
+
 					<div id="dateAndMen">
-						<ul>
-							<li>체크인</li>
-							<li>체크아웃</li>
+						<ul id="checkInAndOut">
+							<li id="checkin">체크인</li>
+							<li id="checkout">체크아웃</li>
 						</ul>
-						<!-- <div id="calendar"></div> -->
-						<span class="fs-14" style="margin-bottom: 0;">
-							성인 <input id="p_adult" type="text" readonly="readonly"
-								style="width: 10px; font-size:16px; border: none; background-color: white;"
-								value='2'>명/ 아동 <input id="p_child" type="text"
-								readonly="readonly"
-								style="width: 10px; font-size :16px; border: none; background-color: white;"
-								value='0'>명 </span> <label for="underIcon" style="float:right"><i
-								class="fa-solid fa-angle-down fs-24"></i></label>
-						
-						</br>
-						<span class="fs-14" style="margin-top: 0"> 반려동물 <input
-							id="p_pet" type="text" readonly="readonly"
-							style="width: 10px; font-size:16px; border: none; background-color: white"
+						<span class="fs-14" style="margin-bottom: 0;"> 성인 <input
+							id="p_adult" type="text" readonly="readonly"
+							style="width: 10px; font-size: 16px; border: none; background-color: white;"
+							value='2'>명/ 아동 <input id="p_child" type="text"
+							readonly="readonly"
+							style="width: 10px; font-size: 16px; border: none; background-color: white;"
+							value='0'>명
+						</span> <label for="underIcon" style="float: right"><i
+							class="fa-solid fa-angle-down fs-24"></i></label> </br> <span class="fs-14"
+							style="margin-top: 0"> 반려동물 <input id="p_pet" type="text"
+							readonly="readonly"
+							style="width: 10px; font-size: 16px; border: none; background-color: white"
 							value='0'> 마리
 						</span>
 						<p class="chargePeople">
@@ -239,13 +278,21 @@ ${itemDto.item_event}</textarea>
 							</span>
 						</p>
 					</div>
-					<p> <input  class="temp_price" style="font-size :16px;text-align:right; border: none; background-color: white; width:80px;" value="0" readonly="readonly"><i class="fa-solid fa-xmark" style="margin-left:10px"></i><input id="night" style="font-size :16px;text-align:right; border: none; background-color: white;width:20px" value="4">박 </p>
-					<p style="text-align: right">
-						총 합계<span id="totalFee" style="margin-left:10px"></span>원
+					<p>
+						<input class="temp_price"
+							style="font-size: 16px; text-align: right; border: none; background-color: white; width: 80px;"
+							value="0" readonly="readonly"><i
+							class="fa-solid fa-xmark" style="margin-left: 10px"></i><input
+							id="night"
+							style="font-size: 16px; text-align: right; border: none; background-color: white; width: 20px"
+							value="0">박
 					</p>
-					<input name="item_no" style="display:none">
-					<button type="button" class="redBtnSt" style="width:100%">결제하기</button>
-					
+					<p style="text-align: right">
+						총 합계<span id="totalFee" style="margin-left: 10px"></span>원
+					</p>
+					<input name="item_no" style="display: none">
+					<button type="button" class="redBtnSt" style="width: 100%">결제하기</button>
+
 				</div>
 			</div>
 		</div>
@@ -355,8 +402,9 @@ ${itemDto.item_event}</textarea>
 	</div>
 
 	<script src="../../js/default.js"></script>
-	<script src="../../js/itemView.js"></script>
+	<script src="../../js/calendar.js"></script>
 	<script src="../../js/item.js"></script>
+	<script src="../../js/itemView.js"></script>
 
 </body>
 </html>

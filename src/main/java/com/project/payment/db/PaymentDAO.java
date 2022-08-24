@@ -65,10 +65,14 @@ public class PaymentDAO {
 		}
 	}
 
-	public List<PaymentDTO> getCartList(int u_no) {
+	public List<PaymentDTO> getPaymentList(int u_no) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		query= SELECT_PAYLIST_BY_UNO;
+		//query= SELECT_PAYLIST_BY_UNO;
+		query = "select a.p_no, a.item_no, a.p_checkin, a.p_checkout,"
+				+ "a.p_night, a.p_fee, a.p_totalfee, a.p_point, a.p_status,a.p_wtime, b.item_name, c.room_name"
+				+ " b.item_imgpath from payment a left join item b on a.item_no = b.item_no "
+				+ "left join room_list c on a.room_no=c.room_no and a.item_no=c.item_no";
 		ResultSet rs = null;
 		PaymentDTO dto = null;
 		List<PaymentDTO> list = new ArrayList<>();
@@ -78,14 +82,19 @@ public class PaymentDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				dto = new PaymentDTO();
-				dto.setP_no(rs.getInt("p_no"));
-				dto.setItem_no(rs.getInt("item_no"));
-				dto.setRoom_no(rs.getInt("room_no"));
-				dto.setP_checkin(rs.getString("p_checkin"));
-				dto.setP_checkout(rs.getString("p_checkout"));
-				dto.setP_pay(rs.getInt("p_pay"));
-				dto.setP_point(rs.getInt("p_point"));
-				dto.setP_wtime(rs.getString("p_wtime"));
+				dto.setP_no(rs.getInt(1));
+				dto.setItem_no(rs.getInt(2));
+				dto.setP_checkin(rs.getString(3));
+				dto.setP_checkout(rs.getString(4));
+				dto.setP_night(rs.getInt(5));
+				dto.setP_fee(rs.getString(6));
+				dto.setP_totalFee(rs.getString(7));
+				dto.setP_point(Integer.parseInt(rs.getString(8)));
+				dto.setP_status(rs.getString(9));
+				dto.setP_wtime(rs.getString(10));
+				dto.setP_item_name(rs.getString(11));
+				dto.setP_room_name(rs.getString(12));
+				dto.setP_item_imgpath(rs.getString(13));
 				list.add(dto);
 			}
 		} catch( SQLException e) {
@@ -96,20 +105,26 @@ public class PaymentDAO {
 		return list;
 	}
 	
-	//바로결제시 이 메서드 호출후 업데이트로 결제넘어가면됨
-	public void insertCart(PaymentDTO dto) {
+
+	public void insertPayment(PaymentDTO dto) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		query= "insert into payment(u_no, item_no, room_no, p_checkin, p_checkout, p_pay,p_point) values(?,?,?,?,?,?,?)";
+		query= "insert into payment(u_no, item_no, room_no, p_name,p_phone,"
+				+ " p_checkin, p_checkout, p_night,p_fee, p_totalfee,p_point) values(?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, dto.getU_no());
 			pstmt.setInt(2, dto.getItem_no());
 			pstmt.setInt(3, dto.getRoom_no());
-			pstmt.setString(4, dto.getP_checkin());
-			pstmt.setString(5, dto.getP_checkout());
-			pstmt.setInt(6, dto.getP_pay());
-			pstmt.setInt(7, dto.getP_point());
+			pstmt.setString(4, dto.getP_name());
+			pstmt.setString(5, dto.getP_phone());
+			pstmt.setString(6, dto.getP_checkin());
+			pstmt.setString(7, dto.getP_checkout());
+			pstmt.setInt(8, dto.getP_night());
+			pstmt.setString(9, dto.getP_fee());
+			pstmt.setString(10, dto.getP_totalFee());
+			pstmt.setInt(11, dto.getP_point());
+			
 			int result = pstmt.executeUpdate();
 			
 		}catch( SQLException e) {
@@ -123,18 +138,18 @@ public class PaymentDAO {
 	public void payFees(PaymentDTO  dto) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		query= "update payment room_no=?, p_checkin=?, p_checkout=?, p_pay=?,p_point=?, p_status=?,p_name=?,p_phone=? WHERE p_no=?" ;
+		query="";
 		try {
 			pstmt = conn.prepareStatement(query);
 		
 			pstmt.setInt(1, dto.getRoom_no());
 			pstmt.setString(2, dto.getP_checkin());
 			pstmt.setString(3, dto.getP_checkout());
-			pstmt.setInt(4, dto.getP_pay());
+			pstmt.setString(4, dto.getP_fee());
 			pstmt.setInt(5, dto.getP_point());
 			pstmt.setString(6, "y");
 			pstmt.setInt(7, dto.getP_no());
-			pstmt.setString(8, dto.getP_name());
+			pstmt.setString(8, dto.getP_item_name());
 			pstmt.setString(9, dto.getP_phone());
 			
 			int result = pstmt.executeUpdate();
@@ -146,30 +161,28 @@ public class PaymentDAO {
 		}
 		
 	}
+	public int getTotalPoint(int u_no) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		query="select sum(p_point) from payment where u_no=?";
+		int totalPoint = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, u_no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				totalPoint= rs.getInt("sum(p_point)");
+			}
+			
+		}catch( SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn,rs);
+		}
+		return totalPoint;
+	}
 	
-//	public int getP_no(PaymentDTO  dto) {
-//		PreparedStatement pstmt = null;
-//		Connection conn = getConn();
-//		ResultSet rs = null;
-//		query= "select p_no from payment where u_no=? and item_no=? and room_no=?";
-//		int p_no = 0;
-//		try {
-//			pstmt = conn.prepareStatement(query);
-//			pstmt.setInt(1, dto.getU_no());
-//			pstmt.setInt(1, dto.getItem_no());
-//			pstmt.setInt(1, dto.getRoom_no());
-//			rs = pstmt.executeQuery();
-//			while(rs.next()) {
-//				p_no = rs.getInt("p_no");
-//			}
-//			
-//		}catch( SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(pstmt, conn,rs);
-//		}
-//		return p_no;
-//	}
 
 	public void deleteCart(int p_no) {
 		PreparedStatement pstmt = null;

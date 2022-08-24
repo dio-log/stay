@@ -140,7 +140,7 @@
   margin-bottom:5px
 }
 #dateAndMen {
-  border: 1px solid black;
+  border: 1px solid #e6e6e6;
   border-radius: 5px;
   padding: 10px;
   overflow: hidden;
@@ -538,14 +538,7 @@ input[type="file"] {
   opacity: 1;
 }
 
-#calendar {
-  position: absolute;
-  border: 1px solid black;
-  width: 350px;
-  height: 280px;
-  left: 0;
-  background-color: white;
-}
+
 
 .writeEx {
   width: 500px;
@@ -589,4 +582,23 @@ input[type="file"] {
 }
 .reviewImgBox {
   overflow: hidden;
+}
+
+#checkInAndOut:hover{
+	cursor: pointer;
+}
+#checkInAndOut ul li{
+	text-align: center;
+}
+
+#calendar{
+	left: -320px;
+	top:50px;
+	transform: scale(0.8, 0.8);
+}
+#checkin{
+	font-size: 14px;
+}
+#checkout{
+	font-size: 14px;
 }

@@ -16,10 +16,17 @@ private int re_maxReview = 0;
 private int re_maxAnswer = 0;
 private String re_room_name=null;
 private String re_u_nick = null;
+private String re_item_name=null;
 
 
 
 
+public String getRe_item_name() {
+	return re_item_name;
+}
+public void setRe_item_name(String re_item_name) {
+	this.re_item_name = re_item_name;
+}
 public String getRe_title() {
 	return re_title;
 }

@@ -29,7 +29,7 @@
     <!-- body아래서 가로정렬 박스 -->
     <div class="centerCont" style="width: 768px">
       <div class="emptyBoxByNav"></div>
-      <form id="signForm" action="signComp.m">
+      <form id="signForm" action="signComp.m" method="post">
         <ul>
           <li>아이디</li>
           <li>

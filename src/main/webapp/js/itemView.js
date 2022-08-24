@@ -9,10 +9,12 @@ $('.tempPayBtn').on('click',function(e){
 	let temp = $(e.target).data('temp').split('&');
 	let room_name = temp[0];
 	let room_price = temp[1];
+	let room_max_men =temp[2];
 	let totalFee = $('#night').val();
 	$('.temp_price').val(room_price);
 	console.log(typeof(totalFee))
 	$('#totalFee').html(room_price*totalFee)
+	$('.chargePeople input').attr('max',room_max_men);
 	
 })
 
@@ -66,9 +68,13 @@ $('.location').on('click',function(){
 
 })
 $(document).on('click',function(e){
-	console.log(e);
 	if(!$('#map').has(e.target).length && !$('.location').is(e.target)){
 		$('#map').css('display','none');
 	}
 })
+	$('#calendar').hide();
+$('#checkInAndOut').on('click',function(){
+	$('#calendar').slideToggle();
+})
 
+initClick("checkin","checkout");

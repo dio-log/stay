@@ -9,10 +9,14 @@
   top:70px;
   box-shadow: 0 1px 5px 0 grey;
   left:-20px;
+  overflow: hidden;
 }
 
 tr:hover {
   cursor: pointer;
+}
+td:hover{
+	color: rgb(255, 98, 98);
 }
 
 .calendarSt tr:nth-child(1) {

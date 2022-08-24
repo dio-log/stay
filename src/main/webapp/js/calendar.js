@@ -13,24 +13,62 @@ let dt2 = new Date();
 
   //일요일은0 ,~6까지
   $("#firstTitle").html(dt1.getFullYear() + "." + (dt1.getMonth() + 1));
-  $("#secondTitle").html(dt2.getFullYear() + "." + (dt2.getMonth() + +1));
+  $("#secondTitle").html(dt2.getFullYear() + "." + (dt2.getMonth() +1));
   setCalendar("firstCalendarTable", dt1);
   setCalendar("secondCalendarTable", dt2);
-  initClick();
 
+let arr =[];
 function initClick() {
   $(".calendarSt tr:not(.calendarSt tr:nth-child(1)) td").on(
     "click",
     function (e) {
-      $(e.target).css("background-color", "rgb(255, 98, 98)");
+     	 $(e.target).css("background-color", "rgb(255, 98, 98)");
       $(e.target).css("color", "white");
-      checkSet.add($(e.target).html());
-      if (checkSet.size == 2) {
-        let min = Math.min(checkSet);
-        let max = Math.max(checkSet);
-
-        $("#setCalendarInput").val();
-      } else if (checkSet.size > 2) {
+      let pick = parseInt($(e.target).html());
+      checkSet.add(pick);
+			if($('#firstCalendar').has($(e.target))){
+				
+				let y = dt1.getFullYear();
+				let m = dt1.getMonth()+1;
+				arr.push(new Date(`${y}-${m}-${pick}`));
+				
+			}else if($('#secondCalendar').has($(e.target))){
+				let y = dt2.getFullYear();
+				let m = dt2.getMonth()+1;
+				arr.push(new Date(`${y}-${m}-${pick}`));
+				console.log("ddd")
+			}
+       if (checkSet.size == 2) {
+		let night =	Math.abs(arr[1].getTime()-arr[0].getTime())/(1000*60*60*24);
+		if(night>7){
+			
+			alert("최대 7박까지 가능합니다");
+			   $(".calendarSt tr:not(.calendarSt tr:nth-child(1)) td").css(
+          "background-color",
+          "white"
+        );
+        $(".calendarSt tr:not(.calendarSt tr:nth-child(1)) td").css(
+          "color",
+          "black"
+        );
+        $(".calendarSt tr td:nth-child(1)").css("color", "rgb(255, 98, 98)");
+        checkSet = new Set();
+        arr=[];
+			
+		}
+		else if(arr[0].getTime()<arr[1].getTime()){
+			$(`#${checkin}`).html(arr[0].getFullYear()+"."+(arr[0].getMonth()+1)+"."+arr[0].getDate())
+			$(`#${checkout}`).html(arr[1].getFullYear()+"."+(arr[1].getMonth()+1)+"."+arr[1].getDate()+"("+night+"박)")
+			$('#night').val(night)
+			fullDate = arr[0].getFullYear()+"."+(arr[0].getMonth()+1)+"."+arr[0].getDate()+"/"+arr[1].getFullYear()+"."+(arr[1].getMonth()+1)+"."+arr[1].getDate()+"("+night+"박)";
+		}else{
+			$(`#${checkout}`).html(arr[0].getFullYear()+"."+(arr[0].getMonth()+1)+"."+arr[0].getDate()+"("+night+"박)")
+			$(`#${checkin}`).html(arr[1].getFullYear()+"."+(arr[1].getMonth()+1)+"."+arr[1].getDate())
+			$('#night').val(night)
+			fullDate = arr[1].getFullYear()+"."+(arr[1].getMonth()+1)+"."+arr[1].getDate()+"/"+arr[0].getFullYear()+"."+(arr[0].getMonth()+1)+"."+arr[0].getDate()+"("+night+"박)";
+		
+		}
+	} else if (checkSet.size > 2) {
         $(".calendarSt tr:not(.calendarSt tr:nth-child(1)) td").css(
           "background-color",
           "white"
@@ -42,6 +80,7 @@ function initClick() {
         $(".calendarSt tr td:nth-child(1)").css("color", "rgb(255, 98, 98)");
 
         checkSet = new Set();
+        arr=[];
       }
     }
   );
@@ -123,13 +162,17 @@ function prevMonth() {
   $("#firstCalendarTable").empty();
   $("#secondCalendarTable").empty();
   dt1.setMonth(dt1.getMonth() - 1);
-  dt2.setMonth(dt1.getMonth() - 1);
-  dt1.setDate(dt1.getDate() - dt1.getDate() - 1);
-  dt2.setDate(dt2.getDate() - dt2.getDate() - 1);
+  dt2.setMonth(dt1.getMonth() + 1);
+  dt1.setDate(dt1.getDate() - dt1.getDate() + 1);
+  dt2.setDate(dt2.getDate() - dt2.getDate() + 1);
 
-  $("#firstTitle").html(dt1.getFullYear() + "." + (dt1.getMonth() - 1));
-  $("#secondTitle").html(dt2.getFullYear() + "." + (dt2.getMonth() - 1));
+  $("#firstTitle").html(dt1.getFullYear() + "." + (dt1.getMonth() + 1));
+  $("#secondTitle").html(dt2.getFullYear() + "." + (dt2.getMonth() + 1));
   setCalendar("firstCalendarTable", dt1);
   setCalendar("secondCalendarTable", dt2);
   initClick();
 }
+
+
+
+

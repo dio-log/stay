@@ -30,30 +30,43 @@
 			<ul id="myTab">
 				<li><a href="myInfo.my">내 정보 관리</a></li>
 				<li><a href="myReservation.my">결제/예약내역</a></li>
-				<li><a href="myPoint.my"
-					style="color: rgb(243, 21, 21); font-weight: 600">포인트</a>
-				</li>
-				<li><a href="myReview.my">나의 후기</a></li>
+				<li><a href="myPoint.my">포인트</a></li>
+				<li><a href="myReview.my"
+					style="color: rgb(243, 21, 21); font-weight: 600">나의 후기</a></li>
 
 				<li><a href="myPick.my">찜</a></li>
 			</ul>
 
 			<div id="myPageContentWrap">
-				<div id="myPointWrap">
-					<div id="currentPointBox">
-						<p>내 포인트</p>
-						<strong>${totalPoint}</strong><strong style="margin-left: 5px">P</strong>
-					</div>
-					<ul>
-						<li><input name="myPoint" type="radio" id="pointAll" checked /><label
-							for="pointAll">전체</label></li>
-						<li><input name="myPoint" type="radio" id="pointSave" /><label
-							for="pointSave">적립</label></li>
-						<li><input name="myPoint" type="radio" id="pointUsed" /><label
-							for="pointUsed">사용</label></li>
-						<li><input name="myPoint" type="radio" id="pointExtinction" /><label
-							for="pointExtinction">소멸</label></li>
-					</ul>
+				<!-- 	//아이템이름, 타이틀, 평점 작성시간 -->
+				<div id="myReviewWrap">
+					<h3>후기</h3>
+					<table>
+						<colgroup style="width: 100%">
+							<col style="width: 20%;">
+							<col style="width: 50%">
+							<col style="width: 15%">
+							<col style="width: 15%">
+						</colgroup>
+						<tr>
+							<td>상품</td>
+							<td>제목</td>
+							<td>평점</td>
+							<td>작성시간</td>
+						</tr>
+					</table>
+
+					<c:forEach var="reviewDto" items="${reviewDtoList}">
+
+						<tr>
+							<a href="itemView.it?item_no=${reviewDto.item_no }">
+								<td>${reviewDto.re_item_name }</td>
+								<td>${reviewDto.re_title }</td>
+								<td>${reviewDto.re_grade }</td>
+								<td>${reviewDto.re_wtime }</td>
+							</a>
+						</tr>
+					</c:forEach>
 				</div>
 			</div>
 			<div id="pointListBox"></div>

@@ -31,21 +31,71 @@
 				<li><a href="myInfo.my">내 정보 관리</a></li>
 				<c:choose>
 					<c:when test="${u_div==1}">
-						<li><a href="myReservation.my">예약내역</a></li>
-						<li><a href="myPoint.my">나의 포인트</a></li>
+						<li><a href="myReservation.my"
+							style="color: rgb(243, 21, 21); font-weight: 600">결제/예약내역</a></li>
+<li>
+            <a href="myPoint.my">나의 포인트</a>
+          </li>
 						<li><a href="myReview.my">나의 후기</a></li>
 						<li><a href="myPick.my">찜</a></li>
 					</c:when>
 					<c:when test="${u_div==2}">
 						<li><a href="itemUpload.it">객실등록</a></li>
-						<li><a href="myItemManage.my"
-							style="color: rgb(243, 21, 21); font-weight: 600">객실관리</a></li>
-						<li><a href="myAnswerManage.my">답변관리</a></li>
+						<li><a href="#">객실관리</a></li>
+						<li><a href="#">답변관리</a></li>
 					</c:when>
 				</c:choose>
+
+
 			</ul>
-			<div id="myPageContentWrap"></div>
+
+			<div id="myPageContentWrap">
+				<div id="myResevationWrap">
+					<div>
+						<h4>결제</h4>
+						<ul id="myPagePayUl">
+							<li>
+								<ul>
+									<li>No</li>
+									<li>결제상태</li>
+									<li>이미지</li>
+									<li>숙소이름</li>
+									<li>객실타입</li>
+									<li>체크인/체크아웃</li>
+									<li>적립 포인트</li>
+									<li>1박 금액</li>
+									<li>총 결제 금액</li>
+
+								</ul>
+							</li>
+							<li>
+								<ul>
+									<li>${paymentDto.p_no }</li>
+									<li>${paymentDto.p_status}</li>
+									<li><img alt="" src="${paymentDto.p_firtImg}"></li>
+									<li>${paymentDto.p_name}</li>
+									<li>${paymentDto.p_room_name }</li>
+									<li>${paymentDto.p_checkin }/${paymentDto.p_checkout}</li>
+									<li>${paymentDto.p_point }</li>
+									<li>${paymentDto.p_fee }</li>
+									<li>${paymentDto.p_totalFee }</li>
+
+								</ul>
+							</li>
+
+						</ul>
+					</div>
+					<div>
+						<h4>예약</h4>
+						<ul>
+							<li>d</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
 		</div>
+	</div>
 	</div>
 	<script src="../../js/default.js"></script>
 	<script src="../../js/myPage.js"></script>

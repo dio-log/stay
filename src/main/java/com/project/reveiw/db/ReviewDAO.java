@@ -240,6 +240,36 @@ public class ReviewDAO {
 		return maxReview;
 	}
 
+	public List<ReviewDTO> getPerReviewDtoList(int u_no){
+		List<ReviewDTO> dtoList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		//아이템 네임, 룸네임
+		query = "select a.item_no, a.re_grade, a.re_title, a.re_wtime, b.item_name from review a"
+				+ " left join item b on a.item_no=b.item_no order by re_no desc";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, u_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				//아이템이름, 타이틀, 평점 작성시간
+				ReviewDTO dto = new ReviewDTO();
+				dto.setItem_no(rs.getInt(1));
+				dto.setRe_grade(rs.getString(2));
+				dto.setRe_title(rs.getString(3));
+				dto.setRe_wtime(rs.getString(4));
+				dto.setRe_item_name(rs.getString(5));
+				dtoList.add(dto);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn,rs);
+		}
+		return dtoList;
+	}
 	
 	
 }

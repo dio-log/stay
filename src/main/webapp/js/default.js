@@ -36,34 +36,4 @@ $("#setPeopleBtn").on("click", function () {
   $("#setPeopleInput").val(`성인 ${adult}, 아동 ${kids}, 반려동물 ${pet}`);
 });
 
-$("body").on("click", (e) => {
-  if (
-    !$("#setLocationBox").is(e.target) &&
-    !$("#setLocationBox").has(e.target).length
-  ) {
-    $("#searchDetination").hide();
-  } else {
-    $("#searchDetination").show();
-  }
-  if (
-    !$("#setCalendarBox").is(e.target) &&
-    !$("#setCalendarBox").has(e.target).length
-  ) {
-    $("#calendar").hide();
-  } else {
-    $("#calendar").show();
-  }
-
-  if (
-    !$("#setPeopleBox").is(e.target) &&
-    !$("#setPeopleBox").has(e.target).length
-  ) {
-    $("#setPeople").hide();
-  } else {
-    $("#setPeople").show();
-  }
-  if ($("#setPeopleBtn").is(e.target)) {
-    $("#setPeople").hide();
-  }
-});
 

@@ -5,20 +5,58 @@ public class PaymentDTO {
 	private int u_no = 0;
 	private int item_no = 0;
 	private int room_no = 0;
-	private String p_name = null;
+	private String p_name=null;
 	private String p_phone = null;
+	private String p_item_name = null;
+	private String p_room_name = null;
 	private String p_checkin = null;
 	private String p_checkout = null;
-	private int p_pay = 0;
+	private int p_night = 0;
+	private String p_fee = null;
+	private String p_totalFee = null;
 	private int p_point = 0;
+	private String p_status = null;
 	private String p_wtime = null;
+	private String p_item_imgpath = null;
 	
+
 
 	public String getP_name() {
 		return p_name;
 	}
 	public void setP_name(String p_name) {
 		this.p_name = p_name;
+	}
+	public String getP_item_imgpath() {
+		return p_item_imgpath;
+	}
+	public void setP_item_imgpath(String p_item_imgpath) {
+		this.p_item_imgpath = p_item_imgpath;
+	}
+	public String getP_item_name() {
+		return p_item_name;
+	}
+	public void setP_item_name(String p_item_name) {
+		this.p_item_name = p_item_name;
+	}
+	public String getP_room_name() {
+		return p_room_name;
+	}
+	public void setP_room_name(String p_room_name) {
+		this.p_room_name = p_room_name;
+	}
+	public int getP_night() {
+		return p_night;
+	}
+	public void setP_night(int p_night) {
+		this.p_night = p_night;
+	}
+	
+	public String getP_status() {
+		return p_status;
+	}
+	public void setP_status(String p_status) {
+		this.p_status = p_status;
 	}
 	public String getP_phone() {
 		return p_phone;
@@ -68,11 +106,17 @@ public class PaymentDTO {
 	public void setP_checkout(String p_checkout) {
 		this.p_checkout = p_checkout;
 	}
-	public int getP_pay() {
-		return p_pay;
+	public String getP_fee() {
+		return p_fee;
 	}
-	public void setP_pay(int p_pay) {
-		this.p_pay = p_pay;
+	public void setP_fee(String p_fee) {
+		this.p_fee = p_fee;
+	}
+	public String getP_totalFee() {
+		return p_totalFee;
+	}
+	public void setP_totalFee(String p_totalFee) {
+		this.p_totalFee = p_totalFee;
 	}
 	public int getP_point() {
 		return p_point;
@@ -81,7 +125,8 @@ public class PaymentDTO {
 		this.p_point = p_point;
 	}
 	
-	
+
+
 	
 	
 	

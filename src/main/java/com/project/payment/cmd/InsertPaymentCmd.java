@@ -11,7 +11,7 @@ import com.project.item.cmd.BasicCmd;
 import com.project.payment.db.PaymentDAO;
 import com.project.payment.db.PaymentDTO;
 
-public class InsertCartCmd implements BasicCmd{
+public class InsertPaymentCmd implements BasicCmd{
 
 	@Override
 	public void excute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,12 +22,16 @@ public class InsertCartCmd implements BasicCmd{
 		dto.setU_no((Integer)session.getAttribute("u_no"));
 		dto.setItem_no(Integer.parseInt(req.getParameter("item_no")));
 		dto.setRoom_no(Integer.parseInt(req.getParameter("room_no")));
+		dto.setP_name(req.getParameter("p_name"));
+		dto.setP_phone(req.getParameter("p_phone"));
 		dto.setP_checkin(req.getParameter("checkin"));
 		dto.setP_checkout(req.getParameter("checkout"));
-		dto.setP_pay(Integer.parseInt(req.getParameter("p_pay")));
+		dto.setP_night(Integer.parseInt(req.getParameter("p_night")));
+		dto.setP_fee(req.getParameter("p_fee"));
+		dto.setP_totalFee(req.getParameter("P_totalFee"));
 		dto.setP_point(Integer.parseInt(req.getParameter("p_point")));
 		
-		dao.insertCart(dto);
+		dao.insertPayment(dto);
 	}
 
 	

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.project.item.cmd.BasicCmd;
 import com.project.item.cmd.InsertRoomCmd;
 import com.project.payment.cmd.DeleteCardCmd;
-import com.project.payment.cmd.GetCartListCmd;
-import com.project.payment.cmd.InsertCartCmd;
+import com.project.payment.cmd.GetPaymentListCmd;
+import com.project.payment.cmd.InsertPaymentCmd;
 import com.project.payment.cmd.PayFeesCmd;
 
 /**
@@ -54,11 +54,11 @@ public class PaymentFront extends HttpServlet {
 		BasicCmd cmd = null;
 		
 		if(path.equals("/app/payment/insertCart.pay")) {
-			cmd = new InsertCartCmd();
+			cmd = new InsertPaymentCmd();
 			cmd.excute(req, resp);
 //			viewPage= "insertCart.jsp";
 		}else if(path.equals("/app/payment/getCartList.pay")) {
-			cmd = new GetCartListCmd();
+			cmd = new GetPaymentListCmd();
 			cmd.excute(req, resp);
 			viewPage= "CartList.jsp";
 		}else if(path.equals("/app/payment/payFees.pay")) {
