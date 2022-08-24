@@ -18,6 +18,7 @@ import com.project.member.cmd.CheckPwCmd;
 import com.project.member.cmd.InsertMemberCmd;
 import com.project.member.cmd.LogoutCmd;
 import com.project.member.cmd.SelectMemberCmd;
+import com.project.member.cmd.GetCookiesCmd;
 
 /**
  * Servlet implementation class MemberFrontCtl
@@ -52,6 +53,8 @@ public class MemberFrontCtl extends HttpServlet {
 	
 	protected void doAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html; charset=UTF-8");
 		BasicCmd cmd = null;
 		String viewPage = null;
 		String path = req.getServletPath();
@@ -61,46 +64,50 @@ public class MemberFrontCtl extends HttpServlet {
 		System.out.println(lastPath);
 		boolean flag = true;
 		
-		if(path.equals("/app/signPage/signComp.m")) {
+		if(lastPath.equals("/signComp.m")) {
 			cmd = new InsertMemberCmd();
 			cmd.excute(req, resp);
 			viewPage="signComp.jsp";
-		}else if(path.equals("/app/signPage/checkOverlapId.m")) {
+		}else if(lastPath.equals("/checkOverlapId.m")) {
 			cmd = new CheckOverlapId();
 			cmd.excute(req, resp);
 			return;
 		}else if(lastPath.equals("/login.m")) {
 			viewPage = "../signPage/login.jsp";
 			flag=false;
-		}else if(path.equals("/app/signPage/signSelect.m")) {
+		}else if(lastPath.equals("/signSelect.m")) {
 			viewPage = "signSelect.jsp";
-		}else if(path.equals("/app/signPage/signAgree.m")) {
+		}else if(lastPath.equals("/signAgree.m")) {
 			viewPage="signAgree.jsp";
-		}else if(path.equals("/app/signPage/signForm.m")) {
+		}else if(lastPath.equals("/signForm.m")) {
 			viewPage = "signForm.jsp";
 		}else if(lastPath.equals("/main.m") ) {
-			viewPage="../mainPage/main.jsp";
+			viewPage="/app/mainPage/main.jsp";
 			flag=false;
-		}else if(path.equals("/app/signPage/checkLogin.m")) {
+		}else if(lastPath.equals("/checkLogin.m")) {
 			cmd = new CheckLoginCmd();
 			cmd.excute(req, resp);
 			return;
 			
-		}else if(path.equals("/app/myPage/myPagePwCheck.m")) {
+		}else if(lastPath.equals("/myPagePwCheck.m")) {
 			cmd = new CheckPwCmd();
 			cmd.excute(req, resp);
 			return;
-		}else if(path.equals("/app/myPage/logout.m") || path.equals("/app/signPage/logout.m") || path.equals("/app/itemPage/logout.m")||path.equals("/app/mainPage/logout.m")) {
+		}else if(lastPath.equals("/logout.m") ) {
 			cmd = new LogoutCmd();
 			cmd.excute(req, resp);
-			viewPage = "/app/mainPage/main.jsp";
+			viewPage = "/main.m";
 			flag = false;
-		}else if(path.equals("/app/myPage/selectMember.m")) {
+		}else if(lastPath.equals("/selectMember.m")) {
 			cmd = new SelectMemberCmd();
 			cmd.excute(req, resp);
 			return;
-		}else if(path.equals("/app/myPage/checkOverlapNick.m")) {
+		}else if(lastPath.equals("/checkOverlapNick.m")) {
 			cmd= new CheckOverlapNick();
+			cmd.excute(req, resp);
+			return;
+		}else if(lastPath.equals("/getCookies.m")) {
+			cmd = new GetCookiesCmd();
 			cmd.excute(req, resp);
 			return;
 		}

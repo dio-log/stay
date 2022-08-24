@@ -11,7 +11,7 @@ public class PaymentDTO {
 	private String p_room_name = null;
 	private String p_checkin = null;
 	private String p_checkout = null;
-	private int p_night = 0;
+	private String p_night = null;
 	private String p_fee = null;
 	private String p_totalFee = null;
 	private int p_point = 0;
@@ -45,13 +45,13 @@ public class PaymentDTO {
 	public void setP_room_name(String p_room_name) {
 		this.p_room_name = p_room_name;
 	}
-	public int getP_night() {
+
+	public String getP_night() {
 		return p_night;
 	}
-	public void setP_night(int p_night) {
+	public void setP_night(String p_night) {
 		this.p_night = p_night;
 	}
-	
 	public String getP_status() {
 		return p_status;
 	}

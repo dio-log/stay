@@ -26,7 +26,7 @@ public class InsertPaymentCmd implements BasicCmd{
 		dto.setP_phone(req.getParameter("p_phone"));
 		dto.setP_checkin(req.getParameter("checkin"));
 		dto.setP_checkout(req.getParameter("checkout"));
-		dto.setP_night(Integer.parseInt(req.getParameter("p_night")));
+		dto.setP_night(req.getParameter("p_night"));
 		dto.setP_fee(req.getParameter("p_fee"));
 		dto.setP_totalFee(req.getParameter("P_totalFee"));
 		dto.setP_point(Integer.parseInt(req.getParameter("p_point")));

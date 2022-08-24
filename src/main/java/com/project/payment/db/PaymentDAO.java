@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.Context;
@@ -86,7 +89,7 @@ public class PaymentDAO {
 				dto.setItem_no(rs.getInt(2));
 				dto.setP_checkin(rs.getString(3));
 				dto.setP_checkout(rs.getString(4));
-				dto.setP_night(rs.getInt(5));
+				dto.setP_night(rs.getString(5));
 				dto.setP_fee(rs.getString(6));
 				dto.setP_totalFee(rs.getString(7));
 				dto.setP_point(Integer.parseInt(rs.getString(8)));
@@ -120,7 +123,7 @@ public class PaymentDAO {
 			pstmt.setString(5, dto.getP_phone());
 			pstmt.setString(6, dto.getP_checkin());
 			pstmt.setString(7, dto.getP_checkout());
-			pstmt.setInt(8, dto.getP_night());
+			pstmt.setString(8, dto.getP_night());
 			pstmt.setString(9, dto.getP_fee());
 			pstmt.setString(10, dto.getP_totalFee());
 			pstmt.setInt(11, dto.getP_point());
@@ -198,6 +201,40 @@ public class PaymentDAO {
 		}finally {
 			close(pstmt, conn);
 		}
+	}
+	
+	public List<Integer> checkDate(int checkinInput, int checkoutInput) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		List<Integer> noList = new ArrayList<>();
+		query ="select room_no, p_checkin,p_checkout from payment where p_status='y'";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String checkin = rs.getString("p_checkin");
+				String checkout = rs.getString("p_checkout");
+				int room_no = rs.getInt("room_no");
+				long dateCheckin =  dateFormat.parse(checkin).getTime();
+				long dateCheckout =  dateFormat.parse(checkout).getTime();
+				if(dateCheckin<checkinInput && checkinInput<dateCheckout  || dateCheckin<checkoutInput && checkoutInput<dateCheckout ) {
+					
+				}else { //날짜가 겹치지 않는것만 넣음
+					noList.add(room_no);
+				}
+			}
+		}catch( SQLException e) {
+			e.printStackTrace();
+		}catch(ParseException e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			close(pstmt, conn,rs);
+		}
+		return noList;
 	}
 
 }

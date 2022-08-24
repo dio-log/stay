@@ -148,4 +148,28 @@ $('body').on('click',function(e){
     $("#setPeople").hide();
   }
 });
+onload=function(){
+	$.ajax({
+		url: "getCookies.m",
+		dataType: "json",
+		data: "",
+		type: "post",
+		success: function(data) {
+			for (let i = data.length-1; i > data.length-4; i--) {
+				$('#searchRecentBox').append(`
+			<div class="searchRecnetContent">
+			<p>
+			<a href="">${data[i].searchWord}</a> <i class="fa-solid fa-xmark"></i>
+				</p>
+			<p>${data[i].calendarInput} <br> ${data[i].peopleInput}</p>
+			</div>
+			`)
+			}
+		
 
+		}, error: function(e) {
+			console.log(e);
+		}
+	})
+
+}

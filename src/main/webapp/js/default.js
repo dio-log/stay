@@ -33,7 +33,7 @@ $("#setPeopleBtn").on("click", function () {
   let adult = $(".setPeopleAdult").val();
   let kids = $(".setPeopleKids").val();
   let pet = $(".setPeoplePet").val();
-  $("#setPeopleInput").val(`성인 ${adult}, 아동 ${kids}, 반려동물 ${pet}`);
+  $("#peopleInput").val(`성인 ${adult}, 아동 ${kids}, 반려동물 ${pet}`);
 });
 
 
