@@ -26,7 +26,7 @@ CREATE TABLE `room_list` (
   `u_no` int NOT NULL,
   `item_no` int NOT NULL,
   `room_no` int NOT NULL DEFAULT '0',
-  `room_name` varchar(20) NOT NULL,
+  `room_name` varchar(40) NOT NULL,
   `room_price` char(10) NOT NULL DEFAULT '0',
   `room_part_price` char(10) DEFAULT NULL,
   `room_part_time` int DEFAULT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE `room_list` (
 
 LOCK TABLES `room_list` WRITE;
 /*!40000 ALTER TABLE `room_list` DISABLE KEYS */;
-INSERT INTO `room_list` VALUES (1,1,1,'슈페리어 더블','87000','2',0,'더블',1,'40','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,',2,2,',../../img/item/item1/룸1-1.jpg,../../img/item/item1/룸1-2.jpg,../../img/item/item1/룸1-3.jpg','y'),(1,1,2,'프리미어 더블','107000','2',0,'퀸',1,'40','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,',2,2,',../../img/item/item1/룸1-1.jpg,../../img/item/item1/룸1-2.jpg,../../img/item/item1/룸1-3.jpg,../../img/item/item1/룸2-1.jpg,../../img/item/item1/룸2-2.jpg','y');
+INSERT INTO `room_list` VALUES (1,2,1,'슈페리어 트윈','99000','0',0,'더블',1,'35','시티','가족','TV,냉장고 ,커피포트,욕실용품,드라이기,비데,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,',2,2,',../../img/item/item1/r5743fc79b14ff.jpg','y'),(1,2,2,'[조식 1+1 패키지] 슈페리어 트윈','130000','0',0,'더블',2,'40','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,',2,2,',../../img/item/item1/r5743fc79b14ff.jpg,../../img/item/item1/r5743fc730e885.jpg','y'),(1,3,1,'슈페리어 더블','79000','0',0,'더블',1,'30','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,',2,2,',../../img/item/item1/룸1-1.jpg,../../img/item/item1/룸1-2.jpg,../../img/item/item1/룸1-3.jpg','y'),(1,3,2,'디럭스','79000','0',0,'더블',1,'30','시티','가족','에어컨,TV,냉장고 ,욕실용품,드라이기,비데,에어컨,TV,냉장고 ,욕실용품,드라이기,비데,',2,2,',../../img/item/item1/r5c77a9772ee61.jpg,../../img/item/item1/r5c77a9797c093.jpg','y'),(1,3,3,'스탠다드 더블','99000','0',0,'더블',1,'30','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,',2,2,',../../img/item/item1/r5c77a9772ee61.jpg,../../img/item/item1/r5c77a9797c093.jpg,../../img/item/item1/r5de0d4d7a1b42.jpg,../../img/item/item1/r5de0d4d8c190f.jpg,../../img/item/item1/r5f436b3c14009.jpg','y'),(1,4,1,'슈페리어 트윈','286000','0',0,'더블',1,'30','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,',2,2,',../../img/item/item1/r5f36227a213b3.jpg,../../img/item/item1/r5f362284e0bde.jpg','y'),(1,4,2,'[주중 조식 무료 패키지] 디럭스 더블','324500','0',0,'더블',1,'38','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,',2,2,',../../img/item/item1/r5f36227a213b3.jpg,../../img/item/item1/r5f362284e0bde.jpg,../../img/item/item1/r5f36227870ca2.jpg,../../img/item/item1/r60658dbe96161.jpg','y'),(1,5,1,'15평 슈페리어 더블_레지던스 (주차불가)','79900','0',0,'더블',1,'33','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,',2,2,',../../img/item/item1/r620cb3d6cf568.jpg,../../img/item/item1/r620cb3d7e955e.jpg,../../img/item/item1/r620cb3d28ec04.jpg','y'),(1,6,1,'마스터킹 베드','660000','0',0,'킹',1,'40','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,',2,2,',../../img/item/item1/r61c9408c94180.jpg,../../img/item/item1/r61c940925cfdf.jpg','y'),(1,6,2,'[1st Palace Getaway 패키지] 마스터스 퀸베드 2','687500','0',0,'퀸',2,'50','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,비데,',2,4,',../../img/item/item1/r61c9408c94180.jpg,../../img/item/item1/r61c940925cfdf.jpg,../../img/item/item1/r61c94099f2775.jpg','y'),(1,7,1,'[RoomOnly 특가] 스탠다드 트윈','253000','0',0,'싱글',2,'40','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,',2,2,',../../img/item/item1/r5f364aef05ff9.jpg','y'),(1,7,2,'스탠다드 싱글','199000','0',0,'싱글',1,'30','시티','가족','에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,에어컨,TV,냉장고 ,커피포트,욕실용품,드라이기,',2,2,',../../img/item/item1/r5f364aef05ff9.jpg,../../img/item/item1/r60cb0edc764a3.jpg','y');
 /*!40000 ALTER TABLE `room_list` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-22 18:23:19
+-- Dump completed on 2022-08-24 18:25:53

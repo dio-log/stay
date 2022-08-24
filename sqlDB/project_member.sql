@@ -36,7 +36,7 @@ CREATE TABLE `member` (
   `u_div` int DEFAULT '1',
   `u_wtime` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`u_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'홍사업자','tkdjqwk','디디','asdf1234','abcd@gmail.com','01011112222',NULL,NULL,'y',2,'2022-08-22 15:12:13');
+INSERT INTO `member` VALUES (1,'홍사업자','tkdjqwk','디디','asdf1234','abcd@gmail.com','01011112222',NULL,NULL,'y',2,'2022-08-22 15:12:13'),(2,'홍개인','asdf123','다다','asdf1234','abcd@gmail.com','01012345678',NULL,NULL,'y',1,'2022-08-24 12:04:56'),(3,'홍개인','asdf123','다다','asdf1234','abcd@gmail.com','01012345678',NULL,NULL,'y',1,'2022-08-24 12:06:40');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-22 18:23:19
+-- Dump completed on 2022-08-24 18:25:53

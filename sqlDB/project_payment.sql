@@ -27,11 +27,13 @@ CREATE TABLE `payment` (
   `u_no` int DEFAULT NULL,
   `item_no` int DEFAULT NULL,
   `room_no` int DEFAULT NULL,
-  `p_name` char(4) DEFAULT NULL,
+  `p_name` varchar(6) DEFAULT NULL,
   `p_phone` char(16) DEFAULT NULL,
   `p_checkin` char(16) DEFAULT NULL,
   `p_checkout` char(16) DEFAULT NULL,
-  `p_pay` char(16) DEFAULT NULL,
+  `p_night` int DEFAULT NULL,
+  `p_fee` char(16) DEFAULT NULL,
+  `p_totalfee` char(16) DEFAULT NULL,
   `p_point` char(8) DEFAULT NULL,
   `p_status` char(1) DEFAULT 'n',
   `p_wtime` datetime DEFAULT CURRENT_TIMESTAMP
@@ -56,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-22 18:23:19
+-- Dump completed on 2022-08-24 18:25:53

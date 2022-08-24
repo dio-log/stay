@@ -16,35 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `review`
+-- Dumping events for database 'project'
 --
 
-DROP TABLE IF EXISTS `review`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `review` (
-  `re_no` int NOT NULL,
-  `u_no` int NOT NULL,
-  `item_no` int NOT NULL,
-  `room_no` int NOT NULL,
-  `re_grade` int DEFAULT '0',
-  `re_title` varchar(30) DEFAULT NULL,
-  `re_content` varchar(200) DEFAULT NULL,
-  `re_answer_sts` char(1) DEFAULT 'n',
-  `re_indent` int DEFAULT '0',
-  `re_imgpath` varchar(200) DEFAULT NULL,
-  `re_wtime` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
--- Dumping data for table `review`
+-- Dumping routines for database 'project'
 --
-
-LOCK TABLES `review` WRITE;
-/*!40000 ALTER TABLE `review` DISABLE KEYS */;
-/*!40000 ALTER TABLE `review` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -55,4 +32,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-24 18:25:53
+-- Dump completed on 2022-08-24 18:25:54
