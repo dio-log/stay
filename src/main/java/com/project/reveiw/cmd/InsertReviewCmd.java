@@ -32,6 +32,7 @@ public class InsertReviewCmd implements BasicCmd{
 			dto.setItem_no((Integer)map.get("item_no"));
 			dto.setRoom_no((Integer)map.get("room_no"));
 			dto.setRe_grade((String)map.get("re_grade"));
+			dto.setRe_grade((String)map.get("re_title"));
 			dto.setRe_content((String)map.get("re_content"));
 			dto.setRe_imgpath((String)(map.get("fullFileName")));
 			dao.insertReview(dto);

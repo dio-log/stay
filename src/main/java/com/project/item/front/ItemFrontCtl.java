@@ -1,6 +1,7 @@
-package com.project.my.front;
+package com.project.item.front;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,23 +9,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.FileUploadException;
 
 import com.project.item.cmd.BasicCmd;
-import com.project.payment.cmd.GetPaymentListCmd;
-import com.project.payment.cmd.GetTotalPointCmd;
-import com.project.reveiw.cmd.SelectPerTotalReviewCmd;
+import com.project.item.cmd.InsertItemCmd;
+import com.project.item.cmd.InsertRoomCmd;
+import com.project.item.cmd.SearchItemListCmd;
+import com.project.item.cmd.SelectItemCmd;
+import com.project.item.cmd.SelectItemListCmd;
+import com.project.mdClass.MultipartCtl;
 
 /**
- * Servlet implementation class MyPageCtl
+ * Servlet implementation class ItemFrontCtl
  */
-@WebServlet("*.my")
-public class MyPageCtl extends HttpServlet {
+@WebServlet("*.it")
+public class ItemFrontCtl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageCtl() {
+    public ItemFrontCtl() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,43 +53,58 @@ public class MyPageCtl extends HttpServlet {
 	}
 	protected void doAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		BasicCmd cmd = null;
-		String viewPage = null;
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html; charset=UTF-8");
+
+		String viewPage=null;
 		String path = req.getServletPath();
 		int idx = path.lastIndexOf("/");
 		String lastPath = path.substring(idx);
+		BasicCmd cmd=null;
+		
 		boolean flag = true;
-		if(lastPath.equals("/myReservation.my")) {
-			//예약내역 조회
-			cmd = new GetPaymentListCmd();
-			cmd.excute(req, resp);
-			viewPage="/app/myPage/myReservation.jsp";
-			
-		}else if(lastPath.equals("/myInfo.my")) {
 	
-			viewPage = "/app/myPage/myInfo.jsp";
-			flag =false; 
-			
-		}else if(lastPath.equals("/myPoint.my")) {
-			//포인트조회
-			cmd = new GetTotalPointCmd();
+		System.out.println(req.getServletPath());
+		
+		if(path.equals("/app/itemPage/insertRoom.it")){
+		 cmd = new InsertRoomCmd();
+		 cmd.excute(req, resp);
+		 return;
+
+		}else if(path.equals("/app/myPage/itemUpload.it")) {
+			viewPage = "/app/itemPage/itemUpload.jsp";
+			flag =false;
+		}else if(path.equals("/app/itemPage/insertItem.it")) {
+			cmd = new InsertItemCmd();
 			cmd.excute(req, resp);
-			
-			viewPage= "/app/myPage/myPoint.jsp";
-			
-		}else if(lastPath.equals("/myReview.my")) {
-			cmd = new SelectPerTotalReviewCmd();
+			viewPage = "/app/myPage/myItemManage.jsp";
+			flag =false;
+		
+		}else if(lastPath.equals("/selectItemList.it")) {
+			cmd = new SelectItemListCmd();
 			cmd.excute(req, resp);
-			viewPage="/app/myPage/myReview.jsp";
+			return;
+		}else if(lastPath.equals("/itemView.it")) {
+			cmd = new SelectItemCmd();
+			cmd.excute(req, resp);
+			viewPage="/app/itemPage/itemView.jsp";
+		}else if(lastPath.equals("/searchItemList.it")) {
+			cmd = new SearchItemListCmd();
+			cmd.excute(req, resp);
+			viewPage="/app/itemPage/itemList.jsp";
 		}
+		
 		
 		
 		if(flag) {
 			RequestDispatcher rd = req.getRequestDispatcher(viewPage);
 			rd.forward(req, resp);
+			
 		}else {
 			resp.sendRedirect(viewPage);
 		}
 	}
+
+	
 
 }

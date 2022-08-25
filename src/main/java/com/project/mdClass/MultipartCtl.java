@@ -114,7 +114,7 @@ public class MultipartCtl {
 				map.put(item.getFieldName(), item.getString("utf-8"));
 			}else {
 				item.write(new File(file.getPath()+"\\"+item.getName()));
-				fullFileName+=",../../img/review/"+reviewDirName+"/"+item.getName();
+				fullFileName+="../../img/review/"+reviewDirName+"/"+item.getName()+",";
 			}
 		}
 		map.put("fullFileName", fullFileName);

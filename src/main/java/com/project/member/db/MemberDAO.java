@@ -235,9 +235,30 @@ public class MemberDAO {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close(pstmt, conn);
+			close(pstmt, conn,rs);
 		}
 		return false;
 	}
 	
+	public int getPoint(int u_no) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		int u_point = 0;
+		query = "select u_point from member where u_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, u_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				u_point = rs.getInt("u_point");
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn,rs);
+		}
+		return u_point;
+	}
 }

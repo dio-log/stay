@@ -25,6 +25,7 @@ public class CheckLoginCmd implements BasicCmd{
 	public void excute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String jsonStr = req.getParameter("jsonStr");
 		JSONObject jobj = null;
+		
 		try {
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(jsonStr);
@@ -50,10 +51,9 @@ public class CheckLoginCmd implements BasicCmd{
 			session.setAttribute("u_nick",  dto.getU_nick());
 			session.setAttribute("u_div",  dto.getU_div());
 			
-			
 			pw.print(true);
-
 		}
+			
 		
 	}
 

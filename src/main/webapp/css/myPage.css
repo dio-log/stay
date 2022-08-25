@@ -24,21 +24,28 @@
 }
 #myPageModifyWrap li span:nth-child(1) {
   color: gray;
+  margin-right: 30px;
 }
 #myPageModifyWrap li {
   padding: 15px 0;
 }
 #myPageModifyWrap input {
   height: 35px;
-  border: none;
-  border-bottom: 1px solid gray;
+  border: 1px solid #e6e6e6;
+  border-radius:5px;
+  border-bottom: 1px solid #e6e6e6;
   font-size: 16px;
   margin: 5px 0;
-  padding: 0 5px;
+  padding: 0 10px;
 }
 #myPageModifyWrap input[type="number"]::-webkit-inner-spin-button,
 #myPageModifyWrap input[type="number"]::-webkit-outer-spin-button {
   display: none;
+}
+#myPagePwCheckInput{
+	padding: 5px 10px;
+	border: 1px solid #e6e6e6;
+	border-radius: 5px
 }
 
 #myPageModifyWrap input[type="checkbox"] {
@@ -47,9 +54,11 @@
 
 #modifyCompBtn {
   font-size: 16px;
-  padding: 5px 30px;
+ 
 }
-
+#modifyCancelBtn{
+	font-size: 16px;
+}
 #phoneWarning {
   font-size: 14px;
   color: rgb(255, 61, 61);

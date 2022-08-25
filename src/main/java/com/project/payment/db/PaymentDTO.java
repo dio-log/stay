@@ -18,9 +18,25 @@ public class PaymentDTO {
 	private String p_status = null;
 	private String p_wtime = null;
 	private String p_item_imgpath = null;
+	private String calendarInput = null;
+	private String p_men = null;
+	
 	
 
 
+
+	public String getP_men() {
+		return p_men;
+	}
+	public void setP_men(String p_men) {
+		this.p_men = p_men;
+	}
+	public String getCalendarInput() {
+		return calendarInput;
+	}
+	public void setCalendarInput(String calendarInput) {
+		this.calendarInput = calendarInput;
+	}
 	public String getP_name() {
 		return p_name;
 	}

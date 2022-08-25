@@ -13,3 +13,14 @@ $('#doPayBtn').on('click',function(){
 $('#cancelBtn').on('click',function(){
 	$('#outerPayBox').fadeOut();
 })
+
+$('#p_point').on('keyup',function(){
+	console.log($(this).attr('max'))
+	if($(this).val()>$(this).attr('max')){
+		$(this).val($(this).attr('max'));
+	}
+})
+
+$('#compBtn').on('click',function(){
+	$('#payForm').submit();
+})

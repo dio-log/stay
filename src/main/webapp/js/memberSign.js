@@ -160,8 +160,9 @@ $("#loginCheckBtn").on("click", function () {
     //traditional: true, 배열넘길떄 사용
     success: function (data) {
      // let jobj = JSON.parse(data);
+     
       if (data == 'true') {
-        location = "/app/mainPage/main.m";
+        location = "main.m";
       } else {
         alert("아이디 혹은 비밀번호가 맞지 않습니다");
       }

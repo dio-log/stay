@@ -15,8 +15,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.json.simple.JSONObject;
+
 import com.mysql.cj.protocol.Resultset;
 import com.mysql.cj.xdevapi.Result;
+import com.project.reveiw.db.ReviewDTO;
 
 public class PaymentDAO {
 	private static PaymentDAO dao = new PaymentDAO();
@@ -235,6 +238,35 @@ public class PaymentDAO {
 			close(pstmt, conn,rs);
 		}
 		return noList;
+	}
+	
+	public JSONObject getPayment(int u_no, int item_no) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		String room_name = null;
+		JSONObject obj = null;
+		query="select a.room_name,a.room_no,a.item_no from room_list a left join payment b on a.room_no = b.room_no"
+				+ " where b.u_no=? and b.item_no=? order by b.p_wtime desc limit 1";
+		try {
+			pstmt= conn.prepareStatement(query);
+			pstmt.setInt(1, u_no);
+			pstmt.setInt(2, item_no);
+			rs= pstmt.executeQuery();
+			while(rs.next()) {
+				obj = new JSONObject();
+				obj.put("re_room_name", rs.getString("a.room_name"));
+				obj.put("item_no", rs.getInt("a.item_no"));
+				obj.put("room_no", rs.getInt("a.room_no"));
+			}
+		}catch( SQLException e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			close(pstmt, conn,rs);
+		}
+		return obj;
 	}
 
 }

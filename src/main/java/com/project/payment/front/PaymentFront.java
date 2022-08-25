@@ -14,6 +14,7 @@ import com.project.item.cmd.InsertRoomCmd;
 import com.project.payment.cmd.DeleteCardCmd;
 import com.project.payment.cmd.GetPaymentListCmd;
 import com.project.payment.cmd.InsertPaymentCmd;
+import com.project.payment.cmd.MovePayPageCmd;
 import com.project.payment.cmd.PayFeesCmd;
 
 /**
@@ -52,23 +53,30 @@ public class PaymentFront extends HttpServlet {
 		String path = req.getServletPath();
 		String viewPage = null;
 		BasicCmd cmd = null;
+		int idx = path.lastIndexOf("/");
+		String lastPath= path.substring(idx);
 		
-		if(path.equals("/app/payment/insertCart.pay")) {
+		
+		if(lastPath.equals("/insertCart.pay")) {
 			cmd = new InsertPaymentCmd();
 			cmd.excute(req, resp);
-//			viewPage= "insertCart.jsp";
-		}else if(path.equals("/app/payment/getCartList.pay")) {
+			viewPage= "/app/myPage/myReservation.jsp";
+		}else if(lastPath.equals("/getCartList.pay")) {
 			cmd = new GetPaymentListCmd();
 			cmd.excute(req, resp);
-			viewPage= "CartList.jsp";
-		}else if(path.equals("/app/payment/payFees.pay")) {
+			viewPage= "/app/myPage/CartList.jsp";
+		}else if(lastPath.equals("/payFees.pay")) {
 			cmd = new PayFeesCmd();
 			cmd.excute(req, resp);
-			viewPage= "payFees.jsp";
-		}else if(path.equals("/app/payment/deleteCart.pay")) {
+			viewPage= "/app/myPage/payFees.jsp";
+		}else if(lastPath.equals("/deleteCart.pay")) {
 			cmd=new DeleteCardCmd();
 			cmd.excute(req, resp);
-			viewPage= "cartList.jsp";
+			viewPage= "/app/myPage/cartList.jsp";
+		}else if(lastPath.equals("/movePayPage.pay")) {
+			cmd = new MovePayPageCmd();
+			cmd.excute(req, resp);
+			viewPage="/app/pay/pay.jsp";
 		}
 		
 		RequestDispatcher rd = req.getRequestDispatcher(viewPage);

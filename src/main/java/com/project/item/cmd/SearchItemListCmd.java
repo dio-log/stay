@@ -49,12 +49,13 @@ public class SearchItemListCmd implements BasicCmd {
 			for (Cookie c : cookies) {
 				if (c.getName().equals("recentSearch")) {
 					String jsonArrStr = URLDecoder.decode(c.getValue(), "utf-8");
-					System.out.println(jsonArrStr );
 					
 					JSONParser parser = new JSONParser();
 					try {
 						jsonArr = (JSONArray) parser.parse(jsonArrStr);
-						System.out.println("인덱스"+jsonArr.get(0));
+						if(jsonArr.size()>=3) {
+							jsonArr.remove(0);
+						}
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

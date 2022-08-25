@@ -155,7 +155,7 @@ onload=function(){
 		data: "",
 		type: "post",
 		success: function(data) {
-			for (let i = data.length-1; i > data.length-4; i--) {
+			for (let i = data.length - 1; i >= 0; i--) {
 				$('#searchRecentBox').append(`
 			<div class="searchRecnetContent">
 			<p>
@@ -165,8 +165,7 @@ onload=function(){
 			</div>
 			`)
 			}
-		
-
+			removeCookie();
 		}, error: function(e) {
 			console.log(e);
 		}

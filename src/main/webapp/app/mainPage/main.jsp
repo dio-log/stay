@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
- <%@page import="java.net.URLEncoder" %>
+<%@page import="java.net.URLEncoder"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +27,7 @@
 <body>
 	<c:set var='title' value=''></c:set>
 	<%@ include file="nav.jsp"%>
+	<div class="outerCenterCont">
 	<div class="centerCont">
 		<div class="emptyBoxByNav"></div>
 		<form action="searchItemList.it" method="POST">
@@ -45,14 +46,10 @@
 								<div>
 									<strong>최근 검색</strong>
 								</div>
-								<div id="searchRecentBox">
-								
-								
-
-								</div>
+								<div id="searchRecentBox"></div>
 							</div>
 
-						<!-- 	<div id="searchBestKeyword">
+							<!-- 	<div id="searchBestKeyword">
 								<div>
 									<strong>인기키워드</strong>
 								</div>
@@ -95,8 +92,8 @@
 
 				<div id="setPeopleBox">
 					<label for="setPeopleInput"><i class="fa-solid fa-users"></i></label>
-					<input id="peopleInput" name="peopleInput" type="text" placeholder="인원"
-						/>
+					<input id="peopleInput" name="peopleInput" type="text"
+						placeholder="인원" />
 					<div id="setPeople">
 						<div class="setPeopleContent">
 							<p>
@@ -192,12 +189,16 @@
 				</a>
 			</div>
 			<div style="border-top: 1px solid #e6e6e6; margin: 20px 0;"></div>
-			<div>
+			
+		</div>
+		<div>
 				<img src="../../img/main/앱다운이미지.PNG" alt="" style="width: 100%;">
 			</div>
-		</div>
-		<script src="../../js/default.js"></script>
-		<script src="../../js/calendar.js"></script>
-		<script src="../../js/main.js"></script>
+	</div>
+	</div>
+	<%@ include file="footer.jsp"%>
+	<script src="../../js/default.js"></script>
+	<script src="../../js/calendar.js"></script>
+	<script src="../../js/main.js"></script>
 </body>
 </html>

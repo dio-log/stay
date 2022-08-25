@@ -48,10 +48,14 @@ function initClick() {
 				}
 				else if (setVal1 < setVal2) {
 					$('#night').val(night)
+					let room_price = $('#chargeRoomPrice').val();
+					$('#totalFee').html(room_price * night);
 					fullDateInput.val(setVal1.getFullYear() + "." + (setVal1.getMonth() + 1) + "." + setVal1.getDate() + "/" +setVal2.getFullYear() + "." + (setVal2.getMonth() + 1) + "." + setVal2.getDate() + "/" + night + "박");
 				} else {
 					$('#night').val(night)
 					fullDateInput.val(setVal2.getFullYear() + "." + (setVal2.getMonth() + 1) + "." + setVal2.getDate() + "/" + setVal1.getFullYear() + "." + (setVal1.getMonth() + 1) + "." + setVal1.getDate() + "/" + night + "박");
+					let room_price = $('#chargeRoomPrice').val();
+					$('#totalFee').html(room_price * night)
 				}
 			} else if (checkSet.size > 2) {
 				initCheckedDate();

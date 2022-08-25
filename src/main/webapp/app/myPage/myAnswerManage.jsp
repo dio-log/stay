@@ -60,6 +60,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         </div>
       </div>
     </div>
+    <%@ include file="/app/mainPage/footer.jsp"%>
     <script src="../../js/default.js"></script>
     <script src="../../js/myPage.js"></script>
   </body>

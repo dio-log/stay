@@ -30,9 +30,7 @@ public class SelectItemCmd implements BasicCmd{
 		reviewDtoList = reviewDao.getReviewDtoList(item_no);
 		int maxAnswer = reviewDao.getMaxAnswer(item_no);
 		int maxReview = reviewDao.getMaxAnswer(item_no);
-		
-		
-		
+		ItemDto.setItem_no(item_no);
 		req.setAttribute("roomDtoList", roomDtoList);
 		req.setAttribute("itemDto", ItemDto);
 		req.setAttribute("reviewDtoList", reviewDtoList);

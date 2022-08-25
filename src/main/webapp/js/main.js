@@ -40,33 +40,36 @@ onload = function() {
 		data: "",
 		type: "post",
 		success: function(data) {
-			for (let i = data.length-1; i > data.length-4; i--) {
+			for (let i = data.length - 1; i >= 0; i--) {
 				$('#searchRecentBox').append(`
 			<div class="searchRecnetContent">
 			<p>
-			<a href="">${data[i].searchWord}</a> <i class="fa-solid fa-xmark"></i>
+			<a href="">${data[i].searchWord}</a> <i class="fa-solid fa-xmark" data-idx="${i}"></i>
 				</p>
 			<p>${data[i].calendarInput} <br> ${data[i].peopleInput}</p>
 			</div>
 			`)
 			}
-		
-
+			removeCookie();
 		}, error: function(e) {
 			console.log(e);
 		}
 	})
-};
+}
+
 let cnt = 0;
 setInterval(mainImgChange, 4000);
 function mainImgChange() {
-	$(".mainImg").eq(cnt).hide(400);
+	$(".mainImg")
+		.eq(++cnt)
+		.fadeIn(500)
+	$(".mainImg").eq(cnt-1).fadeOut(300);
+	
 	if (cnt > 2) {
 		cnt = -1;
 	}
-	$(".mainImg")
-		.eq(++cnt)
-		.fadeIn(800);
+	
+		
 }
 
 
@@ -100,5 +103,6 @@ $("body").on("click", (e) => {
 		$("#setPeople").hide();
 	}
 });
+
 
 

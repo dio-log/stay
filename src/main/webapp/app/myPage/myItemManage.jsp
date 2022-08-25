@@ -23,30 +23,33 @@
 <body>
 	<c:set var="title" value="내 정보"></c:set>
 	<%@ include file="/app/mainPage/nav.jsp"%>
-	<div class="centerCont">
-		<div class="emptyBoxByNav"></div>
-		<!-- 내 정보 관리 , 예약내역,나의 후기,포인트, 찜,쿠폰함,  공지 사항-->
-		<div style="display: flex; white-space: nowrap">
-			<ul id="myTab">
-				<li><a href="myInfo.my">내 정보 관리</a></li>
-				<c:choose>
-					<c:when test="${u_div==1}">
-						<li><a href="myReservation.my">예약내역</a></li>
-						<li><a href="myPoint.my">나의 포인트</a></li>
-						<li><a href="myReview.my">나의 후기</a></li>
-						<li><a href="myPick.my">찜</a></li>
-					</c:when>
-					<c:when test="${u_div==2}">
-						<li><a href="itemUpload.it">객실등록</a></li>
-						<li><a href="myItemManage.my"
-							style="color: rgb(243, 21, 21); font-weight: 600">객실관리</a></li>
-						<li><a href="myAnswerManage.my">답변관리</a></li>
-					</c:when>
-				</c:choose>
-			</ul>
-			<div id="myPageContentWrap"></div>
+	<div class="outerCenterCont">
+		<div class="centerCont">
+			<div class="emptyBoxByNav"></div>
+			<!-- 내 정보 관리 , 예약내역,나의 후기,포인트, 찜,쿠폰함,  공지 사항-->
+			<div style="display: flex; white-space: nowrap">
+				<ul id="myTab">
+					<li><a href="myInfo.my">내 정보 관리</a></li>
+					<c:choose>
+						<c:when test="${u_div==1}">
+							<li><a href="myReservation.my">예약내역</a></li>
+							<li><a href="myPoint.my">나의 포인트</a></li>
+							<li><a href="myReview.my">나의 후기</a></li>
+							<li><a href="myPick.my">찜</a></li>
+						</c:when>
+						<c:when test="${u_div==2}">
+							<li><a href="itemUpload.it">객실등록</a></li>
+							<li><a href="myItemManage.my"
+								style="color: rgb(243, 21, 21); font-weight: 600">객실관리</a></li>
+							<li><a href="myAnswerManage.my">답변관리</a></li>
+						</c:when>
+					</c:choose>
+				</ul>
+				<div id="myPageContentWrap"></div>
+			</div>
 		</div>
 	</div>
+	<%@ include file="/app/mainPage/footer.jsp"%>
 	<script src="../../js/default.js"></script>
 	<script src="../../js/myPage.js"></script>
 </body>

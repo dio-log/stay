@@ -18,6 +18,7 @@ import com.project.member.cmd.CheckPwCmd;
 import com.project.member.cmd.InsertMemberCmd;
 import com.project.member.cmd.LogoutCmd;
 import com.project.member.cmd.SelectMemberCmd;
+import com.project.member.cmd.removeCookieCmd;
 import com.project.member.cmd.GetCookiesCmd;
 
 /**
@@ -61,8 +62,8 @@ public class MemberFrontCtl extends HttpServlet {
 		int idx = path.lastIndexOf("/");
 		String lastPath = path.substring(idx);
 		System.out.println(req.getServletPath());
-		System.out.println(lastPath);
 		boolean flag = true;
+		
 		
 		if(lastPath.equals("/signComp.m")) {
 			cmd = new InsertMemberCmd();
@@ -108,6 +109,10 @@ public class MemberFrontCtl extends HttpServlet {
 			return;
 		}else if(lastPath.equals("/getCookies.m")) {
 			cmd = new GetCookiesCmd();
+			cmd.excute(req, resp);
+			return;
+		}else if(lastPath.equals("/removeCookie.m")) {
+			cmd = new removeCookieCmd();
 			cmd.excute(req, resp);
 			return;
 		}

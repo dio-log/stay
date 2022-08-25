@@ -10,10 +10,7 @@
   word-spacing: 3px;
   font-family: "Noto Sans KR", sans-serif;
 }
-body {
-  display: flex;
-  justify-content: center;
-}
+
 li {
   list-style: none;
 }
@@ -35,6 +32,10 @@ button:hover {
 }
 a:link {
   color: black;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  display: none;
 }
 
 .fs-32 {
@@ -145,13 +146,11 @@ a:link {
   color: white;
 }
 .centerCont {
-  /* border: 1px solid black; */
   background-color: white;
   min-width: 768px;
   width: 1024px;
-  /* height: 500px; */
   padding: 10px;
-  overflow: hidden;
+  min-height: 700px;
 }
 
 .emptyBoxByNav {
@@ -254,10 +253,19 @@ a:link {
 
 .navCartBox {
   position: absolute;
-  height: 80px;
+  height: auto;
   top: 0;
-  right: 35px;
+  right: 40px;
   display: none;
+  background-color: white;
+  border:1px solid #e6e6e6;
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 120px;
+  font-size: 14px;
+}
+.navCartBox *{
+	margin:5px 0;
 }
 
 .navCategoryTab {
@@ -462,4 +470,21 @@ a:link {
 #setPeopleBtn {
   font-size: 14px;
   font-weight: 600;
+}
+.outerCenterCont{
+	display:flex;justify-content: center
+}
+
+#footer{
+	background-color:#e6e6e647;
+	text-align: center;
+	font-size: 12px;
+	border-top: 1px solid #e6e6e6;
+	color:#80808075;
+}
+#footer :nth-child(1){
+	padding: 30px 0 ;
+}
+#footer :last-child {
+	padding: 30px 0 ;
 }

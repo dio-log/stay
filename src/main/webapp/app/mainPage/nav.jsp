@@ -16,14 +16,10 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           <c:when test="${u_no!=null}">
             <i class="fa-solid fa-user"></i>
             <div class="navCartBox">
-              <img src="../../img/main/speachBubble.png" alt="" />
-              <div>
-              <p>${u_nick}님</p>
-                <a href="myInfo.my"><p>MyPage</p></a> 
-                <p>MyPoint</p>
-                <p>Cart</p>
-                <p><a href='logout.m'>로그아웃</a></p>
-              </div>
+              <p>${u_nick} <span style="font-size: 12px">님</span> </p>
+               <p><a href="myInfo.my" style="margin: 0">내정보</a></p>  
+                <p><a href="myReservation.my" style="margin: 0">결제/예약내역</a></p>
+                <p><a href='logout.m' style="margin: 0">로그아웃</a></p>
             </div></c:when>
             <c:when test="${title=='로그인' || title=='회원가입' || title=='내정보'}">
             </c:when>
