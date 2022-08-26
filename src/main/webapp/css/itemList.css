@@ -90,3 +90,6 @@
 	border:1px solid #e6e6e6;
 	display: none;
 }
+.sortBy:hover{
+	cursor: pointer;
+}

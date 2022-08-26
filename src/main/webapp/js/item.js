@@ -253,10 +253,8 @@ function setOpacity(e) {
   for (let i of $(e).children("img")) {
     if (i.src == $("#mainImg").attr("src")) {
       i.style.opacity = "1";
-      console.log("true");
     } else {
       i.style.opacity = "0.4";
-      console.log("false");
     }
   }
 }

@@ -50,6 +50,12 @@
   display: flex;
   border-bottom: 1px solid #e6e6e6;
 }
+.itemTab_roomDetailMore:hover{
+	cursor: pointer;
+	opacity:0.5;
+	background-color: gray;
+	color:white;
+}
 .itemTab_roomDetailSt div {
   padding: 10px 0;
 }
@@ -57,16 +63,21 @@
 #itemSecLeftBox {
   width: 100%;
 }
-#itemSecLeftBox img:hover {
-  opacity: 0.5;
-  cursor: pointer;
-}
+
 .itemTab_roomDetailMore {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 20px;
   color: gray;
+  height: 200px;
+  width: 100%;
+  top: 10px;
+  left: 0;
+  text-align: center;
+}
+.itemTab_roomDetailMore span{
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform:translateX(-50%);
 }
 /* rgba(239, 239, 239, 0.3) */
 
@@ -465,22 +476,20 @@ input[type="file"] {
   width: 75%;
 }
 #roomMoreImgCont {
-  position: absolute;
-  width: auto;
+	width:100%;
   height: 100%;
-  opacity: 1;
-  display: flex;
+ 
   /* background-color: yellow; */
 }
 #roomMoreImgCont img {
-  width: 400;
+  width: 400px;
   height: 100%;
   object-fit: fill;
 }
 
 .roomMoreImgBox button {
-  width: 50px;
-  font-size: 40px;
+  width: 70px;
+  font-size: 50px;
   position: absolute;
   transform: translateY(-50%);
   top: 50%;
@@ -559,68 +568,11 @@ input[type="file"] {
 #itemTab_reviewDetailBox>div{
 	margin: 20px 0;
 }
-#itemTab_reviewDetailBox>div>p{
+
+#totalReviewWrap>p{
 	color:#f3d74f;
 	font-size: 35px;
 }
-.reviewContentWrap {
-  width: 100%;
-  text-align: left;
-   display: flex;
-   border:1px solid #e6e6e6;
-   border-radius: 5px;
-}
-.reviewContentWrap>:nth-child(2){
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-}
-.reviewContentWrap>:nth-child(2)>*{
-	width: 100%;
-	text-align: left;
-	margin: 5px 0 ;
-}
-.reviewContentWrap >div{
-	padding: 20px;
-}
-.reviewContentWrap input{
-	 border:1px solid #e6e6e6;
-  border-radius: 5px;
-  padding: 5px 10px;
-}
-.reviewGrade i{
-	color:#f3d74f;
-	font-size: 16px;
-}
-.reviewGrade{
-	display: flex;
-	justify-content: space-between;
-}
-.reviewGrade>:first-child{
-	font-size: 12px;
-	color: #767676;
-	
-}
-.reviewContentWrap textarea {
-  resize: none;
-  border:1px solid #e6e6e6;
-  border-radius: 5px;
-  min-height: 100px;
-  padding: 10px;
- 
-}
-.reviewContentWrap textarea:disabled {
-  background-color: white;
-}
-.reviewImgBox img {
-  object-fit: fill;
-  height:200px;
-}
-.reviewImgBox {
-  overflow: hidden;
-}
-
-
 
 #calendar{
 	left: -320px;
@@ -642,4 +594,12 @@ input[type="file"] {
 	width: 100%;
 	font-size: 16px;
 	text-align: center;
+}
+
+#roomMoreImgCont>div{
+	display: flex;
+	height: inherit;
+	position: absolute;
+	left:0px;
+	transition:all 1s;
 }

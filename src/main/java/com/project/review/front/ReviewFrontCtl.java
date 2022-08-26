@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.project.item.cmd.BasicCmd;
-import com.project.reveiw.cmd.InsertReviewCmd;
-import com.project.reveiw.cmd.checkPossibleCmd;
+import com.project.review.cmd.InsertReviewCmd;
+import com.project.review.cmd.checkPossibleCmd;
 
 /**
  * Servlet implementation class ReviewFrontCtl

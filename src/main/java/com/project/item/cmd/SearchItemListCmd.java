@@ -18,7 +18,6 @@ import org.json.simple.parser.ParseException;
 
 import com.project.item.db.ItemsDAO;
 import com.project.item.db.ItemsDTO;
-import com.project.reveiw.db.ReviewDAO;
 
 public class SearchItemListCmd implements BasicCmd {
 
@@ -40,6 +39,7 @@ public class SearchItemListCmd implements BasicCmd {
 		if (itemDtoList.size() == 0) {
 			itemDtoList = null;
 		}
+		
 		req.setAttribute("searchWord", searchWord);
 		req.setAttribute("itemDtoList", itemDtoList);
 

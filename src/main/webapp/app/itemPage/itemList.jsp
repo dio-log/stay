@@ -39,7 +39,7 @@
 						</label> <input id="setLocationInput" type="text" name="searchWord"
 							placeholder="여행지, 숙소" />
 						<div id="searchDetination">
-							<!-- 포커스했을땐 최근검색, 인기키워드 -->
+							<!-- 포커스했을땐 최근검색-->
 							<!-- 검색할땐 검색키워드 자동검색 -->
 							<div
 								style="padding: 0 5px; overflow-y: auto; width: 100%; max-height: 300px;">
@@ -50,12 +50,6 @@
 									<div id="searchRecentBox"></div>
 								</div>
 
-								<!-- 	<div id="searchBestKeyword">
-								<div>
-									<strong>인기키워드</strong>
-								</div>
-								<div></div>
-							</div> -->
 							</div>
 						</div>
 					</div>
@@ -139,94 +133,109 @@
 								<div id="map"></div>
 							</button>
 						</div>
-						<ul>
-							<li><h3>가격대</h3></li>
+						<form id="filterForm" action="">
+							<button id="filterBtn" class="whiteBtnSt" style="width: 100%;">
+								필터 적용</button>
+							<ul>
+								<li><h3>가격대</h3></li>
+								<li><progress id="progress" min="0" max="100"></progress></li>
+								<li><input type="text" /> <input type="text" /></li>
+							</ul>
+							<ul>
+								<li><h3>숙소 유형</h3></li>
+								<li><input id="" name="room_div" type="checkbox" value="모텔" /><label
+									class="cb-square-16 filterCbLabel" for="room_div">✓</label><label
+									class="optLabel" for="room_div">모텔</label></li>
+								<li><input id="" name="room_div" type="checkbox" value="호텔" /><label
+									class="cb-square-16 filterCbLabel" for="room_div">✓</label><label
+									class="optLabel" for="room_div">호텔</label></li>
+								<li><input id="" name="room_div" type="checkbox"
+									value="리조트" /><label class="cb-square-16 filterCbLabel"
+									for="room_div">✓</label><label class="optLabel" for="room_div">리조트</label></li>
+								<li><input id="" name="room_div" type="checkbox" value="펜션" /><label
+									class="cb-square-16 filterCbLabel" for="room_div">✓</label><label
+									class="optLabel" for="room_div">펜션</label></li>
+								<li><input id="" name="room_div" type="checkbox"
+									value="게스트하우스" /><label class="cb-square-16 filterCbLabel"
+									for="room_div">✓</label><label class="optLabel" for="room_div">게스트하우스</label></li>
+								<li><input id="" name="room_div" type="checkbox" value="캠핑" /><label
+									class="cb-square-16 filterCbLabel" for="room_div">✓</label><label
+									class="optLabel" for="room_div">캠핑</label></li>
+							</ul>
+							<ul>
+								<li><h3>테마</h3></li>
+								<li><input id="" name="room_theme" type="checkbox"
+									value="가족" /><label class="cb-square-16 filterCbLabel"
+									for="room_theme">✓</label><label class="optLabel"
+									for="room_theme">가족</label></li>
+								<li><input id="" name="room_theme" type="checkbox"
+									value="단체" /><label class="cb-square-16 filterCbLabel"
+									for="room_theme">✓</label><label class="optLabel"
+									for="room_theme">단체</label></li>
+								<li><input id="" name="room_theme" type="checkbox"
+									value="친구" /><label class="cb-square-16 filterCbLabel"
+									for="room_theme">✓</label><label class="optLabel"
+									for="room_theme">친구</label></li>
+								<li><input id="" name="room_theme" type="checkbox"
+									value="커플" /><label class="cb-square-16 filterCbLabel"
+									for="room_theme">✓</label><label class="optLabel"
+									for="room_theme">커플</label></li>
+								<li><input id="" name="room_theme" type="checkbox"
+									value="반려동물" /><label class="cb-square-16 filterCbLabel"
+									for="room_theme">✓</label><label class="optLabel"
+									for="room_theme">반려동물</label></li>
+							</ul>
+							<ul>
+								<li>
+									<h3>부대시설</h3>
+								</li>
 
-							<li><progress id="progress" min="0" max="100"></progress></li>
-							<li><input type="text" /> <input type="text" /></li>
-						</ul>
-						<ul>
-							<li><h3>숙소 유형</h3></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">모텔</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">호텔</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">리조트</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">펜션</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">게스트하우스</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">캠핑</label></li>
-						</ul>
-						<ul>
-							<li><h3>테마</h3></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">가족</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">단체</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">친구</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">커플</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">반려동물</label></li>
-						</ul>
-						<ul>
-							<li>
-								<h3>부대시설</h3>
-							</li>
-
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">마트/편의점</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">바베큐장</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">주차장</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">테라스</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">조식</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">스파</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">세탁</label></li>
-							<li><input id="" name="d1" type="checkbox" /><label
-								class="cb-square-16 filterCbLabel" for="d1">✓</label><label
-								class="optLabel" for="d1">야외수영장</label></li>
-						</ul>
+								<li><input id="" name="room_extraopt" type="checkbox"
+									value="마트/편의점" /><label class="cb-square-16 filterCbLabel"
+									for="room_extraopt">✓</label><label class="optLabel"
+									for="room_extraopt">마트/편의점</label></li>
+								<li><input id="" name="room_extraopt" type="checkbox"
+									value="바베큐장" /><label class="cb-square-16 filterCbLabel"
+									for="room_extraopt">✓</label><label class="optLabel"
+									for="room_extraopt">바베큐장</label></li>
+								<li><input id="" name="room_extraopt" type="checkbox"
+									value="주차장" /><label class="cb-square-16 filterCbLabel"
+									for="room_extraopt">✓</label><label class="optLabel"
+									for="room_extraopt">주차장</label></li>
+								<li><input id="" name="room_extraopt" type="checkbox"
+									value="테라스" /><label class="cb-square-16 filterCbLabel"
+									for="room_extraopt">✓</label><label class="optLabel"
+									for="room_extraopt">테라스</label></li>
+								<li><input id="" name="room_extraopt" type="checkbox"
+									value="조식" /><label class="cb-square-16 filterCbLabel"
+									for="room_extraopt">✓</label><label class="optLabel"
+									for="room_extraopt">조식</label></li>
+								<li><input id="" name="room_extraopt" type="checkbox"
+									value="스파" /><label class="cb-square-16 filterCbLabel"
+									for="room_extraopt">✓</label><label class="optLabel"
+									for="room_extraopt">스파</label></li>
+								<li><input id="" name="room_extraopt" type="checkbox"
+									value="세탁" /><label class="cb-square-16 filterCbLabel"
+									for="room_extraopt">✓</label><label class="optLabel"
+									for="room_extraopt">세탁</label></li>
+								<li><input id="" name="room_extraopt" type="checkbox"
+									value="야외수영장" /><label class="cb-square-16 filterCbLabel"
+									for="room_extraopt">✓</label><label class="optLabel"
+									for="room_extraopt">야외수영장</label></li>
+							</ul>
+						</form>
 					</div>
 				</div>
 				<div class="itemListWrap">
 					<div
 						style="display: flex; justify-content: space-between; border-bottom: 1px solid #e6e6e6;">
-						<h2 id="beSearchedWord">
+						<h2 id="beSearchedWord" data-search="${searchWord }">
 							'${searchWord }' <span style="font-size: 20px">검색결과</span>
 						</h2>
 						<ul id="sortUl">
-							<li>인기순</li>
-							<li>높은 평점순</li>
-							<li>낮은 요금순</li>
-							<li>리뷰 많은순</li>
+							<li class="sortBy" data-sortby="byGrade">높은 평점순</li>
+							<li class="sortBy" data-sortby="byPrice">낮은 요금순</li>
+							<li class="sortBy" data-sortby="byReview">리뷰 많은순</li>
 						</ul>
 					</div>
 					<ul id="itemListWrap" style="margin-top: 5px">

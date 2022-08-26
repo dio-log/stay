@@ -37,7 +37,7 @@ $('.location').on('click', function() {
 	geocoder.addressSearch($('#item_addr').html(), function(result, status) {
 
 		// 정상적으로 검색이 완료됐으면 
-		if (status === kakao.maps.services.Status.OK) {
+		if (status === kakao.maps.services.Status) {
 
 			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
@@ -77,7 +77,7 @@ $('#calendarInput').on('click', function() {
 
 $('#writeReviewBtn').on('click', function() {
 	let item_no = $(this).data('no');
-	if(item_no==''){
+	if (item_no == '') {
 		item_no = 0;
 	}
 	$.ajax({
@@ -86,7 +86,7 @@ $('#writeReviewBtn').on('click', function() {
 		dataType: "json",
 		data: { item_no },
 		success: function(data) {
-			if (data!=null) {
+			if (data != null) {
 				$('#usedRoom').html(data.re_room_name)
 				$('#item_no').val(data.item_no);
 				$('#room_no').val(data.room_no);
@@ -103,31 +103,137 @@ $('#writeReviewBtn').on('click', function() {
 
 
 
-$('.fa-star').on('click',function(e){
+$('.tempClass span i').on('click', function(e) {
 	$(e.target).addClass('fa-solid');
 	$(e.target).prevAll('i').addClass('fa-solid');
 	$(e.target).nextAll('i').removeClass('fa-solid');
-	
+
 	let gr1 = $('#serviceGrade span .fa-solid').length
 	let gr2 = $('#cleanGrade span .fa-solid').length
 	let gr3 = $('#convenienceGrade span .fa-solid').length
-	
-	let avg= (gr1+gr2+gr3)/3;
+
+	let avg = (gr1 + gr2 + gr3) / 3;
 	let roundAvg = Math.round(avg);
-	$('#re_grade').val(roundAvg);	
+	$('#re_grade').val(roundAvg);
 })
 
-$('#doPayBtn').on('click',function(){
-	
-	console.log($('#chargeRoomPrice').val() +"?"+$('#calendarInput').val())
-	if($(this).data("no")==null){
+$('#doPayBtn').on('click', function() {
+
+	console.log($('#chargeRoomPrice').val() + "?" + $('#calendarInput').val())
+	if ($(this).data("no") == null) {
 		alert('로그인이 필요합니다');
-	}else if($('#chargeRoomPrice').val()=='' || $('#calendarInput').val()==''){
-		
+	} else if ($('#chargeRoomPrice').val() == '' || $('#calendarInput').val() == '') {
+
 		alert('필수 사항이 선택되지 않았습니다')
 	}
-	else{
+	else {
 		$('#doPayForm').submit();
 	}
 })
+
+
+let roomMoreMax = 0;
+let roomMoreCnt = 0;
+
+$('.itemTab_roomDetailMore').on('click', function(e) {
+	$('#roomMoreBox').children('div').remove();
+	$('#roomMoreBox').children('h3').remove();
+	let dataSet = $(e.target).data("no");
+
+	$.ajax({
+		url: "selectRoom.it",
+		data: { "dataSet": dataSet },
+		type: "post",
+		dataType: "json",
+		success: function(data) {
+
+
+			$('#roomMoreBox').append(`
+	<div class="roomMoreImgBox">
+					<div id="roomMoreImgCont">
+					<div></div>
+					</div>
+					<button type="button">
+						<i class="fa-solid fa-angle-left" onclick="roomMoreLeftBtn()"></i>
+					</button>
+					<button type="button">
+						<i class="fa-solid fa-angle-right" onclick="roomMoreRightBtn()"></i>
+					</button>
+				</div>
+				<h3>${data.room_name} / ${data.room_view}전망</h3>
+				<div id="roomMoreInfoBox">
+					<div id="roomMoreLeftBox">
+						<ul>
+							<li>기본정보</li>
+							<li><img alt="" src="../../img/main/double-bed.png"> <span> ${data.room_bed} ${data.room_bed_cnt} </span></li>
+							<li>${data.basic_men}인 기준, 최대 ${data.max_men}인</li>
+							<li>${data.room_size} m<sup>2</sup></li>
+							<li>${data.room_theme}</li>
+						</ul>
+					</div>
+					<div id="roomMoreRightBox">
+						<ul>
+							<li>편의시설</li>
+						</ul>
+					</div>
+				</div>`);
+
+			let optArr = data.room_extraopt.split(',');
+			for (let opt of optArr) {
+				if (opt != '') {
+					$('#roomMoreRightBox ul').append(`
+							<li>· ${opt}</li>
+						`)
+				}
+			}
+			
+			
+			let imgArr = data.room_img_path.split(',');
+			roomMoreMax = imgArr.length - 1;
+			console.log("roomMoreMax"+roomMoreMax)
+			
+			
+			for (let imgPath of imgArr) {
+				if (imgPath != '') {
+					$('#roomMoreImgCont div').append(`
+					<img alt="" src="${imgPath}">
+					`)
+				}
+			}
+			$('#roomMoreBox').show();
+
+		}, error: function(req, sts, e) {
+			console.log(req, sts, e);
+			alert(req + "/" + sts + "/" + e);
+		}
+	})
+})
+
+
+
+
+$('#roomMoreBox>p').on('click', function(e) {
+	if ($('#roomMoreCloseImg').is($(e.target))) {
+		$('#roomMoreBox').children('div').remove();
+		$('#roomMoreBox').children('h3').remove();
+		$('#roomMoreBox').hide();
+		roomMoreCnt= 0;
+	}
+})
+
+function roomMoreLeftBtn() {
+	if (roomMoreCnt < roomMoreMax - 1) {
+		roomMoreCnt++;
+	}
+	console.log(roomMoreCnt)
+	$('#roomMoreImgCont>div').css('left', `${roomMoreCnt * -400}px`);
+}
+
+function roomMoreRightBtn() {
+	if (roomMoreCnt > 0) {
+		roomMoreCnt--;
+	}
+	console.log(roomMoreCnt)
+	$('#roomMoreImgCont>div').css('left', `${roomMoreCnt * -400}px`);
+}
 

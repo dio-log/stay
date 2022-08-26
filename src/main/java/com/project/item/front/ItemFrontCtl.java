@@ -18,7 +18,9 @@ import com.project.item.cmd.InsertItemCmd;
 import com.project.item.cmd.InsertRoomCmd;
 import com.project.item.cmd.SearchItemListCmd;
 import com.project.item.cmd.SelectItemCmd;
-import com.project.item.cmd.SelectItemListCmd;
+import com.project.item.cmd.SelectMoreItemListCmd;
+import com.project.item.cmd.SelectRoomCmd;
+import com.project.item.cmd.SortItemCmd;
 import com.project.mdClass.MultipartCtl;
 
 /**
@@ -71,17 +73,17 @@ public class ItemFrontCtl extends HttpServlet {
 		 cmd.excute(req, resp);
 		 return;
 
-		}else if(path.equals("/app/myPage/itemUpload.it")) {
+		}else if(lastPath.equals("/itemUpload.it")) {
 			viewPage = "/app/itemPage/itemUpload.jsp";
 			flag =false;
-		}else if(path.equals("/app/itemPage/insertItem.it")) {
+		}else if(lastPath.equals("/insertItem.it")) {
 			cmd = new InsertItemCmd();
 			cmd.excute(req, resp);
 			viewPage = "/app/myPage/myItemManage.jsp";
 			flag =false;
 		
-		}else if(lastPath.equals("/selectItemList.it")) {
-			cmd = new SelectItemListCmd();
+		}else if(lastPath.equals("/selectMoreItemList.it")) {
+			cmd = new SelectMoreItemListCmd();
 			cmd.excute(req, resp);
 			return;
 		}else if(lastPath.equals("/itemView.it")) {
@@ -92,6 +94,14 @@ public class ItemFrontCtl extends HttpServlet {
 			cmd = new SearchItemListCmd();
 			cmd.excute(req, resp);
 			viewPage="/app/itemPage/itemList.jsp";
+		}else if(lastPath.equals("/selectRoom.it")) {
+			cmd= new SelectRoomCmd();
+			cmd.excute(req, resp);
+			return;
+		}else if(lastPath.equals("/sortItem.it")) {
+			cmd = new SortItemCmd();
+			cmd.excute(req, resp);
+			return;
 		}
 		
 		
