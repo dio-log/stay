@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.project.item.cmd.BasicCmd;
 import com.project.item.cmd.InsertRoomCmd;
 import com.project.payment.cmd.DeleteCardCmd;
+import com.project.payment.cmd.GetPaymentByRoomCmd;
 import com.project.payment.cmd.GetPaymentListCmd;
 import com.project.payment.cmd.InsertPaymentCmd;
+import com.project.payment.cmd.MonthlySalesCmd;
 import com.project.payment.cmd.MovePayPageCmd;
 import com.project.payment.cmd.PayFeesCmd;
 
@@ -50,12 +52,13 @@ public class PaymentFront extends HttpServlet {
 	
 	protected void doAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("utf-8");
 		String path = req.getServletPath();
 		String viewPage = null;
 		BasicCmd cmd = null;
 		int idx = path.lastIndexOf("/");
 		String lastPath= path.substring(idx);
-		
+		boolean flag = true;
 		
 		if(lastPath.equals("/insertCart.pay")) {
 			cmd = new InsertPaymentCmd();
@@ -77,10 +80,24 @@ public class PaymentFront extends HttpServlet {
 			cmd = new MovePayPageCmd();
 			cmd.excute(req, resp);
 			viewPage="/app/pay/pay.jsp";
+		}else if(lastPath.equals("/getMonthlySales.pay")) {
+			cmd = new MonthlySalesCmd();
+			cmd.excute(req, resp);
+			return;
+		}else if(lastPath.equals("/getPaymentByRoom.pay")) {
+			cmd = new GetPaymentByRoomCmd();
+			cmd.excute(req, resp);
+			return;
 		}
 		
-		RequestDispatcher rd = req.getRequestDispatcher(viewPage);
-		rd.forward(req, resp);
+		
+		if(flag) {
+			RequestDispatcher rd = req.getRequestDispatcher(viewPage);
+			rd.forward(req, resp);
+		}else {
+			resp.sendRedirect(viewPage);
+		}
+		
 	}
 
 }

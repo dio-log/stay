@@ -29,9 +29,9 @@
 			<!-- 내 정보 관리 , 예약내역,나의 후기,포인트, 찜,쿠폰함,  공지 사항-->
 			<div style="display: flex; white-space: nowrap">
 				<ul id="myTab">
-					<li><a href="myInfo.my">내 정보 관리</a></li>
 					<c:choose>
 						<c:when test="${u_div==1}">
+							<li><a href="myInfo.my">내 정보 관리</a></li>
 							<li><a href="myReservation.my"
 								style="color: rgb(243, 21, 21); font-weight: 600">결제/예약내역</a></li>
 							<li><a href="myPoint.my">나의 포인트</a></li>
@@ -39,50 +39,63 @@
 							<li><a href="myPick.my">찜</a></li>
 						</c:when>
 						<c:when test="${u_div==2}">
+							<li><a href="myInfo.my">내 정보 관리</a></li>
 							<li><a href="itemUpload.it">객실등록</a></li>
 							<li><a href="#">객실관리</a></li>
 							<li><a href="#">답변관리</a></li>
 						</c:when>
 					</c:choose>
-
-
+					<li><a href="notice.my">공지사항</a></li>
 				</ul>
 
 				<div id="myPageContentWrap">
 					<div id="myResevationWrap">
 						<div>
 							<h4>결제</h4>
-							<ul id="myPagePayUl">
-								<li>
-									<ul>
-										<li>No</li>
-										<li>결제상태</li>
-										<li>이미지</li>
-										<li>숙소이름</li>
-										<li>객실타입</li>
-										<li>체크인/체크아웃</li>
-										<li>적립 포인트</li>
-										<li>1박 금액</li>
-										<li>총 결제 금액</li>
 
-									</ul>
-								</li>
-								<li>
-									<ul>
-										<li>${paymentDto.p_no }</li>
-										<li>${paymentDto.p_status}</li>
-										<li><img alt="" src="${paymentDto.p_firtImg}"></li>
-										<li>${paymentDto.p_name}</li>
-										<li>${paymentDto.p_room_name }</li>
-										<li>${paymentDto.p_checkin }/${paymentDto.p_checkout}</li>
-										<li>${paymentDto.p_point }</li>
-										<li>${paymentDto.p_fee }</li>
-										<li>${paymentDto.p_totalFee }</li>
+							<table>
+								<colgroup style="width: 100%">
+									<col style="width: 5%;">
+									<col style="width: 10%">
+									<col style="width: 25%">
+									<col style="width: 10%">
+									<col style="width: 10%">
+									<col style="width: 6%">
+									<col style="width: 12%">
+									<col style="width: 12%">
+									<col style="width: 10%">
+								</colgroup>
+								<tr>
+									<td>No</td>
+									<td>결제상태</td>
+									<td>숙소이름</td>
+									<td>객실타입</td>
+									<td>체크인/<br>체크아웃
+									</td>
+									<td>적립<br>포인트
+									</td>
+									<td>1박 금액</td>
+									<td>총 금액</td>
+									<td></td>
+								</tr>
+								<c:forEach var="paymentDto" items="${paymentDtoList}">
+									<tr>
+										<td>${paymentDto.p_no }</td>
+										<td><c:if test="${paymentDto.p_status=='n'}">결제 대기</c:if></td>
+										<td>${paymentDto.p_item_name}</td>
+										<td>${paymentDto.p_room_name }</td>
+										<td>${paymentDto.p_checkin }/<br>${paymentDto.p_checkout}</td>
+										<td>${paymentDto.p_point }</td>
+										<td>${paymentDto.p_fee }</td>
+										<td>${paymentDto.p_totalFee }</td>
+										<td><c:if test="${paymentDto.p_status=='n'}">
+												<button type="button" class="whiteBtnSt"
+													style="font-size: 14px; margin-bottom: 15px;">결제</button>
+											</c:if></td>
+									</tr>
+								</c:forEach>
+							</table>
 
-									</ul>
-								</li>
-
-							</ul>
 						</div>
 						<div>
 							<h4>예약</h4>

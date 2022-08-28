@@ -15,6 +15,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.mysql.cj.protocol.Resultset;
@@ -81,9 +82,9 @@ public class PaymentDAO {
 		Connection conn = getConn();
 		// query= SELECT_PAYLIST_BY_UNO;
 		query = "select a.p_no, a.item_no, a.p_checkin, a.p_checkout,"
-				+ "a.p_night, a.p_fee, a.p_totalfee, a.p_point, a.p_status,a.p_wtime, b.item_name, c.room_name"
+				+ "a.p_night, a.p_fee, a.p_totalfee, a.p_point, a.p_status,a.p_wtime, b.item_name, c.room_name,"
 				+ " b.item_imgpath from payment a left join item b on a.item_no = b.item_no "
-				+ "left join room_list c on a.room_no=c.room_no and a.item_no=c.item_no";
+				+ "left join room_list c on a.room_no=c.room_no and a.item_no=c.item_no where a.u_no=?";
 		ResultSet rs = null;
 		PaymentDTO dto = null;
 		List<PaymentDTO> list = new ArrayList<>();
@@ -107,6 +108,7 @@ public class PaymentDAO {
 				dto.setP_room_name(rs.getString(12));
 				dto.setP_item_imgpath(rs.getString(13));
 				list.add(dto);
+				System.out.println("dao" + rs.getString(10));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -283,24 +285,101 @@ public class PaymentDAO {
 		JSONObject obj = new JSONObject();
 		query = "select a.p_no, a.room_no, b.room_name from payment a "
 				+ "left join room_list b on a.room_no=b.room_no inner join review c "
-				+ "on a.p_no != c.p_no where a.p_status ='n' and a.u_no=3 and a.item_no=3"
-				+ " group by a.p_no";
+				+ "on a.p_no != c.p_no where a.p_status ='n' and a.u_no=3 and a.item_no=3" + " group by a.p_no";
 		try {
-			pstmt= conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, u_no);
 			pstmt.setInt(2, item_no);
-			rs= pstmt.executeQuery();
-			while(rs.next()) {
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
 				obj.put("p_no", rs.getInt("a.p_no"));
 				obj.put("room_no", rs.getInt("a.room_no"));
 				obj.put("room_name", rs.getString("b.room_name"));
+				
 			}
-			} catch( SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(pstmt, conn,rs);
-			}
-			
-		return obj;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt, conn, rs);
+		}
 
-}}
+		return obj;
+	}
+
+	public JSONArray getMonthlySales(int item_no, String prev, String cur) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		query = "select sum(p_totalfee),date_format(p_wtime,'%Y-%m') m from payment where p_status='y' and item_no=? and date(p_wtime) between ? and ? group by m ";
+		JSONArray jsonArr = new JSONArray();
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, item_no);
+			pstmt.setString(2, prev);
+			pstmt.setString(3, cur);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				JSONObject obj = new JSONObject();
+				obj.put("sumFee", rs.getInt("sum(p_totalfee)"));
+				obj.put("m", rs.getString("m"));
+				jsonArr.add(obj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt, conn, rs);
+		}
+		
+		if(jsonArr.size()==0) {
+			for(int i=0;i <2;i++) {
+				JSONObject obj = new JSONObject();
+				obj.put("sumFee", 0);
+				jsonArr.add(obj);
+			}
+		}else if(jsonArr.size()==1) {
+			JSONObject tmpObj = (JSONObject) jsonArr.get(0);
+			JSONObject obj = new JSONObject();
+			 obj.put("sumFee", 0);
+			if(prev.indexOf((String)tmpObj.get("m"))>-1) {
+				jsonArr.add(0, obj);
+			}else if(cur.indexOf((String)tmpObj.get("m"))>-1) {
+				jsonArr.add(1,obj);
+			}
+		}
+		return jsonArr;
+
+	}
+	
+	public JSONArray getPaymentByRoom(int item_no,String curFirst,String curLast) {
+		JSONArray jsonArr = new JSONArray();
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		System.out.println(item_no+curFirst+curLast);
+		//query = "select count(a.p_no),sum(a.p_totalfee), b.room_name from payment a "
+		//		+ "left join room_list b on a.room_no=b.room_no and a.item_no=b.item_no where a.item_no=? and date(a.p_wtime) between ? and ? group by a.room_no";
+		query = "select count(a.p_no),sum(a.p_totalfee), b.room_name from payment a left join room_list b on a.room_no=b.room_no and a.item_no=b.item_no where a.item_no=? and date(p_wtime) between ? and ? group by a.room_no";
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, item_no);
+			pstmt.setString(2, curFirst);
+			pstmt.setString(3, curLast);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				JSONObject obj = new JSONObject();
+				obj.put("sum", rs.getInt("sum(a.p_totalfee)"));
+				obj.put("count", rs.getInt("count(a.p_no)"));
+				obj.put("room_name", rs.getString("b.room_name"));
+				jsonArr.add(obj);
+				System.out.println(rs.getString("b.room_name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt, conn, rs);
+		}
+		return jsonArr;
+	}
+}

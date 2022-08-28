@@ -29,15 +29,24 @@
 			<!-- 내 정보 관리 , 예약내역,나의 후기,포인트, 찜,쿠폰함,  공지 사항-->
 			<div style="display: flex; white-space: nowrap">
 				<ul id="myTab">
-					<li><a href="myInfo.my">내 정보 관리</a></li>
-					<li><a href="myReservation.my">결제/예약내역</a></li>
-					<li><a href="myPoint.my">포인트</a></li>
-					<li><a href="myReview.my"
-						style="color: rgb(243, 21, 21); font-weight: 600">나의 후기</a></li>
-
-					<li><a href="myPick.my">찜</a></li>
+					<c:choose>
+						<c:when test="${u_div==1}">
+							<li><a href="myInfo.my">내 정보 관리</a></li>
+							<li><a href="myReservation.my">결제/예약내역</a></li>
+							<li><a href="myPoint.my">나의 포인트</a></li>
+							<li><a href="myReview.my"
+								style="color: rgb(243, 21, 21); font-weight: 600">나의 후기</a></li>
+							<li><a href="myPick.my">찜</a></li>
+						</c:when>
+						<c:when test="${u_div==2}">
+							<li><a href="myInfo.my">내 정보 관리</a></li>
+							<li><a href="itemUpload.it">객실등록</a></li>
+							<li><a href="#">객실관리</a></li>
+							<li><a href="#">답변관리</a></li>
+						</c:when>
+					</c:choose> 
+					<li><a href="notice.my">공지사항</a></li>
 				</ul>
-
 				<div id="myPageContentWrap">
 					<!-- 	//아이템이름, 타이틀, 평점 작성시간 -->
 					<div id="myReviewWrap">
@@ -55,22 +64,20 @@
 								<td>평점</td>
 								<td>작성시간</td>
 							</tr>
-						</table>
+							<c:forEach var="reviewDto" items="${reviewDtoList}">
+								<tr>
 
-						<c:forEach var="reviewDto" items="${reviewDtoList}">
-
-							<tr>
-								<a href="itemView.it?item_no=${reviewDto.item_no }">
-									<td>${reviewDto.re_item_name }</td>
+									<td><a href="itemView.it?item_no=${reviewDto.item_no }">${reviewDto.re_item_name }</a></td>
 									<td>${reviewDto.re_title }</td>
 									<td>${reviewDto.re_grade }</td>
 									<td>${reviewDto.re_wtime }</td>
-								</a>
-							</tr>
-						</c:forEach>
+
+								</tr>
+							</c:forEach>
+						</table>
+
 					</div>
 				</div>
-				<div id="pointListBox"></div>
 			</div>
 		</div>
 	</div>

@@ -39,24 +39,30 @@
   width: 100%;
   height: 200px;
 }
-
-#mainEventCont > div {
+#mainEventCont > div{
+	overflow: hidden;
+	position: relative;
+	 height: 250px;
+}
+#bannerWrap{
   display: flex;
+  position: absolute;
+  transition:all 1s;
+
 }
-#mainEventCont > div a {
-  display: inline-block;
-  width: 100%;
+#mainEventCont{
+	margin-bottom: 20px;
 }
-#mainEventCont > div div {
-  width: 100%;
-  padding: 10px 5px;
-  height: 250px;
+
+#mainEventCont img{
+	width: 1004px;
+	height: 250px;
+	object-fit:fill;
 }
-#mainEventCont img {
-  border: 1px solid black;
-  width: 100%;
-  height: 200px;
-}
+
 input:focus {
 	background-color: white;
+}
+.searchRecnetContent *:hover{
+	cursor: pointer;
 }

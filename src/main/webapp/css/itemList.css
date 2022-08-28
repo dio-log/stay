@@ -42,7 +42,7 @@
   transform: scale(1.1);
 }
 .itemListWrap img {
-  object-fit: cover;
+  object-fit: fill;
   width: 100%;
   height: 100%;
   transition: all 1s;
@@ -90,6 +90,36 @@
 	border:1px solid #e6e6e6;
 	display: none;
 }
-.sortBy:hover{
-	cursor: pointer;
+
+.prograssInputSt{
+	width: 85px;
+	border-radius: 5px;
+	border:1px solid #e6e6e6;
+	padding: 5px 10px;
+}
+#filterForm progress{
+	width: 100%;
+}
+.sortBy:checked +label{
+	color: #f7323f;
+}
+.sortBy{
+	display:none
+}
+
+#alertAddPick{
+	width: 150px;
+	height: 70px;
+	text-align: center;
+	border-radius: 5px;
+	border:1px solid #e6e6e6;
+	background-color: white;
+	position: fixed;
+	top:50%;
+	left:50%;
+	transform:translateY(-50%) translateX(-50%);
+	padding: 10px;
+	color:gray;
+	display: none;
+ 
 }

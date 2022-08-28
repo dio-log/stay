@@ -22,11 +22,7 @@ $('.tempPayBtn').on('click', function(e) {
 
 let flag = true;
 $('.location').on('click', function() {
-
-
 	var container = document.getElementById('map');
-
-
 	var options = {
 		center: new kakao.maps.LatLng(33.450701, 126.570667),
 		level: 3
@@ -34,13 +30,11 @@ $('.location').on('click', function() {
 
 	var map = new kakao.maps.Map(container, options);
 	var geocoder = new kakao.maps.services.Geocoder();
-	geocoder.addressSearch($('#item_addr').html(), function(result, status) {
-
-		// 정상적으로 검색이 완료됐으면 
-		if (status === kakao.maps.services.Status) {
+	geocoder.addressSearch($('#item_addr').html().trim(), function(result, status) {
+		// 정상적으로 검색이 완료됐으면 3
+		if (status === kakao.maps.services.Status.OK) {
 
 			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
 			// 결과값으로 받은 위치를 마커로 표시합니다
 			var marker = new kakao.maps.Marker({
 				map: map,
@@ -90,6 +84,7 @@ $('#writeReviewBtn').on('click', function() {
 				$('#usedRoom').html(data.re_room_name)
 				$('#item_no').val(data.item_no);
 				$('#room_no').val(data.room_no);
+				$('#reviewForm').show();
 			} else {
 				alert('해당 상품을 이용하신 고객님만 작성가능합니다')
 			}

@@ -113,5 +113,7 @@
    border-radius: 5px;
 }
 
-
+#reviewForm{
+	display: none;
+}
 

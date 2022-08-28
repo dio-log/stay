@@ -2,7 +2,6 @@ package com.project.item.cmd;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 
 import com.project.item.db.ItemsDAO;
-import com.project.item.db.ItemsDTO;
 
-public class SortItemCmd implements BasicCmd {
+public class FilteredMaxItem implements BasicCmd{
 
 	@Override
 	public void excute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,13 +24,11 @@ public class SortItemCmd implements BasicCmd {
 		String room_extraopt = req.getParameter("room_extraopt");
 		int preIdx = Integer.parseInt(req.getParameter("preIdx"));
 		PrintWriter pw = resp.getWriter();
-
-		ItemsDAO dao = null;
-		JSONArray jsonArr = null;
-		dao = ItemsDAO.getIns();
-		jsonArr = dao.getSortedItemDtoListByPrice(sortBy, searchWord, item_div, room_theme, room_extraopt, preIdx);
 		
-		pw.print(jsonArr);
+		ItemsDAO dao = null;
+		dao = ItemsDAO.getIns();
+		int maxItem = dao.getMaxItem(sortBy, searchWord, item_div, room_theme, room_extraopt, preIdx);
+		pw.print(maxItem);
 	}
 
 }

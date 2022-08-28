@@ -27,7 +27,8 @@ public class SearchItemListCmd implements BasicCmd {
 		ItemsDAO dao = ItemsDAO.getIns();
 		String searchWord = req.getParameter("searchWord");
 		String calendarInput = req.getParameter("calendarInput");
-		if (calendarInput != null) {
+		System.out.println("calendarInput"+calendarInput);
+		if (calendarInput != "" || calendarInput != null) {
 			String[] calendarInputArr = calendarInput.split("/");
 			String checkin = calendarInputArr[0];
 			String checkout = calendarInputArr[1];
@@ -41,6 +42,8 @@ public class SearchItemListCmd implements BasicCmd {
 		}
 		
 		req.setAttribute("searchWord", searchWord);
+		req.setAttribute("calendarInput", calendarInput);
+		req.setAttribute("peopleInput", peopleInput);
 		req.setAttribute("itemDtoList", itemDtoList);
 
 		Cookie[] cookies = req.getCookies();

@@ -21,9 +21,6 @@ public class PaymentDTO {
 	private String calendarInput = null;
 	private String p_men = null;
 	
-	
-
-
 
 	public String getP_men() {
 		return p_men;

@@ -29,26 +29,25 @@
 			<!-- 내 정보 관리 , 예약내역,나의 후기,포인트, 찜,쿠폰함,  공지 사항-->
 			<div style="display: flex; white-space: nowrap">
 				<ul id="myTab">
-					<li><a href="myInfo.my"
-						style="color: rgb(243, 21, 21); font-weight: 600">내
-							정보 관리</a></li>
 					<c:choose>
 						<c:when test="${u_div==1}">
+							<li><a href="myInfo.my"
+								style="color: rgb(243, 21, 21); font-weight: 600">내 정보 관리</a></li>
 							<li><a href="myReservation.my">결제/예약내역</a></li>
 							<li><a href="myPoint.my">나의 포인트</a></li>
 							<li><a href="myReview.my">나의 후기</a></li>
 							<li><a href="myPick.my">찜</a></li>
 						</c:when>
 						<c:when test="${u_div==2}">
+							<li><a href="myInfo.my"
+								style="color: rgb(243, 21, 21); font-weight: 600">내 정보 관리</a></li>
 							<li><a href="itemUpload.it">객실등록</a></li>
-							<li><a href="#">객실관리</a></li>
-							<li><a href="#">답변관리</a></li>
+							<li><a href="myItemManage.my">객실관리</a></li>
+							<li><a href="#">통계</a></li>
 						</c:when>
 					</c:choose>
-
-
+					<li><a href="notice.my">공지사항</a></li>
 				</ul>
-
 				<div id="myPageContentWrap">
 					<div id="myPagePwCheckWrap">
 						<p style="margin-bottom: 30px">
@@ -70,19 +69,18 @@
 								id="modifyPhoneInput" type="number" placeholder="변경할 휴대폰 번호 입력" />
 
 								<button id="getAccessNum" class="whiteBtnSt"
-									style="font-size: 16px" disabled>
-									인증번호 받기</button> <br /> <input id="modifyPhoneAccessNum" type="number"
-								placeholder="인증번호 입력" />
+									style="font-size: 16px" disabled>인증번호 받기</button> <br /> <input
+								id="modifyPhoneAccessNum" type="number" placeholder="인증번호 입력" />
 
 								<button class="whiteBtnSt" style="font-size: 16px" disabled>
 									인증하기</button>
 								<p id="phoneWarning"></p></li>
 							<li>
 								<p>광고성 정보 수신동의</p> <input id="foreignMarketing" type="checkbox"
-								value="foreignMarketing" /> <label
-								for="foreignMarketing">제 3자 마케팅</label> <input id="smsMarketing"
-								type="checkbox" value="smsMarketing" /> <label
-								for="smsMarketing">SMS 및 이메일</label>
+								value="foreignMarketing" /> <label for="foreignMarketing">제
+									3자 마케팅</label> <input id="smsMarketing" type="checkbox"
+								value="smsMarketing" /> <label for="smsMarketing">SMS 및
+									이메일</label>
 							</li>
 							<li>
 								<button id="modifyCancelBtn" class="whiteBtnSt">수정취소</button>

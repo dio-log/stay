@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.project.item.cmd.BasicCmd;
+import com.project.member.cmd.BeLoginCheckCmd;
 import com.project.member.cmd.CheckLoginCmd;
 import com.project.member.cmd.CheckOverlapId;
 import com.project.member.cmd.CheckOverlapNick;
@@ -18,6 +19,7 @@ import com.project.member.cmd.CheckPwCmd;
 import com.project.member.cmd.InsertMemberCmd;
 import com.project.member.cmd.LogoutCmd;
 import com.project.member.cmd.SelectMemberCmd;
+import com.project.member.cmd.UpdatePickCmd;
 import com.project.member.cmd.removeCookieCmd;
 import com.project.member.cmd.GetCookiesCmd;
 
@@ -115,7 +117,18 @@ public class MemberFrontCtl extends HttpServlet {
 			cmd = new removeCookieCmd();
 			cmd.excute(req, resp);
 			return;
+		}else if(lastPath.equals("/updatePick.m")) {
+			cmd = new UpdatePickCmd();
+			cmd.excute(req, resp);
+			return;
+		}else if(lastPath.equals("/beLoginCheck.m")) {
+			cmd = new BeLoginCheckCmd();
+			cmd.excute(req, resp);
+			return;
 		}
+		
+		
+		
 		
 		if(flag) {
 			RequestDispatcher rd = req.getRequestDispatcher(viewPage);

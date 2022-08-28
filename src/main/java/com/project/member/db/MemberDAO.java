@@ -261,4 +261,64 @@ public class MemberDAO {
 		}
 		return u_point;
 	}
+
+	private String selectPrevPick(int u_no) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		String prevPick = null;
+		query = "select u_pick from member where u_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, u_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				prevPick  = rs.getString("u_pick");
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn,rs);
+		}
+		return prevPick;
+	}
+	
+	public int updatePick(int u_no,String curPick) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		String prevPick = selectPrevPick(u_no);
+		query = "update member set u_pick = concat(?,?) where u_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, prevPick);
+			pstmt.setString(2, curPick+",");
+			pstmt.setInt(3, u_no);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn);
+		}
+		return result;
+	}
+	public int deletePick(int u_no, String curPick) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		String prevPick = selectPrevPick(u_no);
+		query = "update member set u_pick = replace(',?,',',') where u_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, curPick);
+			pstmt.setInt(2, u_no);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn);
+		}
+		return result;
+	}
 }

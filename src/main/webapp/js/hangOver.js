@@ -1,21 +1,4 @@
-window.addEventListener("scroll", (e) => {
-  console.log(window.scrollY);
-  if (window.scrollY > 20) {
-    $(".nav").css("height", "50px");
-    $(".logo").css("width", "50px");
-    //            $('#nav-logoBox').css('margin-top','3px');
-    $("#nav-ul").css("opacity", "0");
-    $(".navTit").css("font-size", "25px");
-    $(".navTit").css("margin-top", "5px");
-  } else {
-    $(".nav").css("height", "80px");
-    $(".logo").css("width", "80px");
-    //         $('#nav-logoBox').css('margin-top','30px');
-    $("#nav-ul").css("opacity", "1");
-    $(".navTit").css("font-size", "40px");
-    $(".navTit").css("margin-top", "8px");
-  }
-});
+
 
 function weatherContBtn(e) {
   let dataN = $(e).data("w");

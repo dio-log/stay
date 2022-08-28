@@ -103,7 +103,7 @@
   border-top: 1px solid gray;
   padding: 10px;
 }
-#notice li:not(#notice li:nth-child(1)) {
+#myPageNoticeWrap li:not(#notice li:nth-child(1)) {
   border-bottom: 1px solid #e6e6e6;
   padding: 20px 0;
 }
@@ -111,16 +111,16 @@
 .noticeDate {
   font-size: 14px;
 }
-#notice p {
+#myPageNoticeWrap p {
   margin: 10px 0;
 }
-#notice li:first-child {
+#myPageNoticeWrap li:first-child {
   border: none;
   border-bottom: 1px solid black;
   display: flex;
   justify-content: space-between;
 }
-#notice li:first-child button {
+#myPageNoticeWrap li:first-child button {
   font-size: 16px;
   margin-bottom: 5px;
 }
@@ -134,30 +134,23 @@
 	text-align: left;
 	padding: 0 20px;
 }
-#myPagePayUl>li{
-	border-bottom:1px solid #e6e6e6;
-	color: gray;
-	font-size: 14px;
-}
+
 #myResevationWrap h4{
 	border-bottom:1px solid #e6e6e6;
 }
-#myPagePayUl{
-	margin-bottom: 30px;
+#myResevationWrap td{
+	text-align: center
 }
-#myPagePayUl ul{
-	display: flex;
-	justify-content: space-between;
-	padding: 5px;
+#myResevationWrap td{
+	border-bottom: 1px solid #e6e6e6;
+	padding: 5px 0;
+	font-size:14px;
+	color:gray;
+	white-space: pre-line;
 }
-#myReviewWrap ul{
-	display: flex;
-	justify-content: space-between;
-}
-#myReviewWrap li{
-	text-align: center;
-	width: 100%;
-}
+
+
+
 #myReviewWrap table{
 width: 100%;
 border-collapse: collapse;
@@ -167,7 +160,56 @@ margin-top: 20px;
 }
 #myReviewWrap table tr{
 	border-bottom: 1px solid #e6e6e6;
+	font-size:14px;
 	height: 30px;
 	color:gray;
 }
+#myReviewWrap table td{
+	white-space: pre-line;
+}
+#myReviewWrap table a{
+	color:gray;
+	font-size:14px;
+}
 
+#monthly button{
+	border: 1px solid #e6e6e6;
+	width: 30px;
+	height: 30px;
+	background-color: white;
+}
+
+#monthlyLeftWrap img{
+	width: 10px;
+	height: 10px;
+}
+#monthlyLeftWrap{
+	width:25%;
+	text-align:left;
+}
+#monthlyRightWrap{
+	width: 75%;
+}
+#monthly{
+	text-align: center;
+	
+}
+#itemSelect{
+	padding: 5px 10px;
+	border: 1px solid #e6e6e6;
+	border-radius: 5px;
+	position:absolute;
+	left: 0px;
+}
+#myPageItemManageWrap{
+ width: 100%;
+}
+#monthSales{
+	font-size:24px;
+	color: #0089ff;
+	font-weight: 600;
+}
+#rightTb{
+	width:100%;
+	border-collapse: collapse;
+}

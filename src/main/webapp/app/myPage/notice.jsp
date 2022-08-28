@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Document</title>
+<title>hostel</title>
 <style>
 @import
 	url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap")
@@ -33,8 +33,7 @@
 						<c:when test="${u_div==1}">
 							<li><a href="myInfo.my">내 정보 관리</a></li>
 							<li><a href="myReservation.my">결제/예약내역</a></li>
-							<li><a href="myPoint.my"
-								style="color: rgb(243, 21, 21); font-weight: 600">나의 포인트</a></li>
+							<li><a href="myPoint.my">나의 포인트</a></li>
 							<li><a href="myReview.my">나의 후기</a></li>
 							<li><a href="myPick.my">찜</a></li>
 						</c:when>
@@ -45,28 +44,43 @@
 							<li><a href="#">답변관리</a></li>
 						</c:when>
 					</c:choose>
-					<li><a href="notice.my">공지사항</a></li>
+					<li><a href="notice.my"
+						style="color: rgb(243, 21, 21); font-weight: 600">공지사항</a></li>
 				</ul>
 
 				<div id="myPageContentWrap">
-					<div id="myPointWrap">
-						<div id="currentPointBox">
-							<p>내 포인트</p>
-							<strong>${u_point}</strong><strong style="margin-left: 5px">P</strong>
-						</div>
-						<ul>
-							<li><input name="myPoint" type="radio" id="pointAll" checked /><label
-								for="pointAll">전체</label></li>
-							<li><input name="myPoint" type="radio" id="pointSave" /><label
-								for="pointSave">적립</label></li>
-							<li><input name="myPoint" type="radio" id="pointUsed" /><label
-								for="pointUsed">사용</label></li>
-							<li><input name="myPoint" type="radio" id="pointExtinction" /><label
-								for="pointExtinction">소멸</label></li>
+					<div id="myPageNoticeWrap">
+						<ul style="width: 100%">
+							<li><span style="font-size: 18px; font-weight: 600">Press
+									& Notice</span>
+								<button type="button" class="whiteBtnSt">공지등록</button></li>
+							<li><a href="">
+									<div>
+										<p>대한민국 공로상 수상</p>
+										<p class="noticeDate">2022.07.08</p>
+									</div>
+							</a></li>
+							<li><a href="">
+									<div>
+										<p>대한민국 공로상 수상</p>
+										<p class="noticeDate">2022.07.08</p>
+									</div>
+							</a></li>
+							<li><a href="">
+									<div>
+										<p>대한민국 공로상 수상</p>
+										<p class="noticeDate">2022.07.08</p>
+									</div>
+							</a></li>
+
+							<li style="padding: 0">
+								<button type="button" id="viewMore">
+									<p>VIEW MORE</p>
+								</button>
+							</li>
 						</ul>
 					</div>
 				</div>
-				<div id="pointListBox"></div>
 			</div>
 		</div>
 	</div>

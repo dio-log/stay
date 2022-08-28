@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileUploadException;
 
 import com.project.item.cmd.BasicCmd;
+import com.project.item.cmd.FilteredMaxItem;
 import com.project.item.cmd.InsertItemCmd;
 import com.project.item.cmd.InsertRoomCmd;
 import com.project.item.cmd.SearchItemListCmd;
@@ -100,6 +101,10 @@ public class ItemFrontCtl extends HttpServlet {
 			return;
 		}else if(lastPath.equals("/sortItem.it")) {
 			cmd = new SortItemCmd();
+			cmd.excute(req, resp);
+			return;
+		}else if(lastPath.equals("/filteredMaxItem.it")) {
+			cmd = new FilteredMaxItem();
 			cmd.excute(req, resp);
 			return;
 		}

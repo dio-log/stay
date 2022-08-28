@@ -42,9 +42,9 @@ onload = function() {
 		success: function(data) {
 			for (let i = data.length - 1; i >= 0; i--) {
 				$('#searchRecentBox').append(`
-			<div class="searchRecnetContent">
+			<div class="searchRecnetContent" onclick="recentSearch(this)" data-recent="${data[i].searchWord}&${data[i].calendarInput}&${data[i].peopleInput}">
 			<p>
-			<a href="">${data[i].searchWord}</a> <i class="fa-solid fa-xmark" data-idx="${i}"></i>
+			<a href="#"  >${data[i].searchWord}</a> <i class="fa-solid fa-xmark" data-idx="${i}"></i>
 				</p>
 			<p>${data[i].calendarInput} <br> ${data[i].peopleInput}</p>
 			</div>
@@ -57,19 +57,30 @@ onload = function() {
 	})
 }
 
+function recentSearch(e) {
+	let ds = $(e).data("recent");
+	let arr = ds.split("&");
+
+	$('#setLocationInput').val(arr[0]);
+	$('#calendarInput').val(arr[1]);
+	$('#peopleInput').val(arr[2]);
+}
+
+
+
 let cnt = 0;
 setInterval(mainImgChange, 4000);
 function mainImgChange() {
 	$(".mainImg")
 		.eq(++cnt)
 		.fadeIn(500)
-	$(".mainImg").eq(cnt-1).fadeOut(300);
-	
+	$(".mainImg").eq(cnt - 1).fadeOut(300);
+
 	if (cnt > 2) {
 		cnt = -1;
 	}
-	
-		
+
+
 }
 
 
@@ -106,3 +117,13 @@ $("body").on("click", (e) => {
 
 
 
+let bannerCnt = 0;
+setInterval(() => {
+	if (bannerCnt < 4) {
+		$('#bannerWrap').css('left', `${bannerCnt * -1004}px`)
+		bannerCnt++;
+		if (bannerCnt >= 4) {
+			bannerCnt = 0;
+		}
+	}
+}, 2000)

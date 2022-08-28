@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.project.item.cmd.BasicCmd;
+import com.project.member.cmd.SelectPointCmd;
+import com.project.my.cmd.MyItemManageCmd;
 import com.project.payment.cmd.GetPaymentListCmd;
 import com.project.payment.cmd.GetTotalPointCmd;
-import com.project.reveiw.cmd.SelectPerTotalReviewCmd;
+import com.project.review.cmd.SelectPerTotalReviewCmd;
 
 /**
  * Servlet implementation class MyPageCtl
@@ -52,28 +54,29 @@ public class MyPageCtl extends HttpServlet {
 		int idx = path.lastIndexOf("/");
 		String lastPath = path.substring(idx);
 		boolean flag = true;
+		System.out.println(path);
 		if(lastPath.equals("/myReservation.my")) {
 			//예약내역 조회
 			cmd = new GetPaymentListCmd();
 			cmd.excute(req, resp);
 			viewPage="/app/myPage/myReservation.jsp";
-			
 		}else if(lastPath.equals("/myInfo.my")) {
-	
 			viewPage = "/app/myPage/myInfo.jsp";
 			flag =false; 
-			
 		}else if(lastPath.equals("/myPoint.my")) {
-			//포인트조회
-			cmd = new GetTotalPointCmd();
+			cmd = new SelectPointCmd();
 			cmd.excute(req, resp);
-			
 			viewPage= "/app/myPage/myPoint.jsp";
-			
 		}else if(lastPath.equals("/myReview.my")) {
 			cmd = new SelectPerTotalReviewCmd();
 			cmd.excute(req, resp);
 			viewPage="/app/myPage/myReview.jsp";
+		}else if(lastPath.equals("/notice.my")) {
+			viewPage="/app/myPage/notice.jsp";
+		}else if(lastPath.equals("/myItemManage.my")) {
+			cmd = new MyItemManageCmd();
+			cmd.excute(req, resp);
+			viewPage="/app/myPage/myItemManage.jsp";
 		}
 		
 		

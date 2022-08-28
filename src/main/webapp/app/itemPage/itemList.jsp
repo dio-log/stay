@@ -37,10 +37,8 @@
 						<label for="setLocationInput"> <i
 							class="fa-solid fa-map-location-dot" style="margin-right: 5px"></i>
 						</label> <input id="setLocationInput" type="text" name="searchWord"
-							placeholder="여행지, 숙소" />
+							placeholder="여행지, 숙소" value="${searchWord }" />
 						<div id="searchDetination">
-							<!-- 포커스했을땐 최근검색-->
-							<!-- 검색할땐 검색키워드 자동검색 -->
 							<div
 								style="padding: 0 5px; overflow-y: auto; width: 100%; max-height: 300px;">
 								<div id="searchRecent">
@@ -57,7 +55,7 @@
 						<label for="setCalendarInput"><i
 							class="fa-solid fa-calendar-week"></i></label> <input id="calendarInput"
 							name="calendarInput" type="text" placeholder="날짜"
-							readonly="readonly" />
+							readonly="readonly" value="${calendarInput }" />
 						<div id="calendar" style="display: none">
 							<div id="firstCalendar" class="calendarSt">
 								<div class="titleBox">
@@ -88,7 +86,7 @@
 					<div id="setPeopleBox">
 						<label for="setPeopleInput"><i class="fa-solid fa-users"></i></label>
 						<input id="peopleInput" name="peopleInput" type="text"
-							placeholder="인원" />
+							placeholder="인원" value="${peopleInput }" />
 						<div id="setPeople">
 							<div class="setPeopleContent">
 								<p>
@@ -138,12 +136,17 @@
 								필터 적용</button>
 							<ul>
 								<li><h3>가격대</h3></li>
-								<li><progress id="progress" min="0" max="100"></progress></li>
-								<li><input type="text" /> <input type="text" /></li>
+								<!-- 		<li><progress id="progress" min="0" max="100" value="">
+										<span min="20"></span> <span max="80"></span>
+									</progress></li> -->
+								<li style="display: flex; justify-content: space-between;"><input
+									class="prograssInputSt" type="number" name="minPrice" value="" />~<input
+									" class="prograssInputSt" type="number" name="maxPrice"
+									value="" /></li>
 							</ul>
 							<ul>
 								<li><h3>숙소 유형</h3></li>
-								<li><input id="" name="room_div" type="checkbox" value="모텔" /><label
+								<li><input id="" name="room_div" type="checkbox" valu e="모텔" /><label
 									class="cb-square-16 filterCbLabel" for="room_div">✓</label><label
 									class="optLabel" for="room_div">모텔</label></li>
 								<li><input id="" name="room_div" type="checkbox" value="호텔" /><label
@@ -230,12 +233,19 @@
 					<div
 						style="display: flex; justify-content: space-between; border-bottom: 1px solid #e6e6e6;">
 						<h2 id="beSearchedWord" data-search="${searchWord }">
-							'${searchWord }' <span style="font-size: 20px">검색결과</span>
+							'${searchWord }' <span style="font-size: 20px">검색결과</span> <span
+								id="filteredMaxItem" style="font-size: 14px">(121)</span>
 						</h2>
 						<ul id="sortUl">
-							<li class="sortBy" data-sortby="byGrade">높은 평점순</li>
-							<li class="sortBy" data-sortby="byPrice">낮은 요금순</li>
-							<li class="sortBy" data-sortby="byReview">리뷰 많은순</li>
+							<li><input class="sortBy" type="radio" id="byGrade"
+								name="sort" value="byGrade" checked> <label
+								for="byGrade"> 높은 평점순</label></li>
+							<li><input class="sortBy" type="radio" id="byPrice"
+								name="sort" value="byPrice"> <label for="byPrice">
+									낮은 요금순</label></li>
+							<li><input class="sortBy" type="radio" id="byReview"
+								name="sort" value="byReview"> <label for="byReview">
+									리뷰 많은순</label></li>
 						</ul>
 					</div>
 					<ul id="itemListWrap" style="margin-top: 5px">
@@ -261,7 +271,7 @@
 										</div>
 										<div style="text-align: right">
 											<p></p>
-											<p>${itemDto.item_room_price}원</p>
+											<p style="font-size: 24px">${itemDto.item_room_price}원</p>
 										</div>
 									</div>
 							</a></li>
@@ -270,8 +280,14 @@
 
 					</ul>
 				</div>
+				<div id="alertAddPick">
+					
+				</div>
 			</div>
 		</div>
+		<button class="topBtn whiteBtnSt">
+			<i class="fa-solid fa-angles-up"></i>
+		</button>
 	</div>
 	<%@ include file="/app/mainPage/footer.jsp"%>
 	<script src="../../js/default.js"></script>
