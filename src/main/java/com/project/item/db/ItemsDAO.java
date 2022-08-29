@@ -460,6 +460,7 @@ public class ItemsDAO {
 				dto.setItem_addpeople(rs.getString("item_addpeople"));
 				dto.setItem_cancel_refund(rs.getString("item_cancel_refund"));
 				dto.setItem_grade(rs.getString("item_grade"));
+				dto.setU_no(rs.getInt("u_no"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

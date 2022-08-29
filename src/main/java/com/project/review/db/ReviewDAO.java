@@ -93,8 +93,10 @@ public class ReviewDAO {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		int maxReNo = getTotalR_no();
-		System.out.println("maxreno" + maxReNo);
-		query = "insert into review(re_no,u_no,item_no,room_no,re_grade,re_title,re_content,re_imgpath) values(?,?,?,?,?,?,?,?)";
+		if(dto.getRe_grade()==""||dto.getRe_grade()==null) {
+			dto.setRe_grade("0");
+		}
+		query = "insert into review(re_no,u_no,item_no,room_no,re_grade,re_title,re_content,p_no) values(?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, maxReNo + 1);
@@ -104,7 +106,7 @@ public class ReviewDAO {
 			pstmt.setString(5, dto.getRe_grade());
 			pstmt.setString(6, dto.getRe_title());
 			pstmt.setString(7, dto.getRe_content());
-			pstmt.setString(8, dto.getRe_imgpath());
+			pstmt.setInt(8, dto.getP_no());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -138,15 +140,14 @@ public class ReviewDAO {
 	public void insertAnswer(ReviewDTO dto) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		query = "insert into review(re_no,u_no,item_no,room_no,re_content,re_indent) values(?,?,?,?,?,?)";
+		query = "insert into review(re_no,u_no,item_no,re_content,re_indent) values(?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, dto.getRe_no());
 			pstmt.setInt(2, dto.getU_no());
 			pstmt.setInt(3, dto.getItem_no());
-			pstmt.setInt(4, dto.getRoom_no());
-			pstmt.setString(5, dto.getRe_content());
-			pstmt.setInt(6, 1);
+			pstmt.setString(4, dto.getRe_content());
+			pstmt.setInt(5, 1);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -160,7 +161,7 @@ public class ReviewDAO {
 	public void updateReAnswerSts(int re_no) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		query = "update from review set re_answer_sts='y' where re_no=? and re_indent=0";
+		query = "update review set re_answer_sts='y' where re_no=? and re_indent=0";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, re_no);
@@ -179,17 +180,18 @@ public class ReviewDAO {
 		ResultSet rs = null;
 		
 		 query
-		 ="select a.re_no, a.re_grade, a.re_title, a.re_content,a.re_imgpath,a.re_indent,"
-		 		+ " a.re_wtime,b.room_name, c.u_nick from review a "
-		 		+ "left join room_list b on a.item_no=b.item_no left join member c"
-		 		+ " on a.u_no=c.u_no group by a.u_no";
+		 ="select a.re_no, a.re_grade, a.re_title, a.re_content, a.re_wtime, b.room_name,c.u_nick"
+		 		+ " from review a left join room_list b on a.room_no = b.room_no left join member"
+		 		+ " c on a.u_no=c.u_no where a.item_no=? group by a.re_wtime order by a.re_no, a.re_indent";
 		 
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, item_no);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				ReviewDTO dto = new ReviewDTO();
 				String grade = rs.getString(2);
+				
 				double re_grade = Double.parseDouble(grade);
 
 				if (re_grade * 10 % 10 < 3) {
@@ -204,14 +206,12 @@ public class ReviewDAO {
 				dto.setRe_grade("" + re_grade * 10);
 				dto.setRe_title(rs.getString(3));
 				dto.setRe_content(rs.getString(4));
-				dto.setRe_imgpath(rs.getString(5));
-				dto.setRe_indent(rs.getInt(6));
-				dto.setRe_wtime(rs.getString(7));
-				dto.setRe_room_name(rs.getString(8));
-				dto.setRe_u_nick(rs.getString(9));
+				dto.setRe_wtime(rs.getString(5));
+				dto.setRe_room_name(rs.getString(6));
+				dto.setRe_u_nick(rs.getString(7));
 
 				dtoList.add(dto);
-				System.out.println("립사이즈    " + rs.getString(9));
+				System.out.println("컨텐츠   " + rs.getString(4));
 			}
 
 		} catch (SQLException e) {
@@ -300,7 +300,6 @@ public class ReviewDAO {
 		// 댓글 정보 인서트 된 후에 평균 구함
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		ResultSet rs = null;
 		query = "update item set item_grade = (select round(avg(re_grade),1) from review where item_no=?) where item_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -313,5 +312,26 @@ public class ReviewDAO {
 			close(pstmt, conn);
 		}
 
+	}
+	
+	public boolean hasWriteReview(int p_no) {
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		query="select p_no from review where p_no=?";
+		boolean flag = false;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, p_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				flag=true;
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt, conn,rs);
+		}
+		return flag;
 	}
 }

@@ -283,18 +283,16 @@ public class PaymentDAO {
 		Connection conn = getConn();
 		ResultSet rs = null;
 		JSONObject obj = new JSONObject();
-		query = "select a.p_no, a.room_no, b.room_name from payment a "
-				+ "left join room_list b on a.room_no=b.room_no inner join review c "
-				+ "on a.p_no != c.p_no where a.p_status ='n' and a.u_no=3 and a.item_no=3" + " group by a.p_no";
+		query = "select a.p_no, a.room_no, b.room_name from payment a left join room_list b on a.room_no=b.room_no where a.item_no=? and a.u_no=? group by a.p_no order by p_wtime";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, u_no);
-			pstmt.setInt(2, item_no);
+			pstmt.setInt(1, item_no);
+			pstmt.setInt(2, u_no);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				obj.put("p_no", rs.getInt("a.p_no"));
-				obj.put("room_no", rs.getInt("a.room_no"));
-				obj.put("room_name", rs.getString("b.room_name"));
+				obj.put("re_p_no", rs.getInt("a.p_no"));
+				obj.put("re_room_no", rs.getInt("a.room_no"));
+				obj.put("re_room_name", rs.getString("b.room_name"));
 				
 			}
 		} catch (SQLException e) {

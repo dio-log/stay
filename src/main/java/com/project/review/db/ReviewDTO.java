@@ -5,6 +5,7 @@ private int u_no=0;
 private int item_no=0;
 private int room_no=0;
 private int re_no=0;
+private int p_no=0;
 private String re_grade = null;
 private String re_title = null;
 private String re_content = null;
@@ -21,6 +22,12 @@ private String re_item_name=null;
 
 
 
+public int getP_no() {
+	return p_no;
+}
+public void setP_no(int p_no) {
+	this.p_no = p_no;
+}
 public String getRe_item_name() {
 	return re_item_name;
 }

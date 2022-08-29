@@ -74,6 +74,7 @@ $('#writeReviewBtn').on('click', function() {
 	if (item_no == '') {
 		item_no = 0;
 	}
+	
 	$.ajax({
 		url: "checkPossibleReview.re",
 		type: "post",
@@ -81,9 +82,11 @@ $('#writeReviewBtn').on('click', function() {
 		data: { item_no },
 		success: function(data) {
 			if (data != null) {
-				$('#usedRoom').html(data.re_room_name)
-				$('#item_no').val(data.item_no);
-				$('#room_no').val(data.room_no);
+				console.log(data)
+				$('#re_usedRoom').html(data.re_room_name)
+				$('#re_item_no').val(item_no);
+				$('#re_room_no').val(data.re_room_no);
+				$('#re_p_no').val(data.re_p_no);
 				$('#reviewForm').show();
 			} else {
 				alert('해당 상품을 이용하신 고객님만 작성가능합니다')
@@ -99,17 +102,21 @@ $('#writeReviewBtn').on('click', function() {
 
 
 $('.tempClass span i').on('click', function(e) {
+	let gr1=0
+	let gr2=0
+	let gr3=0
 	$(e.target).addClass('fa-solid');
 	$(e.target).prevAll('i').addClass('fa-solid');
 	$(e.target).nextAll('i').removeClass('fa-solid');
 
-	let gr1 = $('#serviceGrade span .fa-solid').length
-	let gr2 = $('#cleanGrade span .fa-solid').length
-	let gr3 = $('#convenienceGrade span .fa-solid').length
+	gr1 = $('#serviceGrade span .fa-solid').length
+	gr2 = $('#cleanGrade span .fa-solid').length
+	gr3 = $('#convenienceGrade span .fa-solid').length
 
 	let avg = (gr1 + gr2 + gr3) / 3;
 	let roundAvg = Math.round(avg);
 	$('#re_grade').val(roundAvg);
+	console.log(roundAvg);
 })
 
 $('#doPayBtn').on('click', function() {
@@ -232,3 +239,29 @@ function roomMoreRightBtn() {
 	$('#roomMoreImgCont>div').css('left', `${roomMoreCnt * -400}px`);
 }
 
+
+$('#hostAnswerbtn').on('click',function(e){
+ let dataSet = $(e.target).data('reno').split('&');
+ let re_no = dataSet[0];
+ let item_no = dataSet[1];
+	$(e.target).hide();
+ $(e.target).parent().parent().parent().after(`
+ <div style="width:100%;height:180px;">
+ 	<div id="answerWrap">
+							<p>호스트</p>
+							<form action="insertAnswer.re">
+							<input style="display: none" id="answer_re_no" name="answer_re_no">
+							<input style="display: none" id="answer_item_no" name="answer_item_no">
+							<div>
+								<textarea type="text" name="answerContent"></textarea>
+							</div>
+							<p style="height:26px"> <button class="whiteBtnSt fs-14" style="float:right">작성완료</button></p>
+							</form>
+						</div>
+						</div>
+ `)
+ 	 $('#answer_re_no').val(re_no);
+ 	 $('#answer_item_no').val(item_no);
+ 	 
+ 	 console.log( $('#answer_re_no').val())
+})

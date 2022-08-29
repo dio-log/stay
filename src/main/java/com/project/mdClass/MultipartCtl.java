@@ -101,24 +101,6 @@ public class MultipartCtl {
 		
 		return map;
 	}
-	public Map<String,String> saveReviewImg() throws Exception {
-		Map<String, String> map = new HashMap<>();
-		Iterator<?> itr = items.iterator();
-		File file = new File("C:\\programing\\gitrep\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\webProject\\img\\review\\"+reviewDirName);
-		file.mkdirs();
-		String fullFileName ="";
-		ItemsDTO dto = null;
-		while(itr.hasNext()) {
-			FileItem item = (FileItem)itr.next();
-			if(item.isFormField()) {
-				map.put(item.getFieldName(), item.getString("utf-8"));
-			}else {
-				item.write(new File(file.getPath()+"\\"+item.getName()));
-				fullFileName+="../../img/review/"+reviewDirName+"/"+item.getName()+",";
-			}
-		}
-		map.put("fullFileName", fullFileName);
-		return map;
-	}
+
 
 }

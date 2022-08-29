@@ -20,12 +20,10 @@ public class InsertAnswerCmd implements BasicCmd{
 		ReviewDTO dto = new ReviewDTO();
 		HttpSession session = req.getSession();
 		
-		dto.setRe_no(Integer.parseInt(req.getParameter("re_no")));
 		dto.setU_no((Integer)session.getAttribute("u_no"));
-		dto.setItem_no(Integer.parseInt(req.getParameter("item_no")));
-		dto.setRoom_no(Integer.parseInt(req.getParameter("room_no")));
-		dto.setRe_content(req.getParameter("re_content"));
-		dto.setRe_indent(Integer.parseInt(req.getParameter("re_indent")));
+		dto.setRe_no(Integer.parseInt(req.getParameter("answer_re_no")));
+		dto.setItem_no(Integer.parseInt(req.getParameter("answer_item_no")));
+		dto.setRe_content(req.getParameter("answerContent"));
 		dao.insertAnswer(dto);
 		
 	}

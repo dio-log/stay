@@ -201,8 +201,12 @@ ${itemDto.item_event}</textarea>
 							<button id="writeReviewBtn" class="whiteBtnSt"
 								data-no="${itemDto.item_no}" type="button">후기 남기기</button>
 						</p>
-						<form id="reviewForm" action="insertReview.re" method="post"
-							enctype="multipart/form-data">
+						<form id="reviewForm" action="insertReview.re" method="post">
+							<input type="text" style="display: none;" id="re_item_no"
+								name="re_item_no"> <input type="text"
+								style="display: none" id="re_room_no" name="re_room_no">
+							<input type="text" style="display: none" id="re_p_no"
+								name="re_p_no">
 							<div class="reviewContentWrap">
 								<div style="width: 150px;">
 									<img alt="" src="../../img/main/스마일.png" style="width: 80px">
@@ -211,7 +215,7 @@ ${itemDto.item_event}</textarea>
 								<div style="width: 100%">
 									<input style="display: none" id="re_grade" name="re_grade">
 									<p>
-										<span>이용한 객실</span> <span id="usedRoom"> </span>
+										<span id="re_usedRoom"> </span>
 									</p>
 									<p class="reviewGrade tempClass" id="serviceGrade">
 										<span>서비스 & 친절도</span> <span><i
@@ -223,7 +227,7 @@ ${itemDto.item_event}</textarea>
 										<span>숙소 & 객실 청결도</span> <span><i
 											class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i
 											class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i
-											class="fa-regular fa-star"></i> </i> </span>
+											class="fa-regular fa-star"></i></i> </span>
 									</p>
 									<p class="reviewGrade tempClass" id="convenienceGrade">
 										<span>시설 & 편의성</span> <span> <i
@@ -235,9 +239,6 @@ ${itemDto.item_event}</textarea>
 									<input id="re_title" name="re_title" placeholder="제목을 입력해주세요">
 									<textarea name="re_content" id="re_content" cols="" rows=""
 										placeholder="방문한 곳은 어떠셨나요?"></textarea>
-									<div class="reviewImgBox">
-										<input type="file" id="re_imgfile" name="re_imgfile">
-									</div>
 									<button id="compReviewBtn" class="redBtnSt">작성 완료</button>
 								</div>
 							</div>
@@ -253,7 +254,7 @@ ${itemDto.item_event}</textarea>
 								</div>
 								<div style="width: 100%">
 									<p>
-										<span>이용한 객실</span> <span id="usedRoom">${reviewDto.re_room_name}</span>
+										<span id="usedRoom" style="font-size: 16px; color: gray;">${reviewDto.re_room_name}</span>
 									</p>
 									<p class="reviewGrade">
 										<span> <c:forEach begin="1"
@@ -264,15 +265,18 @@ ${itemDto.item_event}</textarea>
 											</c:if>
 										</span> <span></span>
 									</p>
-									<div>${fn:replace(reviewDto.re_content,dele,"<br>")}</div>
-									<div class="reviewImgBox">
-										<input type="file" id="re_imgfile" name="re_imgfile">
-									</div>
-									<button id="compReviewBtn" class="redBtnSt">작성 완료</button>
+									<p style="font-size: 16px">${reviewDto.re_title}</p>
+									<div style="font-size: 14px">${fn:replace(reviewDto.re_content,dele,"<br>")}</div>
+									<c:if test="${itemDto.u_no==u_no }">
+										<p>
+											<button id="hostAnswerbtn" type="button"
+												class="whiteBtnSt fs-14" style="width: auto; float: right" data-reno="${reviewDto.re_no }&${itemDto.item_no}">답변작성하기</button>
+										</p>
+									</c:if>
 								</div>
 							</div>
 						</c:forEach>
-
+						
 					</div>
 
 				</div>

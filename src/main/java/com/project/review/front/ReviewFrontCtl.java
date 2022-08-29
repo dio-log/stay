@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.project.item.cmd.BasicCmd;
+import com.project.review.cmd.InsertAnswerCmd;
 import com.project.review.cmd.InsertReviewCmd;
 import com.project.review.cmd.checkPossibleCmd;
 
@@ -66,6 +67,11 @@ public class ReviewFrontCtl extends HttpServlet {
 			cmd.excute(req, resp);
 			viewPage = referer;
 			flag =false;
+		}else if(lastPath.equals("/insertAnswer.re")) {
+			cmd=new InsertAnswerCmd();
+			cmd.excute(req, resp);
+			viewPage = referer;
+			flag=false;
 		}
 		
 		
