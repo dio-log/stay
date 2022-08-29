@@ -74,9 +74,12 @@ public class MyPageCtl extends HttpServlet {
 		}else if(lastPath.equals("/notice.my")) {
 			viewPage="/app/myPage/notice.jsp";
 		}else if(lastPath.equals("/myItemManage.my")) {
-			cmd = new MyItemManageCmd();
+			cmd= new MyItemManageCmd();
 			cmd.excute(req, resp);
 			viewPage="/app/myPage/myItemManage.jsp";
+		}else if(lastPath.equals("/myStatics.my")) {
+			cmd.excute(req, resp);
+			viewPage="/app/myPage/myStatics.jsp";
 		}
 		
 		

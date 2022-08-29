@@ -40,19 +40,73 @@
 						<c:when test="${u_div==2}">
 							<li><a href="myInfo.my">내 정보 관리</a></li>
 							<li><a href="itemUpload.it">객실등록</a></li>
-							<li><a href="myItemManage.my"
-								style="color: rgb(243, 21, 21); font-weight: 600">객실관리</a></li>
-							<li><a href="myStatics.my">통계</a></li>
+							<li><a href="myItemManage.my">객실관리</a></li>
+							<li><a href="myStatics.my"
+								style="color: rgb(243, 21, 21); font-weight: 600">통계</a></li>
 						</c:when>
 					</c:choose>
 					<li><a href="notice.my">공지사항</a></li>
 				</ul>
-				<div id="myStaticsWrap"></div>
+				<div id="myPageItemManageWrap">
+					<div id="monthly">
+
+						<h4>월별 통계</h4>
+						<div>
+							<h3 style="position: relative;">
+								<select id="itemSelect">
+									<c:forEach var="itemDto" items="${itemDtoList }">
+										<option value="${itemDto.item_no}">${itemDto.item_name}</option>
+									</c:forEach>
+								</select>
+								<button id="monthlyLeftBtn">
+									<i class="fa-solid fa-angle-left"></i>
+								</button>
+								<span id="monthlyMonth"
+									style="display: inline-block; width: 100px;"></span>
+								<button id="monthlyRightBtn">
+									<i class="fa-solid fa-angle-right"></i>
+								</button>
+							</h3>
+							<ul style="display: flex; padding: 20px 0">
+								<li id="monthlyLeftWrap">
+									<p class="fs-14" style="padding: 10px 0">이 달의 누적 판매금액</p>
+									<p>
+										<span id="monthSales"></span> <span>원</span>
+									</p>
+									<p style="color: gray; font-size: 12px">
+										전월대비 <span id="comparePrevMonth"> <img alt=""
+											src="../../img/main/up.png">
+										</span>
+									</p>
+								</li>
+								<li id="monthlyRightWrap">
+									<table id="rightTb">
+										<colgroup style="width: 100%">
+											<col style="width: 10%">
+											<col style="width: 50%">
+											<col style="width: 10%">
+											<col style="width: 30%">
+										</colgroup>
+										<tr>
+											<td>No</td>
+											<td>객실명</td>
+											<td>예약</td>
+											<td>판매금액</td>
+										</tr>
+									</table>
+
+								</li>
+							</ul>
+
+						</div>
+					</div>
+
+				</div>
 			</div>
 		</div>
 	</div>
 	<%@ include file="/app/mainPage/footer.jsp"%>
 	<script src="../../js/default.js"></script>
-	<script src="../../js/myPage.js"></script>
+	<script src="../../js/myStatics.js"></script>
 </body>
 </html>

@@ -310,8 +310,9 @@ public class PaymentDAO {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		ResultSet rs = null;
-		query = "select sum(p_totalfee),date_format(p_wtime,'%Y-%m') m from payment where p_status='y' and item_no=? and date(p_wtime) between ? and ? group by m ";
+		query = "select sum(p_totalfee),date_format(p_wtime,'%Y-%m') m from payment where p_status='y' and item_no=? and date(p_wtime) between ? and ? group by m order by m ";
 		JSONArray jsonArr = new JSONArray();
+		System.out.println(prev+"?"+cur);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, item_no);
@@ -323,6 +324,8 @@ public class PaymentDAO {
 				obj.put("sumFee", rs.getInt("sum(p_totalfee)"));
 				obj.put("m", rs.getString("m"));
 				jsonArr.add(obj);
+
+				System.out.println(rs.getInt("sum(p_totalfee)"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -330,22 +333,7 @@ public class PaymentDAO {
 			close(pstmt, conn, rs);
 		}
 		
-		if(jsonArr.size()==0) {
-			for(int i=0;i <2;i++) {
-				JSONObject obj = new JSONObject();
-				obj.put("sumFee", 0);
-				jsonArr.add(obj);
-			}
-		}else if(jsonArr.size()==1) {
-			JSONObject tmpObj = (JSONObject) jsonArr.get(0);
-			JSONObject obj = new JSONObject();
-			 obj.put("sumFee", 0);
-			if(prev.indexOf((String)tmpObj.get("m"))>-1) {
-				jsonArr.add(0, obj);
-			}else if(cur.indexOf((String)tmpObj.get("m"))>-1) {
-				jsonArr.add(1,obj);
-			}
-		}
+	
 		return jsonArr;
 
 	}
@@ -355,7 +343,6 @@ public class PaymentDAO {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		ResultSet rs = null;
-		System.out.println(item_no+curFirst+curLast);
 		//query = "select count(a.p_no),sum(a.p_totalfee), b.room_name from payment a "
 		//		+ "left join room_list b on a.room_no=b.room_no and a.item_no=b.item_no where a.item_no=? and date(a.p_wtime) between ? and ? group by a.room_no";
 		query = "select count(a.p_no),sum(a.p_totalfee), b.room_name from payment a left join room_list b on a.room_no=b.room_no and a.item_no=b.item_no where a.item_no=? and date(p_wtime) between ? and ? group by a.room_no";
@@ -373,7 +360,6 @@ public class PaymentDAO {
 				obj.put("count", rs.getInt("count(a.p_no)"));
 				obj.put("room_name", rs.getString("b.room_name"));
 				jsonArr.add(obj);
-				System.out.println(rs.getString("b.room_name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

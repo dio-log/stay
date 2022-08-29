@@ -40,8 +40,8 @@
 						<c:when test="${u_div==2}">
 							<li><a href="myInfo.my">내 정보 관리</a></li>
 							<li><a href="itemUpload.it">객실등록</a></li>
-							<li><a href="#">객실관리</a></li>
-							<li><a href="#">답변관리</a></li>
+							<li><a href="myItemManage.my">객실관리</a></li>
+							<li><a href="myStatics.my">통계</a></li>
 						</c:when>
 					</c:choose>
 					<li><a href="notice.my"

@@ -601,7 +601,6 @@ public class ItemsDAO {
 				dto.setItem_name(rs.getString("item_name"));
 				dto.setItem_no(rs.getInt("item_no"));
 				dtoList.add(dto);
-				System.out.println(rs.getString("item_name"));
 			}
 			
 		}catch (SQLException e) {

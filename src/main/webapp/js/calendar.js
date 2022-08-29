@@ -23,17 +23,18 @@ function initClick() {
 			$(e.target).css("color", "white");
 			let pick = parseInt($(e.target).html());
 			checkSet.add(pick);
-			if ($('#firstCalendar').has($(e.target))) {
+			if ($('#firstCalendar').has($(e.target)).length) {
 
 				let y = dt1.getFullYear();
 				let m = dt1.getMonth() + 1;
 				checkSetTime.add(new Date(`${y}-${m}-${pick}`));
+				console.log(`${y}-${m}-${pick}`)
 
-			} else if ($('#secondCalendar').has($(e.target))) {
+			} else if ($('#secondCalendar').has($(e.target)).length) {
 				let y = dt2.getFullYear();
 				let m = dt2.getMonth() + 1;
 				checkSetTime.add(new Date(`${y}-${m}-${pick}`));
-
+				console.log(`${y}-${m}-${pick}`)
 			}
 			if (checkSet.size == 2) {
 				let getTime = checkSetTime.values();

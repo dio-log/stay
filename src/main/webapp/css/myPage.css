@@ -213,3 +213,11 @@ margin-top: 20px;
 	width:100%;
 	border-collapse: collapse;
 }
+#rightTb tr{
+	font-size:14px;
+	height: 30px
+}
+#rightTb tr:first-child{
+	background-color:#1d1b1e0a; height: 40px;font-size:14px;
+}
+
