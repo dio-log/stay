@@ -388,9 +388,9 @@ public class ItemsDAO {
 		Connection conn = getConn();
 		ResultSet rs = null;
 		ReviewDAO reviewDao = ReviewDAO.getIns();
-
-		query = "select item_no,item_name,item_grade,item_imgpath,item_div from item where item_addr like '%" + searchWord
+		query = "select a.item_no,a.item_name,a.item_grade,a.item_imgpath,a.item_div,(select count(b.re_no) from review b where b.item_no=a.item_no and b.re_indent=0) as cnt from item a where item_addr like '%" + searchWord
 				+ "%' order by item_grade";
+	
 		try {
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
@@ -401,8 +401,7 @@ public class ItemsDAO {
 				dto.setItem_grade(rs.getString(3));
 				dto.setItem_imgpath(rs.getString(4));
 				dto.setItem_div(rs.getString(5));
-				int maxReview = reviewDao.getMaxReview(rs.getInt(1));
-				dto.setItem_reviewCnt(maxReview);
+				dto.setItem_reviewCnt(rs.getInt(6));
 				dto.setItem_room_price(getRoomPrice(rs.getInt(1)));
 				itemDto.add(dto);
 			}
@@ -507,24 +506,29 @@ public class ItemsDAO {
 		return dtoList;
 	}
 
-	public JSONArray getSortedItemDtoListByPrice(String sortBy,String searchWord, String item_div,String room_theme, String room_extraopt, int preIdx) {
+	public JSONArray getSortedItemDtoListByPrice(String sortBy,String searchWord, String item_div,String room_theme, String room_extraopt, int preIdx,int minPrice,int maxPrice) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		ResultSet rs = null;
 		JSONArray jsonArr = new JSONArray();
 		
 		if(sortBy.equals("byPrice")) {
-			query = "select a.item_no, a.item_name,a.item_grade,a.item_imgpath, min(b.room_price),max(d.re_no), a.item_div from item a"
-					+ " left join room_list b on a.item_no=b.item_no left join review d on a.item_no=d.item_no WHERE a.item_div REGEXP '("+item_div+")' and b.room_theme REGEXP '("+room_theme+")'"
-							+ " and b.room_extraopt like '%"+room_extraopt+"%' and a.item_addr like '%"+searchWord+"%' group by a.item_no order by min(b.room_price) limit ?,?";
+			query = "select a.item_no, a.item_name,a.item_grade,a.item_imgpath,(select min(b.room_price) from room_list b where b.item_no=a.item_no and b.room_theme REGEXP '("+room_theme+")' and b.room_extraopt like '%"+room_extraopt+"%' ) as m,(select count(d.re_no) from review d where d.item_no=a.item_no and d.re_indent=0) as cnt, a.item_div from item a"
+					+ " WHERE a.item_div REGEXP '("+item_div+")' "
+							+ " and a.item_addr like '%"+searchWord+"%'  group by a.item_no having "+minPrice+"<m and m<"+maxPrice+" order by m limit ?,?";
 		}else if(sortBy.equals("byGrade")) {
-			query = "select a.item_no, a.item_name,a.item_grade,a.item_imgpath, min(b.room_price),max(d.re_no),a.item_div from item a"
-					+ " left join room_list b on a.item_no=b.item_no left join review d on a.item_no=d.item_no WHERE a.item_div REGEXP '("+item_div+")' and b.room_theme REGEXP '("+room_theme+")'"
-							+ " and b.room_extraopt like '%"+room_extraopt+"%' and a.item_addr like '%"+searchWord+"%' group by a.item_no order by a.item_grade desc limit ?,?";
+			query = "select a.item_no, a.item_name,a.item_grade,a.item_imgpath,(select min(b.room_price) from room_list b"
+					+ " where b.item_no=a.item_no and b.room_theme REGEXP '("+room_theme+")' and b.room_extraopt like '%"+room_extraopt+"%') as m,"
+							+ "(select count(d.re_no) from review d where d.item_no=a.item_no and d.re_indent=0) as cnt, a.item_div from item a"
+					+ " WHERE a.item_div REGEXP '("+item_div+")' "
+							+ " and a.item_addr like '%"+searchWord+"%' group by a.item_no having "+minPrice+"<m and m<"+maxPrice+" order by a.item_grade desc limit ?,?";
 		}else if(sortBy.equals("byReview")) {
-			query = "select a.item_no, a.item_name,a.item_grade,a.item_imgpath, min(b.room_price), max(d.re_no),a.item_div from item a"
-					+ " left join room_list b on a.item_no=b.item_no left join review d on a.item_no=d.item_no WHERE a.item_div REGEXP '("+item_div+")' and b.room_theme REGEXP '("+room_theme+")'"
-							+ " and b.room_extraopt like '%"+room_extraopt+"%' and a.item_addr like'%"+searchWord+"%' group by a.item_no order by max(d.re_no) desc limit ?,?";
+			query = "select a.item_no, a.item_name,a.item_grade,a.item_imgpath,(select min(b.room_price) from room_list b"
+					+ " where b.item_no=a.item_no and b.room_theme REGEXP '("+room_theme+")' and b.room_extraopt like '%"+room_extraopt+"%' ) as m,"
+							+ "(select count(d.re_no) from review d where d.item_no=a.item_no and d.re_indent=0) as cnt, a.item_div from item a"
+					+ " WHERE a.item_div REGEXP '("+item_div+")' "
+							+ " and a.item_addr like '%"+searchWord+"%' group by a.item_no having "+minPrice+"<m and m<"+maxPrice+" order by cnt desc limit ?,?";
+		
 		}
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -552,31 +556,41 @@ public class ItemsDAO {
 		return jsonArr;
 	}
 	
-	public int getMaxItem(String sortBy,String searchWord, String item_div,String room_theme, String room_extraopt, int preIdx) {
+	public JSONObject getMaxItem(String sortBy,String searchWord, String item_div,String room_theme, String room_extraopt, int preIdx, int minPrice, int maxPrice) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		ResultSet rs = null;
-		item_div=	item_div.replaceAll(java.util.regex.Matcher.quoteReplacement(","), "|");
+		//item_div=	item_div.replaceAll(java.util.regex.Matcher.quoteReplacement(","), "|");
 		if(sortBy.equals("byPrice")) {
-			query = "select count(*) from (select a.item_no, a.item_name,a.item_grade,a.item_imgpath, min(b.room_price),max(d.re_no), a.item_div from item a"
-					+ " left join room_list b on a.item_no=b.item_no left join review d on a.item_no=d.item_no WHERE a.item_div REGEXP '("+item_div+")' and b.room_theme REGEXP '("+room_theme+")'"
-							+ " and b.room_extraopt like '%"+room_extraopt+"%' and a.item_addr like '%"+searchWord+"%' group by a.item_no order by min(b.room_price)) a";
+			query = "select count(*), max(max), min(min) from (select a.item_no, a.item_name,a.item_grade,a.item_imgpath,(select min(b.room_price) from room_list b where b.item_no=a.item_no and b.room_theme REGEXP '("+room_theme+")' and b.room_extraopt like '%"+room_extraopt+"%' ) as min,"
+					+ "(select count(d.re_no) from review d where d.item_no=a.item_no and d.re_indent=0) as cnt, a.item_div,"
+					+ "(select max(b.room_price) from room_list b where b.item_no=a.item_no and b.room_theme REGEXP '("+room_theme+")' and b.room_extraopt like '%"+room_extraopt+"%' ) as max from item a"
+					+ " WHERE a.item_div REGEXP '("+item_div+")' "
+							+ " and a.item_addr like '%"+searchWord+"%' group by a.item_no having "+minPrice+"<min and min<"+maxPrice+" order by min) as ab";
 		}else if(sortBy.equals("byGrade")) {
-			query = "select count(*) from (select a.item_no, a.item_name,a.item_grade,a.item_imgpath, min(b.room_price),max(d.re_no),a.item_div from item a"
-					+ " left join room_list b on a.item_no=b.item_no left join review d on a.item_no=d.item_no WHERE a.item_div REGEXP '("+item_div+")' and b.room_theme REGEXP '("+room_theme+")'"
-							+ " and b.room_extraopt like '%"+room_extraopt+"%' and a.item_addr like '%"+searchWord+"%' group by a.item_no order by a.item_grade desc) a";
+			query = "select count(*), max(max), min(min) from (select a.item_no, a.item_name,a.item_grade,a.item_imgpath,(select min(b.room_price) from room_list b where b.item_no=a.item_no and b.room_theme REGEXP '("+room_theme+")' and b.room_extraopt like '%"+room_extraopt+"%' ) as min,"
+					+ "(select count(d.re_no) from review d where d.item_no=a.item_no and d.re_indent=0) as cnt, a.item_div,"
+					+ "(select max(b.room_price) from room_list b where b.item_no=a.item_no and b.room_theme REGEXP '("+room_theme+")' and b.room_extraopt like '%"+room_extraopt+"%' ) as max from item a"
+					+ " WHERE a.item_div REGEXP '("+item_div+")' "
+							+ " and a.item_addr like '%"+searchWord+"%' group by a.item_no having "+minPrice+"<min and min<"+maxPrice+" order by a.item_grade desc) as ab";
+			
 		}else if(sortBy.equals("byReview")) {
-			query = "select count(*) from (select a.item_no, a.item_name,a.item_grade,a.item_imgpath, min(b.room_price), max(d.re_no),a.item_div from item a"
-					+ " left join room_list b on a.item_no=b.item_no left join review d on a.item_no=d.item_no WHERE a.item_div REGEXP '("+item_div+")' and b.room_theme REGEXP '("+room_theme+")'"
-							+ " and b.room_extraopt like '%"+room_extraopt+"%' and a.item_addr like'%"+searchWord+"%' group by a.item_no order by max(d.re_no) desc) a";
+			query = "select count(*), max(max), min(min) from (select a.item_no, a.item_name,a.item_grade,a.item_imgpath,(select min(b.room_price) from room_list b where b.item_no=a.item_no and b.room_theme REGEXP '("+room_theme+")' and b.room_extraopt like '%"+room_extraopt+"%' ) as min,"
+					+ "(select count(d.re_no) from review d where d.item_no=a.item_no and d.re_indent=0) as cnt, a.item_div,"
+					+ "(select max(b.room_price) from room_list b where b.item_no=a.item_no and b.room_theme REGEXP '("+room_theme+")' and b.room_extraopt like '%"+room_extraopt+"%' ) as max from item a"
+					+ " WHERE a.item_div REGEXP '("+item_div+")' "
+							+ " and a.item_addr like '%"+searchWord+"%' group by a.item_no having "+minPrice+"<min and min<"+maxPrice+" order by cnt desc) as ab";
 		}
-		int maxItem = 0;
-		
+		JSONObject obj = null;
 		try {
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				maxItem = rs.getInt("count(*)");
+				obj = new JSONObject();
+				obj.put("totalItem", rs.getInt("count(*)"));
+				obj.put("maxPrice", rs.getInt("max(max)"));
+				obj.put("minPrice", rs.getInt("min(min)"));
+				System.out.println(obj.toJSONString());
 			}
 					
 		}catch (SQLException e) {
@@ -584,7 +598,7 @@ public class ItemsDAO {
 		} finally {
 			close(pstmt, conn, rs);
 		}
-		return maxItem;
+		return obj;
 	}
 	
 	public List<ItemsDTO> getAllItemName(int u_no){
@@ -612,4 +626,5 @@ public class ItemsDAO {
 		return dtoList;
 	}
 	
+
 }

@@ -47,7 +47,38 @@
 					</c:choose>
 					<li><a href="notice.my">공지사항</a></li>
 				</ul>
-				<div id="myStaticsWrap"></div>
+				<div id="myItemManageWrap">
+
+				<%-- 	<h4 style="position: relative; height: 30px;">
+						 <select id="manageItemSelect">
+							<c:forEach var="itemDto" items="${itemDtoList }">
+								<option value="${itemDto.item_no}">${itemDto.item_name}</option>
+							</c:forEach>
+						</select> 
+					
+					</h4> --%>
+					<table>
+						<colgroup style="width: 100%">
+							<col style="width: 10%;">
+							<col style="width: 80%">
+							<col style="width: 10%">
+						</colgroup>
+						<tr>
+							<td>No</td>
+							<td>상품명 <br> <span style="font-size: 12px">(상품명을
+									누르시면 수정페이지로 이동됩니다)</span></td>
+							<td>상태</td>
+						</tr>
+						<c:forEach var="itemDto" items="${itemDtoList }" varStatus="status">
+							<tr>
+								<td>${status.count}</td>
+								<td>${itemDto.item_name}</td>
+								<td>개시</td>
+							</tr>
+						</c:forEach>
+					</table>
+
+				</div>
 			</div>
 		</div>
 	</div>

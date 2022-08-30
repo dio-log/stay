@@ -14,6 +14,7 @@ import com.project.member.cmd.SelectPointCmd;
 import com.project.my.cmd.MyItemManageCmd;
 import com.project.payment.cmd.GetPaymentListCmd;
 import com.project.payment.cmd.GetTotalPointCmd;
+import com.project.payment.cmd.MonthlySalesCmd;
 import com.project.review.cmd.SelectPerTotalReviewCmd;
 
 /**
@@ -67,20 +68,28 @@ public class MyPageCtl extends HttpServlet {
 			cmd = new SelectPointCmd();
 			cmd.excute(req, resp);
 			viewPage= "/app/myPage/myPoint.jsp";
+			
 		}else if(lastPath.equals("/myReview.my")) {
 			cmd = new SelectPerTotalReviewCmd();
 			cmd.excute(req, resp);
 			viewPage="/app/myPage/myReview.jsp";
+			
 		}else if(lastPath.equals("/notice.my")) {
 			viewPage="/app/myPage/notice.jsp";
+			
 		}else if(lastPath.equals("/myItemManage.my")) {
 			cmd= new MyItemManageCmd();
 			cmd.excute(req, resp);
 			viewPage="/app/myPage/myItemManage.jsp";
 		}else if(lastPath.equals("/myStatics.my")) {
+			cmd= new MyItemManageCmd();
 			cmd.excute(req, resp);
 			viewPage="/app/myPage/myStatics.jsp";
-		}
+		}else if(lastPath.equals("/getMonthlySales.my")) {
+			cmd = new MonthlySalesCmd();
+			cmd.excute(req, resp);
+			return;
+		}			
 		
 		
 		if(flag) {

@@ -219,20 +219,20 @@ ${itemDto.item_event}</textarea>
 									</p>
 									<p class="reviewGrade tempClass" id="serviceGrade">
 										<span>서비스 & 친절도</span> <span><i
-											class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i
-											class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i
+											class="fa-regular fa-star fa-solid"></i><i class="fa-regular fa-star fa-solid"></i><i
+											class="fa-regular fa-star fa-solid"></i><i class="fa-regular fa-star"></i><i
 											class="fa-regular fa-star"></i> </i></span>
 									</p>
 									<p class="reviewGrade tempClass" id="cleanGrade">
 										<span>숙소 & 객실 청결도</span> <span><i
-											class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i
-											class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i
+											class="fa-regular fa-star fa-solid"></i><i class="fa-regular fa-star fa-solid"></i><i
+											class="fa-regular fa-star fa-solid"></i><i class="fa-regular fa-star"></i><i
 											class="fa-regular fa-star"></i></i> </span>
 									</p>
 									<p class="reviewGrade tempClass" id="convenienceGrade">
 										<span>시설 & 편의성</span> <span> <i
-											class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i
-											class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i
+											class="fa-regular fa-star fa-solid"></i><i class="fa-regular fa-star fa-solid"></i><i
+											class="fa-regular fa-star fa-solid"></i><i class="fa-regular fa-star"></i><i
 											class="fa-regular fa-star"></i> </i>
 										</span>
 									</p>
@@ -247,36 +247,49 @@ ${itemDto.item_event}</textarea>
 						<!--리뷰dto array 불러서 반복붙임, 페이징-->
 
 						<c:forEach var="reviewDto" items="${reviewDtoList}">
-							<div class="reviewContentWrap">
-								<div style="width: 150px;">
-									<img alt="" src="../../img/main/스마일.png" style="width: 80px">
-									<p class="reviewNick">${reviewDto.re_u_nick}</p>
-								</div>
-								<div style="width: 100%">
-									<p>
-										<span id="usedRoom" style="font-size: 16px; color: gray;">${reviewDto.re_room_name}</span>
-									</p>
-									<p class="reviewGrade">
-										<span> <c:forEach begin="1"
-												end="${reviewDto.re_grade/10}">
-												<i class="fa-solid fa-star"></i>
-											</c:forEach> <c:if test="${reviewDto.re_grade%10!=0}">
-												<i class="fa-solid fa-star-half-stroke"></i>
-											</c:if>
-										</span> <span></span>
-									</p>
-									<p style="font-size: 16px">${reviewDto.re_title}</p>
-									<div style="font-size: 14px">${fn:replace(reviewDto.re_content,dele,"<br>")}</div>
-									<c:if test="${itemDto.u_no==u_no }">
+							<c:if test="${reviewDto.re_indent==0 }">
+								<div class="reviewContentWrap">
+									<div style="width: 150px;">
+										<img alt="" src="../../img/main/스마일.png" style="width: 80px">
+										<p class="reviewNick">${reviewDto.re_u_nick}</p>
+									</div>
+									<div style="width: 100%">
 										<p>
-											<button id="hostAnswerbtn" type="button"
-												class="whiteBtnSt fs-14" style="width: auto; float: right" data-reno="${reviewDto.re_no }&${itemDto.item_no}">답변작성하기</button>
+											<span id="usedRoom" style="font-size: 16px; color: gray;">${reviewDto.re_room_name}</span>
 										</p>
-									</c:if>
+										<p class="reviewGrade">
+											<span> <c:forEach begin="1"
+													end="${reviewDto.re_grade/10}">
+													<i class="fa-solid fa-star"></i>
+												</c:forEach> <c:if test="${reviewDto.re_grade%10!=0}">
+													<i class="fa-solid fa-star-half-stroke"></i>
+												</c:if>
+											</span> <span></span>
+										</p>
+										<p style="font-size: 16px">${reviewDto.re_title}</p>
+										<div style="font-size: 14px">${fn:replace(reviewDto.re_content,dele,"<br>")}</div>
+										<c:if test="${itemDto.u_no==u_no }">
+											<p>
+												<button id="hostAnswerbtn" type="button"
+													class="whiteBtnSt fs-14" style="width: auto; float: right"
+													data-reno="${reviewDto.re_no }&${itemDto.item_no}">답변작성하기</button>
+											</p>
+										</c:if>
+									</div>
 								</div>
-							</div>
+							</c:if>
+							<c:if test="${reviewDto.re_indent==1 }">
+								<div style="width: 100%; height: 180px;">
+									<div id="answerWrap">
+										<p class="fs-14">사장님답변</p>
+										<div style="min-height: 100px;margin: 10px;font-size:14px">
+											${fn:replace(reviewDto.re_content,dele,"<br>")}
+										</div>
+									</div>
+								</div>
+							</c:if>
 						</c:forEach>
-						
+
 					</div>
 
 				</div>
@@ -294,7 +307,7 @@ ${itemDto.item_event}</textarea>
 								<div id="firstCalendar" class="calendarSt">
 									<div class="titleBox">
 										<p class="title">
-											<button onclick="prevMonth()">
+											<button type="button" onclick="prevMonth()">
 												<i class="fa-solid fa-angle-left"></i>
 											</button>
 											<span id="firstTitle" style="margin-right: 50px"></span>
@@ -306,7 +319,7 @@ ${itemDto.item_event}</textarea>
 									<div class="titleBox">
 										<p class="title">
 											<span id="secondTitle" style="margin-left: 50px"></span>
-											<button onclick="nextMonth()">
+											<button type="button"  onclick="nextMonth()">
 												<i class="fa-solid fa-angle-right"></i>
 											</button>
 										</p>

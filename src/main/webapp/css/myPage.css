@@ -135,20 +135,23 @@
 	padding: 0 20px;
 }
 
-#myResevationWrap h4{
+ h4{
 	border-bottom:1px solid #e6e6e6;
 }
+
 #myResevationWrap td{
-	text-align: center
-}
-#myResevationWrap td{
-	border-bottom: 1px solid #e6e6e6;
+	text-align: center;
 	padding: 5px 0;
-	font-size:14px;
+	font-size:12px;
 	color:gray;
 	white-space: pre-line;
 }
-
+#myResevationWrap table{
+	border-collapse: collapse;
+}
+#myResevationWrap table tr{
+	border-bottom: 1px solid #e6e6e6;
+}
 
 
 #myReviewWrap table{
@@ -166,6 +169,7 @@ margin-top: 20px;
 }
 #myReviewWrap table td{
 	white-space: pre-line;
+	padding: 10px 0;
 }
 #myReviewWrap table a{
 	color:gray;
@@ -220,4 +224,27 @@ margin-top: 20px;
 #rightTb tr:first-child{
 	background-color:#1d1b1e0a; height: 40px;font-size:14px;
 }
+#myItemManageWrap{
+	width: 100%;
+}
+#myItemManageWrap table{
+	border-collapse: collapse;
+	width: 100%;
+}
+#myItemManageWrap tr{
+	border-bottom: 1px solid #e6e6e6;
+	font-size: 14px;
+	color: gray;
+	text-align: center;
+}
+#myItemManageWrap td{
+		padding: 10px 0;
+}
 
+#manageItemSelect{
+	padding: 5px 10px;
+	border: 1px solid #e6e6e6;
+	border-radius: 5px;
+	position:absolute;
+	left: 0px;
+}

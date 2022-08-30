@@ -25,12 +25,22 @@ public class SortItemCmd implements BasicCmd {
 		String room_theme = req.getParameter("room_theme");
 		String room_extraopt = req.getParameter("room_extraopt");
 		int preIdx = Integer.parseInt(req.getParameter("preIdx"));
+		int minPrice = 0 ;
+		int maxPrice = 999999999;
+		String min = req.getParameter("minPrice");
+		String max = req.getParameter("maxPrice");
+		if(!(min.equals("")||min==null)) {
+			minPrice = Integer.parseInt(min);
+		}
+		if(!(max.equals("")||max==null)) {
+			maxPrice = Integer.parseInt(max);
+		}
 		PrintWriter pw = resp.getWriter();
 
 		ItemsDAO dao = null;
 		JSONArray jsonArr = null;
 		dao = ItemsDAO.getIns();
-		jsonArr = dao.getSortedItemDtoListByPrice(sortBy, searchWord, item_div, room_theme, room_extraopt, preIdx);
+		jsonArr = dao.getSortedItemDtoListByPrice(sortBy, searchWord, item_div, room_theme, room_extraopt, preIdx,minPrice,maxPrice);
 		
 		pw.print(jsonArr);
 	}

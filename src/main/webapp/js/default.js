@@ -57,6 +57,7 @@ $("#setPeopleBtn").on("click", function() {
 
 function removeCookie() {
 	$('.fa-xmark').on('click', function(e) {
+		e.stopPropagation();
 		let idx = $(e.target).data("idx");
 		$.ajax({
 			url: "removeCookie.m",
@@ -143,7 +144,14 @@ function togglePick(e) {
 	}
 
 }
+function recentSearch(e) {
+	let ds = $(e).data("recent");
+	let arr = ds.split("&");
 
+	$('#setLocationInput').val(arr[0]);
+	$('#calendarInput').val(arr[1]);
+	$('#peopleInput').val(arr[2]);
+}
 
 function setComma(num){
 	let numlen = num.length;

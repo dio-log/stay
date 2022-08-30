@@ -19,16 +19,16 @@ $('.tempPayBtn').on('click', function(e) {
 	$('#room_no').val(room_no);
 })
 
-
 let flag = true;
 $('.location').on('click', function() {
 	var container = document.getElementById('map');
-	var options = {
-		center: new kakao.maps.LatLng(33.450701, 126.570667),
-		level: 3
-	};
-
-	var map = new kakao.maps.Map(container, options);
+	//var options = {
+	//	center: new kakao.maps.LatLng(33.450701, 126.570667),
+	//	level: 3
+	//};
+  
+	//var map = new kakao.maps.Map(container, options);
+	var map=null;
 	var geocoder = new kakao.maps.services.Geocoder();
 	geocoder.addressSearch($('#item_addr').html().trim(), function(result, status) {
 		// 정상적으로 검색이 완료됐으면 3
@@ -36,6 +36,12 @@ $('.location').on('click', function() {
 
 			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 			// 결과값으로 받은 위치를 마커로 표시합니다
+			var options = {
+				center: coords,
+				level:3
+			}
+			map = new kakao.maps.Map(container, options)
+			
 			var marker = new kakao.maps.Marker({
 				map: map,
 				position: coords
@@ -46,16 +52,17 @@ $('.location').on('click', function() {
 			//     content: '<div style="width:150px;text-align:center;padding:6px 0;"></div>'
 			// infowindow.open(map, marker);
 
+			//marker.setMap(map);
 			// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 			map.setCenter(coords);
 		}
 
 		$('#map').css('display', 'block')
-
-		if (flag) {
-			$('.location').trigger("click");
-			flag = false;
-		}
+	if(flag){
+		$('.location').trigger('click');
+		flag=false;
+	}
+		
 	});
 })
 $(document).on('click', function(e) {
@@ -74,7 +81,7 @@ $('#writeReviewBtn').on('click', function() {
 	if (item_no == '') {
 		item_no = 0;
 	}
-	
+
 	$.ajax({
 		url: "checkPossibleReview.re",
 		type: "post",
@@ -102,9 +109,9 @@ $('#writeReviewBtn').on('click', function() {
 
 
 $('.tempClass span i').on('click', function(e) {
-	let gr1=0
-	let gr2=0
-	let gr3=0
+	let gr1 = 0
+	let gr2 = 0
+	let gr3 = 0
 	$(e.target).addClass('fa-solid');
 	$(e.target).prevAll('i').addClass('fa-solid');
 	$(e.target).nextAll('i').removeClass('fa-solid');
@@ -116,12 +123,10 @@ $('.tempClass span i').on('click', function(e) {
 	let avg = (gr1 + gr2 + gr3) / 3;
 	let roundAvg = Math.round(avg);
 	$('#re_grade').val(roundAvg);
-	console.log(roundAvg);
 })
 
 $('#doPayBtn').on('click', function() {
 
-	console.log($('#chargeRoomPrice').val() + "?" + $('#calendarInput').val())
 	if ($(this).data("no") == null) {
 		alert('로그인이 필요합니다');
 	} else if ($('#chargeRoomPrice').val() == '' || $('#calendarInput').val() == '') {
@@ -188,13 +193,13 @@ $('.itemTab_roomDetailMore').on('click', function(e) {
 						`)
 				}
 			}
-			
-			
+
+
 			let imgArr = data.room_img_path.split(',');
 			roomMoreMax = imgArr.length - 1;
-			console.log("roomMoreMax"+roomMoreMax)
-			
-			
+			console.log("roomMoreMax" + roomMoreMax)
+
+
 			for (let imgPath of imgArr) {
 				if (imgPath != '') {
 					$('#roomMoreImgCont div').append(`
@@ -219,7 +224,7 @@ $('#roomMoreBox>p').on('click', function(e) {
 		$('#roomMoreBox').children('div').remove();
 		$('#roomMoreBox').children('h3').remove();
 		$('#roomMoreBox').hide();
-		roomMoreCnt= 0;
+		roomMoreCnt = 0;
 	}
 })
 
@@ -240,15 +245,15 @@ function roomMoreRightBtn() {
 }
 
 
-$('#hostAnswerbtn').on('click',function(e){
- let dataSet = $(e.target).data('reno').split('&');
- let re_no = dataSet[0];
- let item_no = dataSet[1];
+$('#hostAnswerbtn').on('click', function(e) {
+	let dataSet = $(e.target).data('reno').split('&');
+	let re_no = dataSet[0];
+	let item_no = dataSet[1];
 	$(e.target).hide();
- $(e.target).parent().parent().parent().after(`
+	$(e.target).parent().parent().parent().after(`
  <div style="width:100%;height:180px;">
  	<div id="answerWrap">
-							<p>호스트</p>
+							<p>사장님답변</p>
 							<form action="insertAnswer.re">
 							<input style="display: none" id="answer_re_no" name="answer_re_no">
 							<input style="display: none" id="answer_item_no" name="answer_item_no">
@@ -260,8 +265,6 @@ $('#hostAnswerbtn').on('click',function(e){
 						</div>
 						</div>
  `)
- 	 $('#answer_re_no').val(re_no);
- 	 $('#answer_item_no').val(item_no);
- 	 
- 	 console.log( $('#answer_re_no').val())
+	$('#answer_re_no').val(re_no);
+	$('#answer_item_no').val(item_no);
 })

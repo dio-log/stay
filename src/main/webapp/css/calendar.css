@@ -4,7 +4,7 @@
   display: flex;
   padding: 20px;
   position: absolute;
-  z-index: 50000;
+  z-index: 60000;
   background-color:white;
   top:70px;
   box-shadow: 0 1px 5px 0 grey;

@@ -112,9 +112,7 @@ $($('#monthlyRightBtn')).on('click', function() {
 	getMonthlySales();
 })
 
-$('#itemSelect').on('change', function() {
-	getMonthlySales()
-})
+$('#itemSelect').on('change', getMonthlySales)
 function getMonthlySales() {
 	let item_no = $('#itemSelect').val();
 	let tmpDate = new Date(fullDate.getFullYear(), fullDate.getFullYear(), 0)
@@ -124,7 +122,7 @@ function getMonthlySales() {
 	$('#rightTb').children().remove();
 	console.log(sendPrev)
 	$.ajax({
-		url: "getMonthlySales.pay",
+		url: "getMonthlySales.my",
 		type: "post",
 		data: { "item_no": item_no, "firstDate": firstDate, "lastDate": lastDate },
 		dataType: "json",
@@ -219,4 +217,6 @@ function setZero(val) {
 	}
 	return `0${val}`;
 }
+
+
 

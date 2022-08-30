@@ -52,8 +52,9 @@
 					<div id="myPageNoticeWrap">
 						<ul style="width: 100%">
 							<li><span style="font-size: 18px; font-weight: 600">Press
-									& Notice</span>
-								<button type="button" class="whiteBtnSt">공지등록</button></li>
+									& Notice</span> <c:if test="${u_div==1 }">
+									<button type="button" class="whiteBtnSt">공지등록</button>
+								</c:if></li>
 							<li><a href="">
 									<div>
 										<p>대한민국 공로상 수상</p>

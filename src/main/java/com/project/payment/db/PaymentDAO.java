@@ -84,7 +84,7 @@ public class PaymentDAO {
 		query = "select a.p_no, a.item_no, a.p_checkin, a.p_checkout,"
 				+ "a.p_night, a.p_fee, a.p_totalfee, a.p_point, a.p_status,a.p_wtime, b.item_name, c.room_name,"
 				+ " b.item_imgpath from payment a left join item b on a.item_no = b.item_no "
-				+ "left join room_list c on a.room_no=c.room_no and a.item_no=c.item_no where a.u_no=?";
+				+ "left join room_list c on a.room_no=c.room_no and a.item_no=c.item_no where a.u_no=? order by p_no desc";
 		ResultSet rs = null;
 		PaymentDTO dto = null;
 		List<PaymentDTO> list = new ArrayList<>();

@@ -1,8 +1,8 @@
 #mainImgCont {
   position: relative;
   height: 670px;
-  background-color: rgb(70, 70, 70);
-  margin-top: 20px;
+ background-color:white;
+   margin-top: 20px;
 }
 .mainImg {
   object-fit: fill;
@@ -29,20 +29,33 @@
   display: inline-block;
   width: 100%;
 }
-#mainTravelInfo > div div {
-  width: 100%;
-  padding: 10px 5px;
-  height: 250px;
+.mainTravelInfoImgWrap{
+	position: relative;
+	width: 33%;
+	overflow: hidden;
+	padding: 5px
+
 }
+.mainTravelInfoImgWrap p{
+	position: absolute;
+	bottom: 20px;
+	left: 10px;
+	color: white;
+	font-weight: 600;
+}
+
 #mainTravelInfo img {
-  border: 1px solid black;
-  width: 100%;
-  height: 200px;
+  width:inherit;
+  height:250px;
+  object-fit: fill;
+ 
+  
 }
 #mainEventCont > div{
 	overflow: hidden;
 	position: relative;
 	 height: 250px;
+	 
 }
 #bannerWrap{
   display: flex;

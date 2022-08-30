@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.project.item.db.ItemsDAO;
 
-public class FilteredMaxItem implements BasicCmd{
+public class FilteredMaxItem implements BasicCmd {
 
 	@Override
 	public void excute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,12 +24,24 @@ public class FilteredMaxItem implements BasicCmd{
 		String room_theme = req.getParameter("room_theme");
 		String room_extraopt = req.getParameter("room_extraopt");
 		int preIdx = Integer.parseInt(req.getParameter("preIdx"));
+		int minPrice = 0 ;
+		int maxPrice = 999999999;
+		String min = req.getParameter("minPrice");
+		String max = req.getParameter("maxPrice");
+		if(!(min.equals("")||min==null)) {
+			minPrice = Integer.parseInt(min);
+		}
+		if(!(max.equals("")||max==null)) {
+			maxPrice = Integer.parseInt(max);
+		}
+		
+		
 		PrintWriter pw = resp.getWriter();
 		
 		ItemsDAO dao = null;
 		dao = ItemsDAO.getIns();
-		int maxItem = dao.getMaxItem(sortBy, searchWord, item_div, room_theme, room_extraopt, preIdx);
-		pw.print(maxItem);
+		JSONObject obj = dao.getMaxItem(sortBy, searchWord, item_div, room_theme, room_extraopt, preIdx,minPrice,maxPrice);
+		pw.print(obj);
 	}
 
 }

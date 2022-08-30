@@ -44,7 +44,7 @@ onload = function() {
 				$('#searchRecentBox').append(`
 			<div class="searchRecnetContent" onclick="recentSearch(this)" data-recent="${data[i].searchWord}&${data[i].calendarInput}&${data[i].peopleInput}">
 			<p>
-			<a href="#"  >${data[i].searchWord}</a> <i class="fa-solid fa-xmark" data-idx="${i}"></i>
+			<a href="#"  >${data[i].searchWord}</a> <i class="fa-solid fa-xmark" data-idx="${ i }"></i>
 				</p>
 			<p>${data[i].calendarInput} <br> ${data[i].peopleInput}</p>
 			</div>
@@ -57,24 +57,17 @@ onload = function() {
 	})
 }
 
-function recentSearch(e) {
-	let ds = $(e).data("recent");
-	let arr = ds.split("&");
 
-	$('#setLocationInput').val(arr[0]);
-	$('#calendarInput').val(arr[1]);
-	$('#peopleInput').val(arr[2]);
-}
 
 
 
 let cnt = 0;
-setInterval(mainImgChange, 4000);
+setInterval(mainImgChange, 3000);
 function mainImgChange() {
 	$(".mainImg")
 		.eq(++cnt)
-		.fadeIn(500)
-	$(".mainImg").eq(cnt - 1).fadeOut(300);
+		.fadeIn(400)
+	$(".mainImg").eq(cnt - 1).hide();
 
 	if (cnt > 2) {
 		cnt = -1;

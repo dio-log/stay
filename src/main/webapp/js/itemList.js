@@ -24,8 +24,8 @@ $(".cb-square-16").on("click", function(e) {
 
 $('#searchMapBtn').on('click', function() {
 	var container = document.getElementById('map');
-	
-	
+
+
 	var options = {
 		center: new kakao.maps.LatLng(33.450701, 126.570667),
 		level: 3
@@ -116,9 +116,9 @@ onload = function() {
 		success: function(data) {
 			for (let i = data.length - 1; i >= 0; i--) {
 				$('#searchRecentBox').append(`
-			<div class="searchRecnetContent">
+			<div class="searchRecnetContent" onclick="recentSearch(this)" data-recent="${data[i].searchWord}&${data[i].calendarInput}&${data[i].peopleInput}">
 			<p>
-			<a href="">${data[i].searchWord}</a> <i class="fa-solid fa-xmark"></i>
+			<a href="#"  >${data[i].searchWord}</a> <i class="fa-solid fa-xmark" data-idx="${i}"></i>
 				</p>
 			<p>${data[i].calendarInput} <br> ${data[i].peopleInput}</p>
 			</div>
@@ -131,6 +131,57 @@ onload = function() {
 	})
 	$(".sortBy").eq(0).trigger('click');
 }
+
+$('#filterBtn').on('click', function() {
+	$('#itemListWrap').empty();
+	preIdx = 0;
+	let arr = [];
+	let sortBy = $('input[class=sortBy]:checked').val();
+	let searchWord = $('#beSearchedWord').data("search");
+
+	$('input[name=room_div]:checked').each(function() {
+		arr.push(this.value);
+	})
+	let item_div = arr.toString().replaceAll(',', "|");
+
+	arr = []
+	$('input[name=room_theme]:checked').each(function() {
+		arr.push(this.value);
+	})
+	let room_theme = arr.toString().replaceAll(',', "|");
+
+	arr = [];
+	$('input[name=room_extraopt]:checked').each(function() {
+		arr.push(this.value);
+	})
+	let room_extraopt = arr.toString().replaceAll(',', "%");
+	let minPrice = $('#minPrice').val();
+	let maxPrice = $('#maxPrice').val();
+	if (preIdx == 0) {
+		$.ajax({
+			url: "filteredMaxItem.it",
+			data: {
+				"sortBy": sortBy,
+				"searchWord": searchWord,
+				"item_div": item_div,
+				"room_theme": room_theme,
+				"room_extraopt": room_extraopt,
+				"preIdx": preIdx,
+				"minPrice": minPrice,
+				"maxPrice": maxPrice
+			},
+			dataType: "json",
+			type: "post",
+			success: function(data) {
+				$('#filteredMaxItem').html(`(${data.totalItem})`);
+			}, error: function(e) {
+				console.log(e);
+			}
+		})
+	};
+	sortItem()
+})
+let priceFlag = true;
 $(".sortBy").on('click', function() {
 	$('#itemListWrap').empty();
 	preIdx = 0;
@@ -154,8 +205,8 @@ $(".sortBy").on('click', function() {
 		arr.push(this.value);
 	})
 	let room_extraopt = arr.toString().replaceAll(',', "%");
-
-
+	let minPrice = $('#minPrice').val();
+	let maxPrice = $('#maxPrice').val();
 	if (preIdx == 0) {
 		$.ajax({
 			url: "filteredMaxItem.it",
@@ -165,21 +216,27 @@ $(".sortBy").on('click', function() {
 				"item_div": item_div,
 				"room_theme": room_theme,
 				"room_extraopt": room_extraopt,
-				"preIdx": preIdx
+				"preIdx": preIdx,
+				"minPrice": minPrice,
+				"maxPrice": maxPrice
 			},
-			dataType: "text",
+			dataType: "json",
 			type: "post",
 			success: function(data) {
 
-				$('#filteredMaxItem').html(`(${data})`);
+				$('#filteredMaxItem').html(`(${data.totalItem})`);
+				if (priceFlag) {
+
+					$('#minPrice').val(`${data.minPrice}`);
+					$('#maxPrice').val(`${data.maxPrice}`);
+					priceFlag = false;
+				}
 			}, error: function(e) {
 				console.log(e);
 			}
 		})
 	}
 	sortItem();
-
-
 })
 
 
@@ -192,20 +249,21 @@ function sortItem() {
 	$('input[name=room_div]:checked').each(function() {
 		arr.push(this.value);
 	})
-	let item_div = arr.toString().replaceAll(',', ",");
+	let item_div = arr.toString().replaceAll(',', "|");
 
 	arr = []
 	$('input[name=room_theme]:checked').each(function() {
 		arr.push(this.value);
 	})
-	let room_theme = arr.toString().replaceAll(',', ",");
+	let room_theme = arr.toString().replaceAll(',', "|");
 
 	arr = [];
 	$('input[name=room_extraopt]:checked').each(function() {
 		arr.push(this.value);
 	})
 	let room_extraopt = arr.toString().replaceAll(',', "%");
-
+	let minPrice = $('#minPrice').val();
+	let maxPrice = $('#maxPrice').val();
 	$.ajax({
 		url: "sortItem.it",
 		data: {
@@ -214,7 +272,9 @@ function sortItem() {
 			"item_div": item_div,
 			"room_theme": room_theme,
 			"room_extraopt": room_extraopt,
-			"preIdx": preIdx
+			"preIdx": preIdx,
+			"minPrice": minPrice,
+			"maxPrice": maxPrice
 		},
 		dataType: "json",
 		type: "post",

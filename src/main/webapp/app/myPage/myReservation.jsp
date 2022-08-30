@@ -50,20 +50,19 @@
 
 				<div id="myPageContentWrap">
 					<div id="myResevationWrap">
-						<div>
 							<h4>결제</h4>
 
 							<table>
 								<colgroup style="width: 100%">
 									<col style="width: 5%;">
 									<col style="width: 10%">
-									<col style="width: 25%">
-									<col style="width: 10%">
+									<col style="width: 30%">
+									<col style="width: 15%">
 									<col style="width: 10%">
 									<col style="width: 6%">
 									<col style="width: 12%">
 									<col style="width: 12%">
-									<col style="width: 10%">
+
 								</colgroup>
 								<tr>
 									<td>No</td>
@@ -74,37 +73,24 @@
 									</td>
 									<td>적립<br>포인트
 									</td>
-									<td>1박 금액</td>
-									<td>총 금액</td>
-									<td></td>
+									<td>1박 금액(원)</td>
+									<td>총 금액(원)</td>
 								</tr>
 								<c:forEach var="paymentDto" items="${paymentDtoList}">
 									<tr>
 										<td>${paymentDto.p_no }</td>
-										<td><c:if test="${paymentDto.p_status=='n'}">결제 대기</c:if></td>
+										<td><c:choose><c:when test="${paymentDto.p_status=='n'}">결제대기</c:when><c:when test="${paymentDto.p_status=='y'}">결제완료</c:when><c:when test="${paymentDto.p_status=='c'}">결제취소</c:when></c:choose></td>
 										<td>${paymentDto.p_item_name}</td>
 										<td>${paymentDto.p_room_name }</td>
 										<td>${paymentDto.p_checkin }/<br>${paymentDto.p_checkout}</td>
 										<td>${paymentDto.p_point }</td>
 										<td>${paymentDto.p_fee }</td>
 										<td>${paymentDto.p_totalFee }</td>
-										<td><c:if test="${paymentDto.p_status=='n'}">
-												<button type="button" class="whiteBtnSt"
-													style="font-size: 14px; margin-bottom: 15px;">결제</button>
-											</c:if></td>
 									</tr>
 								</c:forEach>
 							</table>
 
 						</div>
-						<div>
-							<h4>예약</h4>
-							<ul>
-								<li>d</li>
-							</ul>
-						</div>
-
-					</div>
 				</div>
 			</div>
 		</div>

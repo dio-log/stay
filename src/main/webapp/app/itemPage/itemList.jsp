@@ -132,23 +132,19 @@
 							</button>
 						</div>
 						<form id="filterForm" action="">
-							<button id="filterBtn" class="whiteBtnSt" style="width: 100%;">
-								필터 적용</button>
+							<button type='button' id="filterBtn" class="whiteBtnSt"
+								style="width: 100%;">필터 적용</button>
 							<ul>
 								<li><h3>가격대</h3></li>
-								<!-- 		<li><progress id="progress" min="0" max="100" value="">
-										<span min="20"></span> <span max="80"></span>
-									</progress></li> -->
-								<li style="display: flex; justify-content: space-between;"><input
+								<li style="display: flex; justify-content: space-between;"><input id="minPrice" 
 									class="prograssInputSt" type="number" name="minPrice" value="" />~<input
-									" class="prograssInputSt" type="number" name="maxPrice"
+									" class="prograssInputSt" type="number" id="maxPrice" name="maxPrice"
 									value="" /></li>
 							</ul>
 							<ul>
 								<li><h3>숙소 유형</h3></li>
-								<li><input id="" name="room_div" type="checkbox" valu e="모텔" /><label
-									class="cb-square-16 filterCbLabel" for="room_div">✓</label><label
-									class="optLabel" for="room_div">모텔</label></li>
+								<li><input id="" name="room_div" type="checkbox" value="모텔" /><label class="cb-square-16 filterCbLabel"
+									for="room_div">✓</label><label class="optLabel" for="room_div">모텔</label></li>
 								<li><input id="" name="room_div" type="checkbox" value="호텔" /><label
 									class="cb-square-16 filterCbLabel" for="room_div">✓</label><label
 									class="optLabel" for="room_div">호텔</label></li>
@@ -234,7 +230,7 @@
 						style="display: flex; justify-content: space-between; border-bottom: 1px solid #e6e6e6;">
 						<h2 id="beSearchedWord" data-search="${searchWord }">
 							'${searchWord }' <span style="font-size: 20px">검색결과</span> <span
-								id="filteredMaxItem" style="font-size: 14px">(121)</span>
+								id="filteredMaxItem" style="font-size: 14px"></span>
 						</h2>
 						<ul id="sortUl">
 							<li><input class="sortBy" type="radio" id="byGrade"
@@ -249,40 +245,37 @@
 						</ul>
 					</div>
 					<ul id="itemListWrap" style="margin-top: 5px">
-						<c:if test="${itemDtoList==null}">
-							<li style="text-align: center; margin-top: 50px">
-								<h3>검색하신 상품은 존재하지 않습니다</h3>
-							</li>
-						</c:if>
-						<c:forEach var="itemDto" items="${itemDtoList}">
-							<li><a href="itemView.it?item_no=${itemDto.item_no}"> <img
-									src="${itemDto.item_imgpath.split(',')[1]}" alt="" /> <input
-									type="checkbox" class="cbSt-heart" style="display: none" /><label
-									for="item_no1"><i class="fa-solid fa-heart heartStyle"></i></label>
-									<div class="itemTitle">
-										<h1 style="margin-bottom: 5px">${itemDto.item_name}</h1>
-										<div>
-											<p>
-												<span>${itemDto.item_div}</span> <span></span>
-											</p>
-											<p style="color: rgb(250, 187, 93)">
-												<span>${itemDto.item_grade}</span><span>(${itemDto.item_reviewCnt})</span>
-											</p>
+							<c:if test="${itemDtoList==null}">
+								<li style="text-align: center; margin-top: 50px">
+									<h3>검색하신 상품은 존재하지 않습니다</h3>
+								</li>
+							</c:if>
+							<c:forEach var="itemDto" items="${itemDtoList}">
+								<li><a href="itemView.it?item_no=${itemDto.item_no}"> <img
+										src="${itemDto.item_imgpath.split(',')[1]}" alt="" /> <input
+										type="checkbox" class="cbSt-heart" style="display: none" /><label
+										for="item_no1"><i class="fa-solid fa-heart heartStyle"></i></label>
+										<div class="itemTitle">
+											<h1 style="margin-bottom: 5px">${itemDto.item_name}</h1>
+											<div>
+												<p>
+													<span>${itemDto.item_div}</span> <span></span>
+												</p>
+												<p style="color: rgb(250, 187, 93)">
+													<span>${itemDto.item_grade}</span><span>(${itemDto.item_reviewCnt})</span>
+												</p>
+											</div>
+											<div style="text-align: right">
+												<p></p>
+												<p style="font-size: 24px">${itemDto.item_room_price}원</p>
+											</div>
 										</div>
-										<div style="text-align: right">
-											<p></p>
-											<p style="font-size: 24px">${itemDto.item_room_price}원</p>
-										</div>
-									</div>
-							</a></li>
-						</c:forEach>
-
+								</a></li>
+							</c:forEach>
 
 					</ul>
 				</div>
-				<div id="alertAddPick">
-					
-				</div>
+				<div id="alertAddPick"></div>
 			</div>
 		</div>
 		<button class="topBtn whiteBtnSt">

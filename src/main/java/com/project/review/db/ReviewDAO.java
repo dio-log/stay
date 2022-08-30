@@ -93,9 +93,10 @@ public class ReviewDAO {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		int maxReNo = getTotalR_no();
-		if(dto.getRe_grade()==""||dto.getRe_grade()==null) {
+		if (dto.getRe_grade() == "" || dto.getRe_grade() == null) {
 			dto.setRe_grade("0");
 		}
+		int result = 0;
 		query = "insert into review(re_no,u_no,item_no,room_no,re_grade,re_title,re_content,p_no) values(?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -107,13 +108,17 @@ public class ReviewDAO {
 			pstmt.setString(6, dto.getRe_title());
 			pstmt.setString(7, dto.getRe_content());
 			pstmt.setInt(8, dto.getP_no());
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt, conn);
 		}
-		updateItemGrade(dto.getItem_no());
+		if (result > 0) {
+			updateItemGrade(dto.getItem_no());
+			System.out.println("아이템그레이드");
+		}
 	}
 
 	// 리뷰수정
@@ -123,12 +128,10 @@ public class ReviewDAO {
 		query = "update review set re_title=?, re_content=? where re_no=? and re_indent=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-
 			pstmt.setString(1, dto.getRe_title());
 			pstmt.setString(2, dto.getRe_content());
 			pstmt.setInt(3, dto.getRe_no());
 			pstmt.setInt(4, dto.getRe_indent());
-
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -141,6 +144,7 @@ public class ReviewDAO {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		query = "insert into review(re_no,u_no,item_no,re_content,re_indent) values(?,?,?,?,?)";
+		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, dto.getRe_no());
@@ -148,13 +152,16 @@ public class ReviewDAO {
 			pstmt.setInt(3, dto.getItem_no());
 			pstmt.setString(4, dto.getRe_content());
 			pstmt.setInt(5, 1);
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt, conn);
 		}
-		updateReAnswerSts(dto.getRe_no());
+		if (result > 0) {
+			updateReAnswerSts(dto.getRe_no());
+		}
 
 	}
 
@@ -178,12 +185,11 @@ public class ReviewDAO {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		ResultSet rs = null;
-		
-		 query
-		 ="select a.re_no, a.re_grade, a.re_title, a.re_content, a.re_wtime, b.room_name,c.u_nick"
-		 		+ " from review a left join room_list b on a.room_no = b.room_no left join member"
-		 		+ " c on a.u_no=c.u_no where a.item_no=? group by a.re_wtime order by a.re_no, a.re_indent";
-		 
+
+		query = "select a.re_no, a.re_grade, a.re_title, a.re_content, a.re_wtime, b.room_name,c.u_nick,a.re_indent"
+				+ " from review a left join room_list b on a.room_no = b.room_no left join member"
+				+ " c on a.u_no=c.u_no where a.item_no=? group by a.re_wtime order by a.re_no, a.re_indent";
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, item_no);
@@ -191,7 +197,7 @@ public class ReviewDAO {
 			while (rs.next()) {
 				ReviewDTO dto = new ReviewDTO();
 				String grade = rs.getString(2);
-				
+
 				double re_grade = Double.parseDouble(grade);
 
 				if (re_grade * 10 % 10 < 3) {
@@ -209,6 +215,7 @@ public class ReviewDAO {
 				dto.setRe_wtime(rs.getString(5));
 				dto.setRe_room_name(rs.getString(6));
 				dto.setRe_u_nick(rs.getString(7));
+				dto.setRe_indent(rs.getInt(8));
 
 				dtoList.add(dto);
 				System.out.println("컨텐츠   " + rs.getString(4));
@@ -272,7 +279,9 @@ public class ReviewDAO {
 		// 아이템 네임, 룸네임
 		query = "select a.item_no, a.re_grade, a.re_title, a.re_wtime, b.item_name from review a"
 				+ " left join item b on a.item_no=b.item_no where a.u_no=? order by re_no desc";
-	//	query="select a.item_no, a.re_grade, a.re_title, a.re_wtime, b.item_name from review a left join item b on a.item_no=b.item_no where a.u_no=? order by re_no desc";
+		// query="select a.item_no, a.re_grade, a.re_title, a.re_wtime, b.item_name from
+		// review a left join item b on a.item_no=b.item_no where a.u_no=? order by
+		// re_no desc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, u_no);
@@ -286,7 +295,6 @@ public class ReviewDAO {
 				dto.setRe_wtime(rs.getString(4));
 				dto.setRe_item_name(rs.getString(5));
 				dtoList.add(dto);
-				System.out.println(rs.getString(4));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -297,15 +305,14 @@ public class ReviewDAO {
 	}
 
 	private void updateItemGrade(int item_no) {
-		// 댓글 정보 인서트 된 후에 평균 구함
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
-		query = "update item set item_grade = (select round(avg(re_grade),1) from review where item_no=?) where item_no=?";
+		query = "update item set item_grade = (select round(avg(re_grade),1) from review where item_no=? and re_indent=0) where item_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, item_no);
 			pstmt.setInt(2, item_no);
-
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -313,24 +320,24 @@ public class ReviewDAO {
 		}
 
 	}
-	
+
 	public boolean hasWriteReview(int p_no) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		ResultSet rs = null;
-		query="select p_no from review where p_no=?";
+		query = "select p_no from review where p_no=?";
 		boolean flag = false;
 		try {
-			pstmt=conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, p_no);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				flag=true;
+			while (rs.next()) {
+				flag = true;
 			}
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(pstmt, conn,rs);
+			close(pstmt, conn, rs);
 		}
 		return flag;
 	}

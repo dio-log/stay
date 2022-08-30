@@ -147,22 +147,32 @@
 			<div id="mainTravelInfo">
 				<h2>지금 필요한 여행 정보</h2>
 				<div>
-					<a href="">
-						<div>
-							<img src="" alt="">
-							<p>dfdfdfdf</p>
-						</div>
-					</a> <a href="">
-						<div>
-							<img src="" alt="">
-							<p></p>
-						</div>
-					</a> <a href="">
-						<div>
-							<img src="" alt="">
-							<p></p>
-						</div>
-					</a>
+					<div class="mainTravelInfoImgWrap">
+						<a href="https://www.yanolja.com/magazine/pension-inside/778">
+							<img src="../../img/main/recomend1.jpg" alt="">
+						</a>
+						<p>우리들끼리 프라이빗하게
+						<br>인생 풀빌라 7
+						</p>
+					</div>
+					<div class="mainTravelInfoImgWrap">
+						<a href="https://www.yanolja.com/magazine/traffic/782">
+							<img src="../../img/main/recomend2.jpg" alt="">
+
+						</a>
+						<p>지나치면 섭섭한데요,
+						<br>우영우가 다녀간 그 곳 !
+						</p>
+					</div>
+					<div class="mainTravelInfoImgWrap">
+						<a href="https://www.yanolja.com/magazine/travel-counselor/575">
+							<img src="../../img/main/recomend3.png" alt="">
+						</a>
+						<p>한국에서 찾은 발리,
+						<br>여수 여행 가이드
+						</p>
+					</div>
+
 				</div>
 
 			</div>
