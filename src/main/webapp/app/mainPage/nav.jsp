@@ -3,7 +3,7 @@
 <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fmt"
 uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
  <nav class="nav">
       <!-- 중간배치박스 -->
       <div class="navCenterCont" >
@@ -19,7 +19,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               <p>${u_nick} <span style="font-size: 12px">님</span> </p>
                <p><a href="myInfo.my" style="margin: 0">내정보</a></p>  
                 <p><a href="myReservation.my" style="margin: 0">결제/예약내역</a></p>
-                <p><a href='logout.m' style="margin: 0">로그아웃</a></p>
+                <p><a href='#' style="margin: 0"  onclick="logout()">로그아웃</a></p>
             </div></c:when>
             <c:when test="${title=='로그인' || title=='회원가입' || title=='내정보'}">
             </c:when>

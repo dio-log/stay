@@ -40,6 +40,7 @@ onload = function() {
 		data: "",
 		type: "post",
 		success: function(data) {
+			if(data==null)return;
 			for (let i = data.length - 1; i >= 0; i--) {
 				$('#searchRecentBox').append(`
 			<div class="searchRecnetContent" onclick="recentSearch(this)" data-recent="${data[i].searchWord}&${data[i].calendarInput}&${data[i].peopleInput}">

@@ -63,7 +63,7 @@ public class PaymentFront extends HttpServlet {
 		if(lastPath.equals("/insertCart.pay")) {
 			cmd = new InsertPaymentCmd();
 			cmd.excute(req, resp);
-			viewPage= "/app/myPage/myReservation.jsp";
+			viewPage= "myReservation.my";
 		}else if(lastPath.equals("/getCartList.pay")) {
 			cmd = new GetPaymentListCmd();
 			cmd.excute(req, resp);

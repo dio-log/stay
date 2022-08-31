@@ -50,6 +50,7 @@ public class CheckLoginCmd implements BasicCmd{
 			session.setAttribute("u_no",  dto.getU_no());
 			session.setAttribute("u_nick",  dto.getU_nick());
 			session.setAttribute("u_div",  dto.getU_div());
+			session.setAttribute("u_id",  dto.getU_id());
 			
 			pw.print(true);
 		}

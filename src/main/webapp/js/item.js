@@ -85,19 +85,13 @@ function closeBtn(e) {
 }
 
 $("#roomSaveBtn").on("click", function() {
-	// for (let inputValue of $("#roomUploadForm input")) {
-	//   if (inputValue.value == "") {
-	//     alert("필수항목이 체크되지 않았습니다");
 
-	//     return;
-	//   }
-	// }
 	let firstImg = $("#roomMoreImgInput")[0].files[0];
 	let arr = [];
-	$("input:checkbox[name=room_extraopt]:checked").each(function() {
-		arr.push(this.value);
-	});
-	$("#room_extraopt").val(arr.toString());
+	//$("input:checkbox[name=room_extraopt]:checked").each(function() {
+	//	arr.push(this.value);
+	//});
+	//$("#room_extraopt").val(arr.toString());
 
 	let formData = new FormData($("#roomUploadForm")[0]);
 

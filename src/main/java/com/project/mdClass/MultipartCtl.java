@@ -82,7 +82,6 @@ public class MultipartCtl {
 				}else {
 //					fullFileName = ",..\\roomImg\\"+item.getString("utf-8");
 				map.put(item.getFieldName(), item.getString("utf-8"));
-				System.out.println(item.getString("utf-8"));
 			}
 			//C:\work_do\eclipse_web2\.metadata\.plugins\org.eclipse.wst.server.core\tmp2\wtpwebapps\project\img\room\admin
 			}else {
@@ -96,6 +95,7 @@ public class MultipartCtl {
 				
 			}
 		}
+		System.out.println(checkStr);
 		map.put("room_extraopt", checkStr);
 		map.put("fullFileName", fullFileName);
 		

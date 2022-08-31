@@ -22,8 +22,7 @@ public class InsertMemberCmd implements BasicCmd{
 		dto.setU_nick(req.getParameter("u_nick"));
 		dto.setU_pw(req.getParameter("u_pw"));
 		dto.setU_email(req.getParameter("u_email"));
-		dto.setU_phone(req.getParameter("u_phone"));
-		dto.setU_gender(req.getParameter("u_gender"));
+		dto.setU_phone(req.getParameter("u_phone").replace("-",""));
 		
 		dao.insertMember(dto);
 	}

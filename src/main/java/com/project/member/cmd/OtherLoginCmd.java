@@ -22,9 +22,12 @@ public class OtherLoginCmd implements BasicCmd {
 		String account = req.getParameter("account");
 		HttpSession session = req.getSession();
 		MemberDTO memberDto = dao.OtherLoginCheck(account);
+		
 		if(memberDto!=null) {
+			session.setAttribute("u_no", memberDto.getU_no());
 			session.setAttribute("u_nick", memberDto.getU_nick());
 			session.setAttribute("u_div", memberDto.getU_div());
+			System.out.println(memberDto.getU_no()+memberDto.getU_nick()+memberDto.getU_div());
 			pw.print(true);
 		}else {
 			pw.print(false);

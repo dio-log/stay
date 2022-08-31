@@ -17,12 +17,20 @@ public class CheckOverlapId implements BasicCmd {
 		MemberDAO dao = MemberDAO.getIns();
 		PrintWriter pw = resp.getWriter();
 	
-		if(dao.hasId(req.getParameter("u_id_value"))){
-	
-			pw.write("true");
-		}else {
-			pw.write("false");
+		String u_id_value = req.getParameter("u_id_value");
+		String u_nick_value = req.getParameter("u_nick_value");
+		
+		System.out.println("u_id_value"+u_id_value);
+		System.out.println("u_nick_value"+u_nick_value);
+		if(!(u_id_value==null) && !(u_id_value=="")) {
+			if(dao.hasId(u_id_value)) pw.write("true");
+			else pw.write("false");
 		}
+		else if(!(u_nick_value==null) && !(u_nick_value=="")) {
+			if(dao.hasNick(u_nick_value)) pw.write("true");
+			else pw.write("false");
+		}
+		
 	}
 
 }

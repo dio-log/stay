@@ -35,7 +35,7 @@
 				<div>
 					<ul id="signUlSNS">
 						<li><a href="#"><img src="../../img/main/naverlogo.png"
-								\ alt=""  /></a></li>
+								alt=""  /></a></li>
 						<li><a href="#" onclick="kakaoLoginCreateUser()"><img src="../../img/main/kakaologo2.png"
 								alt="" /></a></li>
 						<li><a href="#"><img src="../../img/main/googlelogo.jpg"

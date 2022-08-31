@@ -72,7 +72,7 @@
 						<c:forEach var="itemDto" items="${itemDtoList }" varStatus="status">
 							<tr>
 								<td>${status.count}</td>
-								<td>${itemDto.item_name}</td>
+								<td> <a href="itemView.it?item_no=${itemDto.item_no }"> ${itemDto.item_name} </a></td>
 								<td>개시</td>
 							</tr>
 						</c:forEach>

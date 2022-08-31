@@ -17,7 +17,7 @@ public class LogoutCmd implements BasicCmd{
 		
 		HttpSession session = req.getSession();
 		session.invalidate();
-	
+		
 	}
 	
 

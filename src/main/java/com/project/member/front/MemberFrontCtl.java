@@ -85,8 +85,6 @@ public class MemberFrontCtl extends HttpServlet {
 		}else if(lastPath.equals("/signAgree.m")) {
 			viewPage="signAgree.jsp";
 		}else if(lastPath.equals("/signForm.m")) {
-			cmd = new OtherLoginCreateUserCmd();
-			cmd.excute(req, resp);
 			viewPage = "signForm.jsp";
 		}else if(lastPath.equals("/main.m") ) {
 			viewPage="/app/mainPage/main.jsp";
@@ -133,6 +131,10 @@ public class MemberFrontCtl extends HttpServlet {
 			cmd = new OtherLoginCmd();
 			cmd.excute(req, resp);
 			return;
+		}else if (lastPath.equals("/otherSignForm.m")) {
+			cmd = new OtherLoginCreateUserCmd();
+			cmd.excute(req, resp);
+			viewPage="otherSignForm.jsp";
 		}
 		
 		

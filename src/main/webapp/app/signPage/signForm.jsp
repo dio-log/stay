@@ -29,19 +29,21 @@
 			<div class="emptyBoxByNav"></div>
 			<form id="signForm" action="signComp.m" method="post">
 				<ul>
-					<li>아이디</li>
-					<li><input id="u_id" name="u_id" type="text" required
-						placeholder="6~14자 영문, 숫자" /></li>
-					<li>
-						<p id="idWarning" class="warningPharses"></p>
-					</li>
-					<li>비밀번호</li>
-					<li><input id="pw1" name="u_pw" type="password" required
-						placeholder="8~20자 영문, 숫자" /></li>
-					<li>비밀번호 확인</li>
-					<li><input id="pw2" name="pw2" type="password" required
-						placeholder="8~20자 영문, 숫자" /></li>
-					<li><p id="pwWarning" class="warningPharses"></p></li>
+					<c:if test="${account==null}">
+						<li>아이디</li>
+						<li><input id="u_id" name="u_id" type="text" required
+							placeholder="6~14자 영문, 숫자" /></li>
+						<li>
+							<p id="idWarning" class="warningPharses"></p>
+						</li>
+						<li>비밀번호</li>
+						<li><input id="pw1" name="u_pw" type="password" required
+							placeholder="8~20자 영문, 숫자" /></li>
+						<li>비밀번호 확인</li>
+						<li><input id="pw2" name="pw2" type="password" required
+							placeholder="8~20자 영문, 숫자" /></li>
+						<li><p id="pwWarning" class="warningPharses"></p></li>
+					</c:if>
 					<li>이름</li>
 					<li><input id="u_name" name="u_name" type="text" required /></li>
 					<li>닉네임</li>
@@ -79,8 +81,9 @@
 
 				</div>
 				<button type="submit" id="signCompleteBtn" disabled>가입완료</button>
-		</div>
-		</form>
+			</form>
+			</div>
+		
 	</div>
 	<%@ include file="/app/mainPage/footer.jsp"%>
 	<script src="../../js/memberSign.js"></script>

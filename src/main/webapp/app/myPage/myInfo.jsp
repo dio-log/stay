@@ -17,6 +17,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+		<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <link rel="stylesheet" href="../../css/default.css" />
 <link rel="stylesheet" href="../../css/myPage.css" />
 </head>
@@ -53,14 +54,29 @@
 						<p style="margin-bottom: 30px">
 							회원님의 소중한 개인정보를 안전하게 보호하기위해 <br /> 로그인된 계정을 한번 더 인증해주세요
 						</p>
-						<span>비밀번호</span> <input id="myPagePwCheckInput" type="password" />
-						<button type="button" id="myPagePwCheckBtn"
-							class="whiteBtnSt fs-14">확인</button>
+						<c:choose>
+							<c:when test="${(u_id==null)||(u_id=='')}">
+								<button id="myPageKakao" type="button" onclick="kakaoLoginCheck()">
+									<img src="../../img/main/kakaologo2.png" alt="" /> <span>카카오톡 인증하기</span>
+								</button>
+							</c:when>
+							<c:otherwise>
+								<span>비밀번호</span>
+								<input id="myPagePwCheckInput" type="password" />
+								<button type="button" id="myPagePwCheckBtn"
+									class="whiteBtnSt fs-14">확인</button>
+							</c:otherwise>
+						</c:choose>
+
 					</div>
 					<div id="myPageModifyWrap" style="display: none">
 						<ul>
 							<li><i class="fa-solid fa-face-grin-wide fs-32"></i></li>
+							
+							
+							<c:if test="${u_id!=null}">  
 							<li><span>아이디</span> <span id="u_id"></span></li>
+							</c:if>
 							<li><span>이메일</span> <span id="u_email"></span></li>
 							<li><span>닉네임</span> <span id="u_nick">${u_nick}</span> <br />
 								<input id="modifyNick" type="text" placeholder="변경할 닉네임 입력" />

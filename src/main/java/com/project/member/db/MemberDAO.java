@@ -132,6 +132,7 @@ public class MemberDAO {
 		}
 		return false;
 	}
+
 	public boolean hasNick(String u_nick) {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
@@ -326,15 +327,17 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		Connection conn = getConn();
 		ResultSet rs = null;
-		query = "select u_nick, u_div from member where u_email=?";
+		query = "select u_nick, u_div,u_no,u_id from member where u_email=?";
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1, account);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				dto = new MemberDTO();
+				dto.setU_no(rs.getInt("u_no"));
 				dto.setU_div(rs.getInt("u_div"));
 				dto.setU_nick(rs.getString("u_nick"));
+				dto.setU_id(rs.getString("u_id"));
 			
 			}
 		}catch(SQLException e) {

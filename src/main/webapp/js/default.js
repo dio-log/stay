@@ -158,3 +158,25 @@ function setComma(num){
 	
 }
 
+function logout(){
+	//unlinkApp()  ;
+	//sessionStorage.clear();
+	window.Kakao.init('9b8cfe888abf4ea908007fe3bb9d7094');
+	Kakao.Auth.logout()
+	location="logout.m";
+}
+function unlinkApp() {
+	window.Kakao.init('9b8cfe888abf4ea908007fe3bb9d7094');
+    Kakao.API.request({
+      url: '/v1/user/unlink',
+      success: function(res) {
+        alert('success: ' + JSON.stringify(res))
+      },
+      fail: function(err) {
+        alert('fail: ' + JSON.stringify(err))
+      },
+    })
+  }
+ 
+  
+
