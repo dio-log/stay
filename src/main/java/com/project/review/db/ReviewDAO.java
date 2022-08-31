@@ -187,7 +187,7 @@ public class ReviewDAO {
 		ResultSet rs = null;
 
 		query = "select a.re_no, a.re_grade, a.re_title, a.re_content, a.re_wtime, b.room_name,c.u_nick,a.re_indent"
-				+ " from review a left join room_list b on a.room_no = b.room_no left join member"
+				+ " from review a left join room_list b on a.room_no = b.room_no and a.item_no=b.item_no left join member"
 				+ " c on a.u_no=c.u_no where a.item_no=? group by a.re_wtime order by a.re_no, a.re_indent";
 
 		try {
