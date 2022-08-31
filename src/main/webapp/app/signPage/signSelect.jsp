@@ -17,6 +17,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <link rel="stylesheet" href="../../css/default.css" />
 <link rel="stylesheet" href="../../css/memberSign.css" />
 </head>
@@ -33,11 +34,11 @@
 				<a href="signAgree.m"><button type="button">개인 회원가입</button></a>
 				<div>
 					<ul id="signUlSNS">
-						<li><a href=""><img src="../../img/main/naverlogo.png"
-								\ alt="" /></a></li>
-						<li><a href=""><img src="../../img/main/kakaologo2.png"
+						<li><a href="#"><img src="../../img/main/naverlogo.png"
+								\ alt=""  /></a></li>
+						<li><a href="#" onclick="kakaoLoginCreateUser()"><img src="../../img/main/kakaologo2.png"
 								alt="" /></a></li>
-						<li><a href=""><img src="../../img/main/googlelogo.jpg"
+						<li><a href="#"><img src="../../img/main/googlelogo.jpg"
 								alt="" /></a></li>
 					</ul>
 					<p>SNS계정 회원가입(만 14세 이상 가능)</p>

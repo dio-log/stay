@@ -7,8 +7,8 @@ let dt2 = new Date();
 let fullDateInput=$('#calendarInput');
 
 dt2.setMonth(dt1.getMonth() + 1);
-dt1.setDate(dt1.getDate() - dt1.getDate() + 1);
-dt2.setDate(dt2.getDate() - dt2.getDate() + 1);
+dt1.setDate(dt1.getDate() - dt1.getDate()+1 );
+dt2.setDate(dt2.getDate() - dt2.getDate() );
 //일요일은0 ~6까지
 $("#firstTitle").html(dt1.getFullYear() + "." + (dt1.getMonth() + 1));
 $("#secondTitle").html(dt2.getFullYear() + "." + (dt2.getMonth() + 1));

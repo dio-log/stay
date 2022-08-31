@@ -172,3 +172,66 @@ $("#loginCheckBtn").on("click", function () {
     },
   });
 });
+
+  window.Kakao.init('9b8cfe888abf4ea908007fe3bb9d7094');
+  
+  function kakaoLoginCreateUser() {
+            window.Kakao.Auth.login({
+                scope: 'profile_nickname, account_email', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+                success: function(response) {
+                    console.log(response) // 로그인 성공하면 받아오는 데이터
+                    window.Kakao.API.request({ // 사용자 정보 가져오기 
+                        url: '/v2/user/me',
+                        success: (res) => {
+                            const kakao_account = res.kakao_account.email;
+                            console.log(kakao_account)
+                            location.href=`signForm.m?account=${kakao_account}`
+                        }
+                    });
+                    // window.location.href='/ex/kakao_login.html' //리다이렉트 되는 코드
+                },
+                fail: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    
+        function kakaoLogin() {
+            window.Kakao.Auth.login({
+                scope: 'profile_nickname, account_email', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+                success: function(response) {
+                    console.log(response) // 로그인 성공하면 받아오는 데이터
+                    window.Kakao.API.request({ // 사용자 정보 가져오기 
+                        url: '/v2/user/me',
+                        success: (res) => {
+                            const kakao_account = res.kakao_account.email;
+							$.ajax({
+								url:'otherLoginCheck.m',
+								data:{"account":kakao_account},
+								dataType:"text",
+								type:"post",
+								success:function(data){
+									console.log(data)
+									if(data=="true"){
+										location="main.m"
+									}else{
+										alert(`가입된 회원이 아닙니다. 회원가입 페이지로 이동합니다`)
+										location.href=`signForm.m?account=${kakao_account}`
+									}
+								},error:function(e){
+									console.log(e)
+								}
+								
+							})
+						                            
+                        }
+                    });
+                    // window.location.href='/ex/kakao_login.html' //리다이렉트 되는 코드
+                },
+                fail: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+

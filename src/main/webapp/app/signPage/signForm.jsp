@@ -37,18 +37,25 @@
 					</li>
 					<li>비밀번호</li>
 					<li><input id="pw1" name="u_pw" type="password" required
-						placeholder="10~20자 영문, 숫자" /></li>
+						placeholder="8~20자 영문, 숫자" /></li>
 					<li>비밀번호 확인</li>
 					<li><input id="pw2" name="pw2" type="password" required
-						placeholder="10~20자 영문, 숫자" /></li>
+						placeholder="8~20자 영문, 숫자" /></li>
 					<li><p id="pwWarning" class="warningPharses"></p></li>
 					<li>이름</li>
 					<li><input id="u_name" name="u_name" type="text" required /></li>
 					<li>닉네임</li>
 					<li><input name="u_nick" type="text"></li>
 					<li>이메일</li>
-					<li><input id="u_email" name="u_email" type="email" required
-						placeholder="abcd@gmail.com" /></li>
+					<li><c:if test="${account!=null}">
+							<input id="u_email" name="u_email" type="email" required
+								placeholder="abcd@gmail.com" value="
+					${account}" disabled />
+						</c:if> <c:if test="${account==null}">
+							<input id="u_email" name="u_email" type="email" required
+								placeholder="abcd@gmail.com" value="
+					${account}" />
+						</c:if></li>
 					<li>
 						<p class="warningPharses">비밀번호 찾기 시 사용되니, 정확한 이메일 주소를 작성해주세요</p>
 					</li>

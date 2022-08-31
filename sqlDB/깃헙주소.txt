@@ -2,3 +2,16 @@ https://github.com/DoK-93/webProject.git
 
 
 git config --global core.autocrlf true
+
+
+git ls-files '*.java' | xargs wc -l
+
+
+java  4392
+
+css 2360
+
+js 2067
+
+html 218
+

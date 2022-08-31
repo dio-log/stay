@@ -80,7 +80,6 @@ public class PaymentFront extends HttpServlet {
 			cmd = new MovePayPageCmd();
 			cmd.excute(req, resp);
 			viewPage="/app/pay/pay.jsp";
-			flag=false;
 		}else if(lastPath.equals("/getPaymentByRoom.pay")) {
 			cmd = new GetPaymentByRoomCmd();
 			cmd.excute(req, resp);

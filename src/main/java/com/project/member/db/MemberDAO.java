@@ -321,4 +321,27 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	public MemberDTO OtherLoginCheck(String account) {
+		MemberDTO dto = null;
+		PreparedStatement pstmt = null;
+		Connection conn = getConn();
+		ResultSet rs = null;
+		query = "select u_nick, u_div from member where u_email=?";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, account);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				dto = new MemberDTO();
+				dto.setU_div(rs.getInt("u_div"));
+				dto.setU_nick(rs.getString("u_nick"));
+			
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt, conn,rs);
+		}
+		return dto;
+	}
 }

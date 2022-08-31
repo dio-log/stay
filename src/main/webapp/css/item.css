@@ -552,7 +552,7 @@ input[type="file"] {
   font-size: 14px;
   padding: 10px;
   color: rgb(102, 101, 101);
-  display: block;
+  display: none;
 }
 
 .fa-circle-exclamation {

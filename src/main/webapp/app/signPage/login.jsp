@@ -22,6 +22,7 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript"
 	src="/scripts/amcharts/amcharts.js?v=<%=System.currentTimeMillis()%>"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <link rel="stylesheet" href="../../css/default.css" />
 <link rel="stylesheet" href="../../css/memberSign.css" />
 </head>
@@ -54,8 +55,8 @@
 				<ul id="loginBtnUl">
 					<li>
 						<button type="button" class="whiteBtnSt"
-							style="background-color: rgb(255, 220, 64);">
-							<img src="../../img/main/kakaologo2.png" alt=""> <span>카카오톡으로
+							style="background-color: rgb(255, 220, 64);" onclick="kakaoLogin()">
+							<img src="../../img/main/kakaologo2.png" alt="" > <span>카카오톡으로
 								로그인</span>
 						</button>
 					</li>
